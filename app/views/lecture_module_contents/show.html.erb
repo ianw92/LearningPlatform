@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @lecture_module_content.code %>
+</p>
+
+<p>
+  <strong>Academic year end:</strong>
+  <%= @lecture_module_content.academic_year_end %>
+</p>
+
+<p>
+  <strong>Week:</strong>
+  <%= @lecture_module_content.week %>
+</p>
+
+<p>
+  <strong>Data source:</strong>
+  <%= @lecture_module_content.data_source %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @lecture_module_content.description %>
+</p>
+
+<p>
+  <strong>Lecture module:</strong>
+  <%= @lecture_module_content.lecture_module %>
+</p>
+
+<%= link_to 'Edit', edit_lecture_module_content_path(@lecture_module_content) %> |
+<%= link_to 'Back', lecture_module_contents_path %>

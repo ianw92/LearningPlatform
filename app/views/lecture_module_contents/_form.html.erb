@@ -1,0 +1,47 @@
+<%= form_with(model: lecture_module_content, local: true) do |form| %>
+  <% if lecture_module_content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lecture_module_content.errors.count, "error") %> prohibited this lecture_module_content from being saved:</h2>
+
+      <ul>
+      <% lecture_module_content.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code, id: :lecture_module_content_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :academic_year_end %>
+    <%= form.number_field :academic_year_end, id: :lecture_module_content_academic_year_end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :week %>
+    <%= form.number_field :week, id: :lecture_module_content_week %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data_source %>
+    <%= form.text_field :data_source, id: :lecture_module_content_data_source %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :lecture_module_content_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lecture_module_id %>
+    <%= form.text_field :lecture_module_id, id: :lecture_module_content_lecture_module_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
