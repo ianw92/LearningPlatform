@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount EpiCas::Engine, at: "/"
   devise_for :users
   resources :lecture_module_contents
   resources :lecture_modules
