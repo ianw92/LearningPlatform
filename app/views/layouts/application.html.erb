@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Dissertation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,20 +10,32 @@
   </head>
 
   <body>
-    <div id="header_bar">
-      <nav>
-        <%= link_to 'Modules', lecture_modules_path %>
-        <%= link_to 'All Module Content', lecture_module_contents_path %>
-        <%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' if user_signed_in? %>
-      </nav>
-    </div>
+    <div class="container-fluid">
+      <div id="header_bar">
+        <div class="container" id="nav_menu">
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              Menu
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item"><%= link_to 'Modules', lecture_modules_path %></a>
+              <a class="dropdown-item"><%= link_to 'All Module Content', lecture_module_contents_path %></a>
+              <a class="dropdown-item"><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' if user_signed_in? %></a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Another link</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div id="title_bar">
-      <%= @page_title || "Dissertation" %>
-    </div>
 
-    <div id="main">
-      <%= yield %>
+      <div id="title_bar">
+        <%= @page_title || "Dissertation" %>
+      </div>
+
+      <div id="main">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
