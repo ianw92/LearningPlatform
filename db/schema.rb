@@ -10,17 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212164603) do
+ActiveRecord::Schema.define(version: 20180219171655) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
     t.string "code"
     t.integer "academic_year_end"
     t.integer "week"
-    t.string "data_source"
     t.text "description"
     t.integer "lecture_module_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "content_file_name"
+    t.string "content_content_type"
+    t.integer "content_file_size"
+    t.datetime "content_updated_at"
     t.index ["lecture_module_id"], name: "index_lecture_module_contents_on_lecture_module_id"
   end
 

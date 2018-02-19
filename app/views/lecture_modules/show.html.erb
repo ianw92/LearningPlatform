@@ -36,7 +36,8 @@
     <div id="collapse<%= i %>" class="collapse">
       <div class="card-body">
         <%= render partial: "lecture_module_contents/lecture_module_content",
-                   collection: @weekly_content[i] %>
+                   collection: @weekly_content[i],
+                   locals: { show_pdf: TRUE } %>
       </div>
     </div>
   </div>

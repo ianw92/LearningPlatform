@@ -70,3 +70,5 @@ gem 'epi_cas', git: 'git@git.shefcompsci.org.uk:gems/epi_cas.git'
 
 gem 'bootstrap', '~> 4.0.0'
 gem 'autoprefixer-rails'
+
+gem "paperclip", "~> 5.2.1"

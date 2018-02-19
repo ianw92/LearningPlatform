@@ -1,12 +1,14 @@
 class LectureModuleContent < ApplicationRecord
   belongs_to :lecture_module
+  has_attached_file :content
 
-  validates :code, :academic_year_end, :week, :data_source, presence: true
+  validates :code, :academic_year_end, :week, presence: true
   validates :code, length: { in: 5..20 }
   validates :academic_year_end, numericality: true,
                                 inclusion: { within: 2000..2100 }
   validates :week, numericality: true,
                    inclusion: { within: 1..12 }
+  validates_attachment :content, content_type: {content_type: ["application/pdf"]}
   validate :module_must_exist, :module_id_must_match_code_and_year
 
   ########## Validation methods

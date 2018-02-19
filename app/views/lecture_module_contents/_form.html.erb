@@ -1,4 +1,4 @@
-<%= form_with(model: lecture_module_content, local: true) do |form| %>
+<%= form_with(model: lecture_module_content, local: true, html: { multipart: true }) do |form| %>
   <% if lecture_module_content.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(lecture_module_content.errors.count, "error") %> prohibited this lecture_module_content from being saved:</h2>
@@ -27,9 +27,14 @@
   </div>
 
   <div class="field">
+    <%= form.label :content %>
+    <%= form.file_field :content, id: :lecture_module_content_content_file_name %>
+  </div>
+
+  <!-- <div class="field">
     <%= form.label :data_source %>
     <%= form.text_field :data_source, id: :lecture_module_content_data_source %>
-  </div>
+  </div> -->
 
   <div class="field">
     <%= form.label :description %>

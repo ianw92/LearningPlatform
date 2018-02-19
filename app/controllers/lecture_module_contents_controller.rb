@@ -16,10 +16,15 @@ class LectureModuleContentsController < ApplicationController
 
   # GET /lecture_module_contents/new
   def new
-    lecture_module = LectureModule.find(params[:lecture_module])
-    @lecture_module_content = LectureModuleContent.new(code: lecture_module.code,
-                                                       academic_year_end: lecture_module.academic_year_end,
-                                                       lecture_module_id: lecture_module.id)
+    if !params[:lecture_module].nil?
+      lecture_module = LectureModule.find(params[:lecture_module])
+      @lecture_module_content = LectureModuleContent.new(code: lecture_module.code,
+                                                         academic_year_end: lecture_module.academic_year_end,
+                                                         lecture_module_id: lecture_module.id)
+    else
+      @lecture_module_content = LectureModule.new
+    end
+
   end
 
   # GET /lecture_module_contents/1/edit
@@ -74,7 +79,7 @@ class LectureModuleContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_module_content_params
-      params.require(:lecture_module_content).permit(:code, :academic_year_end, :week, :data_source, :description, :lecture_module_id)
+      params.require(:lecture_module_content).permit(:code, :academic_year_end, :week, :description, :lecture_module_id, :content)
     end
 
     def set_page_title_for_specific_content
