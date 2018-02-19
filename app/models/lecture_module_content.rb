@@ -34,4 +34,15 @@ class LectureModuleContent < ApplicationRecord
     LectureModuleContent.where("code = ?", code)
                         .where("academic_year_end = ?", academic_year_end).order(:week)
   end
+
+  #TODO test thiss
+  def self.get_content_for_module_and_week(lecture_module, week)
+    code = lecture_module.code
+    academic_year_end = lecture_module.academic_year_end
+    LectureModuleContent.where("code = ?", code)
+                        .where("academic_year_end = ?", academic_year_end)
+                        .where("week = ?", week)
+  end
+
+
 end

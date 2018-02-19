@@ -5,15 +5,7 @@
 <h2>Current Modules</h2>
 <table>
   <tbody>
-    <% @current_modules.each do |lecture_module| %>
-      <tr>
-        <td><%= link_to "#{lecture_module.code} - #{lecture_module.name} -
-                        #{"ACADEMIC YEAR" if lecture_module.semester == 0}#{"AUTUMN" if lecture_module.semester == 1}#{"SPRING" if lecture_module.semester == 2}
-                        #{lecture_module.academic_year_end - 1}/#{lecture_module.academic_year_end}", lecture_module %></td>
-        <td><%= link_to 'Edit', edit_lecture_module_path(lecture_module) %></td>
-        <td><%= link_to 'Destroy', lecture_module, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <%= render(@current_modules) %>
   </tbody>
 </table>
 
@@ -21,15 +13,7 @@
 <h2>Completed Modules</h2>
 <table>
   <tbody>
-    <% @completed_modules.each do |lecture_module| %>
-      <tr>
-        <td><%= link_to "#{lecture_module.code} - #{lecture_module.name} -
-                        #{"ACADEMIC YEAR" if lecture_module.semester == 0}#{"AUTUMN" if lecture_module.semester == 1}#{"SPRING" if lecture_module.semester == 2}
-                        #{lecture_module.academic_year_end - 1}/#{lecture_module.academic_year_end}", lecture_module %></td>
-        <td><%= link_to 'Edit', edit_lecture_module_path(lecture_module) %></td>
-        <td><%= link_to 'Destroy', lecture_module, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <%= render(@completed_modules) %>
   </tbody>
 </table>
 

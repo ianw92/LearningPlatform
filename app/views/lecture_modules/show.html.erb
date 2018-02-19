@@ -25,34 +25,22 @@
 
 <h1>Lecture Module Contents</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Academic year end</th>
-      <th>Week</th>
-      <th>Data source</th>
-      <th>Description</th>
-      <th>Lecture module</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @module_content.each do |lecture_module_content| %>
-      <tr>
-        <td><%= lecture_module_content.code %></td>
-        <td><%= lecture_module_content.academic_year_end %></td>
-        <td><%= lecture_module_content.week %></td>
-        <td><%= lecture_module_content.data_source %></td>
-        <td><%= lecture_module_content.description %></td>
-        <td><%= lecture_module_content.lecture_module %></td>
-        <td><%= link_to 'Show', lecture_module_content %></td>
-        <td><%= link_to 'Edit', edit_lecture_module_content_path(lecture_module_content) %></td>
-        <td><%= link_to 'Destroy', lecture_module_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="accordion">
+  <% for i in 1..12 do %>
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
+        Week <%= i %>
+      </a>
+    </div>
+    <div id="collapse<%= i %>" class="collapse">
+      <div class="card-body">
+        <%= render partial: "lecture_module_contents/lecture_module_content",
+                   collection: @weekly_content[i] %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
 
 <%= link_to 'New Lecture Module Content', new_lecture_module_content_path(:lecture_module => @lecture_module) %>

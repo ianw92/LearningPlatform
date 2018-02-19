@@ -21,6 +21,16 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
+
+#START:jquery
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+gem 'jquery-turbolinks'
+#START_HIGHLIGHT
+gem 'jquery-ui-rails'
+#END_HIGHLIGHT
+#END:jquery
+
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -57,3 +67,6 @@ gem 'devise', '>= 4.0.0'
 gem 'devise_ldap_authenticatable', '>= 0.8.5'
 gem 'devise_cas_authenticatable', '>= 1.5.0'
 gem 'epi_cas', git: 'git@git.shefcompsci.org.uk:gems/epi_cas.git'
+
+gem 'bootstrap', '~> 4.0.0'
+gem 'autoprefixer-rails'
