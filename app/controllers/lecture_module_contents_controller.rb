@@ -22,7 +22,7 @@ class LectureModuleContentsController < ApplicationController
                                                          academic_year_end: lecture_module.academic_year_end,
                                                          lecture_module_id: lecture_module.id)
     else
-      @lecture_module_content = LectureModule.new
+      @lecture_module_content = LectureModuleContent.new
     end
 
   end

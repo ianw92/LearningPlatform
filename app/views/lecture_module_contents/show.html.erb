@@ -30,5 +30,9 @@
   <%= @lecture_module_content.lecture_module %>
 </p>
 
+<% if @lecture_module_content.content? %>
+<iframe src="<%= @lecture_module_content.content.url %>" allowfullscreen></iframe>
+<% end %>
+
 <%= link_to 'Edit', edit_lecture_module_content_path(@lecture_module_content) %> |
 <%= link_to 'Back', lecture_module_contents_path %>

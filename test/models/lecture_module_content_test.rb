@@ -5,13 +5,17 @@ class LectureModuleContentTest < ActiveSupport::TestCase
     @lecture_module_content = lecture_module_contents(:com3501_2018_week1)
   end
 
-  test "code, academic_year_end, week and data source must not be empty" do
+  test "code, academic_year_end and week must not be empty" do
     lecture_module_content = lecture_module_contents(:empty_test)
     assert lecture_module_content.invalid?
     assert lecture_module_content.errors[:code].any?
     assert lecture_module_content.errors[:academic_year_end].any?
     assert lecture_module_content.errors[:week].any?
-    assert lecture_module_content.errors[:data_source].any?
+  end
+
+  #TODO
+  test "content must be a pdf file" do
+
   end
 
   test "code must be within 5 and 20 characters" do
@@ -37,4 +41,11 @@ class LectureModuleContentTest < ActiveSupport::TestCase
     assert_equal content.first, lecture_module_contents(:com3501_2018_week1)
     assert_equal content.last, lecture_module_contents(:com3501_2018_week3)
   end
+
+  #TODO
+  test "get_content_for_module_and_week returns all and only content for a given week of a given module" do
+
+  end
+
+
 end

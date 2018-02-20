@@ -13,7 +13,7 @@
 <% if local_assigns.has_key? :show_pdf %>
   <% if local_assigns.fetch :show_pdf %>
     <% if lecture_module_content.content? %>
-    <iframe src="<%= lecture_module_content.content.url %>" width="100%" height="500px"></iframe>
+    <iframe src="<%= lecture_module_content.content.url %>" allowfullscreeen></iframe>
     <% end %>
   <% end %>
 <% end %>
