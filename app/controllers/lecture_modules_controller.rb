@@ -10,7 +10,7 @@ class LectureModulesController < ApplicationController
     @current_modules = LectureModule.current
     @completed_modules = LectureModule.completed
     me = current_user
-    puts User.find(me.id).email
+    puts User.find(me.id).username
   end
 
   # GET /lecture_modules/1

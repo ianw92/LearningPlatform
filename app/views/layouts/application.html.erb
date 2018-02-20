@@ -20,6 +20,8 @@
             <div class="dropdown-menu">
               <a class="dropdown-item"><%= link_to 'Modules', lecture_modules_path %></a>
               <a class="dropdown-item"><%= link_to 'All Module Content', lecture_module_contents_path %></a>
+              <a class="dropdown-item"><%= link_to 'All Todo Lists', todo_lists_path %></a>
+              <a class="dropdown-item"><%= link_to 'All Tasks', tasks_path %></a>
               <a class="dropdown-item"><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' if user_signed_in? %></a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Another link</a>
