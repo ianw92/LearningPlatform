@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :tasks
+  resources :tasks do
+    post 'complete', on: :member
+  end
   resources :todo_lists
   mount EpiCas::Engine, at: "/"
   devise_for :users

@@ -8,4 +8,15 @@ class Task < ApplicationRecord
     list_id = todo_list.id
     Task.where("todo_list_id = ?", list_id)
   end
+
+  #TODO test this!
+  def self.change_completed_status(task)
+    if task.completed?
+      Task.update(task.id, :completed => false)
+    else
+      Task.update(task.id, :completed => true)
+    end
+
+    return task
+  end
 end

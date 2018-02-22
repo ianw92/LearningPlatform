@@ -1,9 +1,22 @@
 <tr>
-  <td><%= task.todo_list %></td>
+  <td>
+    <div class="form-check">
+      <label class="form-check-label" style="inline">
+        <!-- TODO Make this work using checking/unchecking box to trigger action. Use javascript to make AJAX request -->
+        <% if task.completed? %>
+          <input type="checkbox" class="form-check-input" id="task_completed_check_<%= task.id %>" checked>
+        <% else %>
+          <input type="checkbox" class="form-check-input" id="task_completed_check_<%= task.id %>">
+        <% end %>
+        <!-- <%= check_box task, complete_task_path(task), {checked: task.completed}, method: :put %><%= task.completed %> -->
+        <%= button_to 'Toggle', complete_task_path(task), method: :post %>
+      </label>
+    </div>
+  </td>
+  <td><%= task.todo_list.title %></td>
   <td><%= task.title %></td>
   <td><%= task.description %></td>
   <td><%= task.due_date %></td>
-  <td><%= task.completed %></td>
   <td><%= link_to 'Show', task %></td>
   <td><%= link_to 'Edit', edit_task_path(task) %></td>
   <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>

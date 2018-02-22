@@ -12,18 +12,50 @@
   </thead>
 
   <tbody>
-    <% @todo_lists.each do |todo_list| %>
-      <tr>
-        <td><%= todo_list.title %></td>
-        <td><%= todo_list.user %></td>
-        <td><%= link_to 'Show', todo_list %></td>
-        <td><%= link_to 'Edit', edit_todo_list_path(todo_list) %></td>
-        <td><%= link_to 'Destroy', todo_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <%= render partial: "todo_list",
+               collection: @todo_lists %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Todo List', new_todo_list_path %>
+<div id="accordion">
+  <% @todo_lists.each_with_index do |todo_list, i| %>
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
+        <%= todo_list.title %>
+      </a>
+    </div>
+    <div id="collapse<%= i %>" class="collapse show">
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Completed</th>
+              <th>Todo List Name</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Due date</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <%= render partial: "tasks/task",
+                       collection: @tasks_for_list[i] %>
+          </tbody>
+        </table>
+        <%= link_to 'New Task', new_task_path(:todo_list => todo_list) %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="card">
+    <div class="card-header">
+      <%= link_to '+ New Todo List', new_todo_list_path %>
+    </div>
+  </div>
+
+</div>
