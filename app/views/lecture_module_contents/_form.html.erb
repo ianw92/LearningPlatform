@@ -11,37 +11,37 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :code %>
     <%= form.text_field :code, id: :lecture_module_content_code %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :academic_year_end %>
     <%= form.number_field :academic_year_end, id: :lecture_module_content_academic_year_end %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :week %>
     <%= form.number_field :week, id: :lecture_module_content_week %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :content %>
     <%= form.file_field :content, id: :lecture_module_content_content_file_name %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :description %>
     <%= form.text_area :description, id: :lecture_module_content_description %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :lecture_module_id %>
     <%= form.text_field :lecture_module_id, id: :lecture_module_content_lecture_module_id %>
   </div>
 
-  <div class="actions">
+  <div class="form-group actions">
     <%= form.submit %>
   </div>
 <% end %>

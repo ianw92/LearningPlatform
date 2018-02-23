@@ -3,8 +3,8 @@
   <td><%= lecture_module_content.academic_year_end %></td>
   <td><%= lecture_module_content.week %></td>
   <td><%= lecture_module_content.description %></td>
-  <td><%= lecture_module_content.content.url %></td>
-  <td><%= lecture_module_content.lecture_module %></td>
+  <td><%= lecture_module_content.content.original_filename %></td>
+  <td><%= lecture_module_content.lecture_module.get_module_full_title %></td>
   <td><%= link_to 'Show', lecture_module_content %></td>
   <td><%= link_to 'Edit', edit_lecture_module_content_path(lecture_module_content) %></td>
   <td><%= link_to 'Destroy', lecture_module_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
