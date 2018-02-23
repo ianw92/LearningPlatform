@@ -35,7 +35,6 @@
               <th>Completed</th>
               <th>Todo List Name</th>
               <th>Title</th>
-              <th>Description</th>
               <th>Due date</th>
               <th colspan="3"></th>
             </tr>
@@ -46,7 +45,15 @@
                        collection: @tasks_for_list[i] %>
           </tbody>
         </table>
-        <%= link_to 'New Task', new_task_path(:todo_list => todo_list) %>
+        <!-- <%= link_to 'New Task', new_task_path(:todo_list => todo_list) %> -->
+
+
+        <!-- TODO add code to create new task for this list without going to a separate page -->
+        <%= render 'tasks/add_new_task', task: @task, todo_list: todo_list %>
+
+
+
+
       </div>
     </div>
   </div>

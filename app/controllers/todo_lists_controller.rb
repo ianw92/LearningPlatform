@@ -11,6 +11,8 @@ class TodoListsController < ApplicationController
     for i in 0..no_of_lists-1 do
       @tasks_for_list[i] = Task.get_tasks_for_list(@todo_lists[i])
     end
+
+    @task = Task.new
   end
 
   # GET /todo_lists/1

@@ -46,6 +46,10 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
+        # TODO Find a less hacky way to do this redirect!!! Use a member route like I am for completed???
+        if params[:redirect] == "{:value=>1}"
+          format.html { redirect_to todo_lists_path }
+        end
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
@@ -87,6 +91,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:todo_list_id, :title, :description, :due_date, :completed)
+      params.require(:task).permit(:todo_list_id, :title, :due_date, :completed)
     end
 end

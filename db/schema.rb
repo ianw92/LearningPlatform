@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220161118) do
+ActiveRecord::Schema.define(version: 20180223111731) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
     t.string "code"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20180220161118) do
   create_table "tasks", force: :cascade do |t|
     t.integer "todo_list_id"
     t.string "title"
-    t.string "description"
     t.date "due_date"
     t.boolean "completed"
     t.datetime "created_at", null: false
