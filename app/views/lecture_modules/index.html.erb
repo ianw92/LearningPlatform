@@ -1,22 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Lecture Modules</h1>
-
-<h2>Current Modules</h2>
-<table>
-  <tbody>
+<div class="container-fluid">
+  <dl>
+    <dt>Current Modules</dt>
     <%= render(@current_modules) %>
-  </tbody>
-</table>
-
-
-<h2>Completed Modules</h2>
-<table>
-  <tbody>
+    <dt>Completed Modules</dt>
     <%= render(@completed_modules) %>
-  </tbody>
-</table>
+  </dl>
 
-<br>
-
-<%= link_to 'New Lecture Module', new_lecture_module_path %>
+  <br>
+  <%= link_to 'New Lecture Module', new_lecture_module_path %>
+</div>

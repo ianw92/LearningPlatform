@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :code %>
+  <div class="form-group">
+    <%= form.label :code, class: "col-sm-4" %>
     <%= form.text_field :code, id: :lecture_module_code %>
   </div>
 
-  <div class="field">
-    <%= form.label :academic_year_end %>
+  <div class="form-group">
+    <%= form.label :academic_year_end, class: "col-sm-4" %>
     <%= form.number_field :academic_year_end, id: :lecture_module_academic_year_end %>
   </div>
 
-  <div class="field">
-    <%= form.label :semester %>
+  <div class="form-group">
+    <%= form.label :semester, class: "col-sm-4" %>
     <%= form.number_field :semester, id: :lecture_module_semester %>
   </div>
 
-  <div class="field">
-    <%= form.label :name %>
+  <div class="form-group">
+    <%= form.label :name, class: "col-sm-4" %>
     <%= form.text_area :name, id: :lecture_module_name %>
   </div>
 
-  <div class="actions">
+  <div class="form-group actions">
     <%= form.submit %>
   </div>
 <% end %>

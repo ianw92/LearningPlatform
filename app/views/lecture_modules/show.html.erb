@@ -1,25 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @lecture_module.code %>
-</p>
-
-<p>
-  <strong>Academic year end:</strong>
-  <%= @lecture_module.academic_year_end %>
-</p>
-
-<p>
-  <strong>Semester:</strong>
-  <%= @lecture_module.semester %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @lecture_module.name %>
-</p>
-
 <%= link_to 'Edit', edit_lecture_module_path(@lecture_module) %> |
 <%= link_to 'Back', lecture_modules_path %>
 

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Dissertation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning Platform Dissertation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div class="container-fluid">
-      <div id="header_bar">
+      <div class="container-fluid" id="header_bar">
         <div class="container" id="nav_menu">
           <div class="dropdown">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -29,12 +29,8 @@
         </div>
       </div>
 
-
-      <div id="title_bar">
-        <%= @page_title || "Dissertation" %>
-      </div>
-
-      <div id="main">
+      <div class="container col-sm-11" id="main">
+        <h1><%= @page_title || "Dissertation" %></h1>
         <%= yield %>
       </div>
     </div>

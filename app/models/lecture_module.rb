@@ -36,4 +36,11 @@ class LectureModule < ApplicationRecord
     current_month > 1 && current_month < 9 ? @current_semester = 2 : @current_semester = 1
   end
 
+  #TODO test this
+  def get_module_full_title
+    "#{code} - #{name} -
+     #{"ACADEMIC YEAR" if semester == 0}#{"AUTUMN" if semester == 1}#{"SPRING" if semester == 2}
+     #{academic_year_end - 1}/#{academic_year_end}"
+   end
+
 end

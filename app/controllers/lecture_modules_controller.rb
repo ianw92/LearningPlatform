@@ -1,6 +1,6 @@
 class LectureModulesController < ApplicationController
   before_action :set_lecture_module, only: [:show, :edit, :update, :destroy]
-  before_action :set_page_title_for_specific_module, only: [:show, :edit, :update]
+  before_action :set_page_title_for_specific_module, only: [:show, :edit]
 
   # GET /lecture_modules
   # GET /lecture_modules.json
@@ -91,7 +91,7 @@ class LectureModulesController < ApplicationController
     end
 
     def set_page_title_for_specific_module
-      @page_title = "#{@lecture_module.code} - #{@lecture_module.name}"
+      @page_title = @lecture_module.get_module_full_title
     end
 
 end
