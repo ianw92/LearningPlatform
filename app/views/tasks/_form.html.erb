@@ -11,27 +11,30 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :todo_list_id %>
     <%= form.text_field :todo_list_id, id: :task_todo_list_id %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, id: :task_title %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :due_date %>
-    <%= form.date_select :due_date, id: :task_due_date %>
+    <%= form.text_field :due_date, id: :task_due_date,
+            "data-provide" => "datepicker",
+            "data-date-format" => "yyyy-mm-dd",
+            "data-date-orientation" => "auto" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :completed %>
     <%= form.check_box :completed, id: :task_completed %>
   </div>
 
-  <div class="actions">
+  <div class="form-group actions">
     <%= form.submit %>
   </div>
 <% end %>

@@ -93,4 +93,5 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:todo_list_id, :title, :due_date, :completed)
     end
+    
 end

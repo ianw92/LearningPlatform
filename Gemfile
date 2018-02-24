@@ -72,3 +72,5 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'autoprefixer-rails'
 
 gem "paperclip", "~> 5.2.1"
+
+gem 'bootstrap-datepicker-rails'
