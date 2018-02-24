@@ -6,7 +6,7 @@ class Task < ApplicationRecord
   #TODO test this!
   def self.get_tasks_for_list(todo_list)
     list_id = todo_list.id
-    Task.where("todo_list_id = ?", list_id)
+    Task.where("todo_list_id = ?", list_id).order(:completed).order(:due_date)
   end
 
   #TODO test this!

@@ -11,28 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.hidden_field :todo_list_id, id: :task_todo_list_id, value: todo_list.id %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, id: :task_title %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :due_date %>
     <%= form.date_select :due_date, id: :task_due_date %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.hidden_field :completed, id: :task_completed, value: false %>
   </div>
 
   <!-- TODO Find a less hacky way to do this!!! -->
   <%= hidden_field_tag :redirect, :value => 1 %>
 
-  <div class="actions">
+  <div class="form-group actions">
     <%= form.submit %>
   </div>
 <% end %>

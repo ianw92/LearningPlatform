@@ -11,17 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title %>
     <%= form.text_field :title, id: :todo_list_title %>
   </div>
 
-  <div class="field">
-    <%= form.label :user %>
-    <%= form.text_field :user, id: :todo_list_user %>
+  <div class="form-group">
+    <%= form.hidden_field :user, id: :todo_list_user %>
   </div>
 
-  <div class="actions">
+  <div class="form-group actions">
     <%= form.submit %>
   </div>
 <% end %>

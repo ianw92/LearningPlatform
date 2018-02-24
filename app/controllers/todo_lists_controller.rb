@@ -4,8 +4,8 @@ class TodoListsController < ApplicationController
   # GET /todo_lists
   # GET /todo_lists.json
   def index
-    @todo_lists = TodoList.all
-    puts @todo_lists[0]
+    me = current_user
+    @todo_lists = TodoList.where("user = ?", me.username)
     no_of_lists = @todo_lists.size
     @tasks_for_list = Array.new(no_of_lists)
     for i in 0..no_of_lists-1 do

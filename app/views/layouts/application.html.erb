@@ -10,29 +10,17 @@
   </head>
 
   <body class='<%= controller.controller_name %>'>
-    <div class="container-fluid">
-      <div class="container-fluid" id="header_bar">
-        <div class="container" id="nav_menu">
-          <div class="dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-              Menu
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item"><%= link_to 'Modules', lecture_modules_path %></a>
-              <a class="dropdown-item"><%= link_to 'All Module Content', lecture_module_contents_path %></a>
-              <a class="dropdown-item"><%= link_to 'All Todo Lists', todo_lists_path %></a>
-              <a class="dropdown-item"><%= link_to 'All Tasks', tasks_path %></a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item"><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' if user_signed_in? %></a>
-            </div>
-          </div>
-        </div>
-      </div>
 
+    <%= render partial: "shared/navbar" %>
+
+    <div class="container-fluid">
       <div class="container col-sm-11" id="main">
         <h1><%= @page_title || "Dissertation" %></h1>
         <%= yield %>
       </div>
     </div>
+
+    <%= render partial: "shared/footer" %>
+
   </body>
 </html>

@@ -13,7 +13,11 @@
       </label>
     </div>
   </td>
-  <td><%= task.todo_list.title %></td>
+  <% if local_assigns.has_key? :short_view %>
+    <% if !local_assigns.fetch :short_view %>
+      <td><%= task.todo_list.title %></td>
+    <% end %>
+  <% end %>
   <td><%= task.title %></td>
   <td><%= task.due_date %></td>
   <td><%= link_to 'Show', task %></td>
