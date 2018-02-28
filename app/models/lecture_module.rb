@@ -1,5 +1,5 @@
 class LectureModule < ApplicationRecord
-  has_many :lecture_module_contents
+  has_many :lecture_module_contents, dependent: :destroy
 
   validates :code, :academic_year_end, :semester, :name, presence: true
   validates :code, length: { in: 5..20 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223111731) do
+ActiveRecord::Schema.define(version: 20180225101619) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
     t.string "code"
@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(version: 20180223111731) do
     t.string "user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "subtasks", force: :cascade do |t|
+    t.integer "task_id"
+    t.string "title"
+    t.date "due_date"
+    t.boolean "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_subtasks_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|

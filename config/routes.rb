@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :subtasks do
+    post 'complete', on: :member
+  end
   resources :tasks do
     post 'complete', on: :member
   end

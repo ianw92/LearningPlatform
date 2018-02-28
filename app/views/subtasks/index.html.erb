@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
+<h1>Subtasks</h1>
 
 <p>THIS PAGE WONT BE NECESSARY</p>
 
@@ -8,7 +8,7 @@
   <thead>
     <tr>
       <th>Completed</th>
-      <th>Todo List Name</th>
+      <th>Main Task Name</th>
       <th>Title</th>
       <th>Due date</th>
       <th colspan="3"></th>
@@ -16,12 +16,13 @@
   </thead>
 
   <tbody>
-    <%= render partial: "task",
-               collection: @tasks,
+    <%= render partial: "subtask",
+               collection: @subtasks,
                locals: { short_view: false } %>
   </tbody>
+
 </table>
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
+<%= link_to 'New Subtask', new_subtask_path %>

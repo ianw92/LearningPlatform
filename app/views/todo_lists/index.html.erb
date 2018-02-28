@@ -2,23 +2,6 @@
 
 <h1>Todo Lists</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= render partial: "todo_list",
-               collection: @todo_lists %>
-  </tbody>
-</table>
-
-<br>
-
 <div id="accordion">
   <% @todo_lists.each_with_index do |todo_list, i| %>
   <div class="card">
@@ -34,7 +17,7 @@
     </div>
     <div id="collapse<%= i %>" class="collapse show">
       <div class="card-body">
-        <table>
+        <!-- <table>
           <thead>
             <tr>
               <th>Completed</th>
@@ -44,12 +27,14 @@
             </tr>
           </thead>
 
-          <tbody>
+          <tbody> -->
+          <ul class="list-unstyled">
             <%= render partial: "tasks/task",
                        collection: @tasks_for_list[i],
-                       locals: { short_view: true }%>
-          </tbody>
-        </table>
+                       locals: { short_view: true } %>
+          </ul>
+          <!-- </tbody>
+        </table> -->
 
         <%= render 'tasks/add_new_task', task: @task, todo_list: todo_list %>
 

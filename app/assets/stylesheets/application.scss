@@ -12,8 +12,11 @@
  *
  */
 
+// @import "scaffolds";
 @import "bootstrap";
 @import "bootstrap-datepicker";
+@import "lecture_modules";
+@import "lecture_module_contents";
 
 #header_bar {
   background: #9c9;
@@ -26,6 +29,12 @@
     margin-left: 0;
     width: 10%;
   }
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
 }
 
 body {
@@ -47,16 +56,16 @@ iframe {
   height: 500px;
 }
 
-label {
+form {
+  label {
   width: 140px;
-}
-
-.lecture_modules, .lecture_module_contents {
-    input, textarea {
-    width: 220px;
   }
 }
 
 .show-edit-destroy-links {
   float: right;
+}
+
+.subtask-list {
+  margin-left: 30px;
 }

@@ -20,7 +20,7 @@ class TasksController < ApplicationController
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -93,5 +93,5 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:todo_list_id, :title, :due_date, :completed)
     end
-    
+
 end

@@ -12,6 +12,8 @@ class TodoListsController < ApplicationController
       @tasks_for_list[i] = Task.get_tasks_for_list(@todo_lists[i])
     end
 
+    @subtasks = Subtask.all
+
     @task = Task.new
   end
 
