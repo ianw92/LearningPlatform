@@ -3,7 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .lecture_module_contents {
+  .form-group {
     input, textarea {
-    width: 220px;
+      width: 220px;
+    }
   }
 }

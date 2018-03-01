@@ -16,12 +16,12 @@
       <li class="nav-item">
         <a class="nav-link"><%= link_to 'All Todo Lists', todo_lists_path %></a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link"><%= link_to 'All Tasks', tasks_path %></a>
-      </li>
-      <li class="nav-item">
+      </li> -->
+      <!-- <li class="nav-item">
         <a class="nav-link"><%= link_to 'All Subtasks', subtasks_path %></a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link"><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' if user_signed_in? %></a>
       </li>
@@ -32,8 +32,8 @@
           <a class="dropdown-item"><%= link_to 'Modules', lecture_modules_path %></a>
           <a class="dropdown-item"><%= link_to 'All Module Content', lecture_module_contents_path %></a>
           <a class="dropdown-item"><%= link_to 'All Todo Lists', todo_lists_path %></a>
-          <a class="dropdown-item"><%= link_to 'All Tasks', tasks_path %></a>
-          <a class="dropdown-item"><%= link_to 'All Subtasks', subtasks_path %></a>
+          <!-- <a class="dropdown-item"><%= link_to 'All Tasks', tasks_path %></a> -->
+          <!-- <a class="dropdown-item"><%= link_to 'All Subtasks', subtasks_path %></a> -->
           <div class="dropdown-divider"></div>
           <a class="dropdown-item"><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' if user_signed_in? %></a>
         </div>

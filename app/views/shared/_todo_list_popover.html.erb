@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+  <span>
+    <a style="color:blue; font-style:underlined;"
+       data-toggle="popover"
+       title="Todo Lists"
+       data-placement="top"
+       data-content="<%= render partial:'shared/todo_lists_accordion',
+                                locals: { type: 'popover' }%>">Todos</a>
+  </span>
+<% end %>

@@ -1,38 +1,49 @@
-<li class="list-item">
-  <ul class="list-inline">
-    <li class="list-inline-item">
-      <div class="form-check">
-        <label class="form-check-label" style="inline">
-          <!-- TODO Make this work using checking/unchecking box to trigger action. Use javascript to make AJAX request -->
-          <% if task.completed? %>
-            <input type="checkbox" class="form-check-input" id="task_completed_check_<%= task.id %>" checked>
-          <% else %>
-            <input type="checkbox" class="form-check-input" id="task_completed_check_<%= task.id %>">
+<% if local_assigns.has_key? :todo_list %> <!-- TODO Remove this line when task index page is deleted -->
+  <% if (local_assigns.fetch :todo_list).id == task.todo_list_id %>
+    <% if !(((local_assigns.fetch :type) == 'popover') and task.completed?) %>
+      <li class='list-item'>
+        <ul class='list-inline'>
+          <li class='list-inline-item'>
+            <div class='form-check'>
+              <label class='form-check-label' style='inline'>
+                <!-- TODO Make this work using checking/unchecking box to trigger action. Use javascript to make AJAX request -->
+                <% if task.completed? %>
+                  <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>' checked>
+                <% else %>
+                  <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>'>
+                <% end %>
+                  <form class='button_to' method='post' action='/tasks/<%= task.id %>/complete'>
+                    <input type='submit' value='Toggle'>
+                    <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'>
+                  </form>
+              </label>
+            </div>
+          </li>
+
+          <% if local_assigns.has_key? :short_view %>
+            <% if !local_assigns.fetch :short_view %>
+              <li class='list-inline-item'><%= task.todo_list.title %></li>
+            <% end %>
           <% end %>
-          <!-- <%= check_box task, complete_task_path(task), {checked: task.completed}, method: :put %><%= task.completed %> -->
-          <%= button_to 'Toggle', complete_task_path(task), method: :post %>
-        </label>
-      </div>
-    </li>
-    <% if local_assigns.has_key? :short_view %>
-      <% if !local_assigns.fetch :short_view %>
-        <li class="list-inline-item"><%= task.todo_list.title %></li>
-      <% end %>
+          <li class='list-inline-item'><%= task.title %></li>
+          <% if (local_assigns.fetch :type) == 'main' %>
+            <li class='list-inline-item'><%= task.due_date %></li>
+            <li class='list-inline-item'><%= link_to 'Show', task %></li>
+            <li class='list-inline-item'><%= link_to 'Edit', edit_task_path(task) %></li>
+            <li class='list-inline-item'><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+
+            <!-- Subtasks -->
+            <li class='list-item subtask-list'>
+              <ul class='list-inline'>
+                <%= render partial: 'subtasks/subtask',
+                           collection: @subtasks,
+                           locals: { short_view: true, task: task } %>
+              </ul>
+            </li>
+          <% end %>
+
+        </ul>
+      </li>
     <% end %>
-    <li class="list-inline-item"><%= task.title %></li>
-    <li class="list-inline-item"><%= task.due_date %></li>
-    <li class="list-inline-item"><%= link_to 'Show', task %></li>
-    <li class="list-inline-item"><%= link_to 'Edit', edit_task_path(task) %></li>
-    <li class="list-inline-item"><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-
-    <!-- Subtasks -->
-    <li class="list-item subtask-list">
-      <ul class="list-inline">
-        <%= render partial: "subtasks/subtask",
-                   collection: @subtasks,
-                   locals: { short_view: true, task: task } %>
-      </ul>
-    </li>
-
-  </ul>
-</li>
+  <% end %>
+<% end %>

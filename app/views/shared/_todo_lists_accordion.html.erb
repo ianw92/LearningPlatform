@@ -1,0 +1,49 @@
+<div id='accordion'>
+  <% @todo_lists_global.each_with_index do |todo_list, i| %>
+  <div class='card'>
+    <div class='card-header'>
+      <a class='card-link' data-toggle='collapse' data-parent='#accordion' href='#collapse_<%= local_assigns.fetch :type %>_<%= i %>'>
+        <td><%= todo_list.title %></td>
+
+        <% if (local_assigns.fetch :type) == 'main' %>
+        <div class='show-edit-destroy-links'>
+          <td><%= link_to 'Show', todo_list %></td>
+          <td><%= link_to 'Edit', edit_todo_list_path(todo_list) %></td>
+          <td><%= link_to 'Destroy', todo_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </div>
+        <% end %>
+
+      </a>
+    </div>
+
+    <% if i==0 %>
+    <div id='collapse_<%= local_assigns.fetch :type %>_<%= i %>' class='collapse show'>
+    <% else %>
+    <div id='collapse_<%= local_assigns.fetch :type %>_<%= i %>' class='collapse'>
+    <% end %>
+
+      <div class='card-body'>
+        <ul class='list-unstyled'>
+          <%= render partial: 'tasks/task',
+                     collection: @tasks_global,
+                     locals: { short_view: true, # need to remove this variable when i get rid of the view all tasks page
+                               todo_list: todo_list,
+                               type: (local_assigns.fetch :type) } %>
+        </ul>
+
+        <% if (local_assigns.fetch :type) == 'main' %>
+        <%= render 'tasks/add_new_task', task: @task, todo_list: todo_list %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div class='card'>
+    <div class='card-header'>
+      <a href='todo_lists/new' data-original-title='Todo Lists'>+ New Todo List</a>
+    </div>
+  </div>
+
+</div>
