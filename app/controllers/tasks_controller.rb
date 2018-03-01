@@ -16,7 +16,7 @@ class TasksController < ApplicationController
     Task.change_completed_status(@task)
     respond_to do |format|
       if @task.save
-        format.html { redirect_to todo_lists_path, notice: 'Task was successfully updated.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -50,7 +50,7 @@ class TasksController < ApplicationController
         if params[:redirect] == "{:value=>1}"
           format.html { redirect_to todo_lists_path }
         end
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
