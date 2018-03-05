@@ -4,6 +4,7 @@
   <td><%= lecture_module_content.week %></td>
   <td><%= lecture_module_content.description %></td>
   <td><%= lecture_module_content.content.original_filename %></td>
+  <td><%= lecture_module_content.youTube_link %></td>
   <td><%= lecture_module_content.lecture_module.get_module_full_title %></td>
   <td><%= link_to 'Show', lecture_module_content %></td>
   <td><%= link_to 'Edit', edit_lecture_module_content_path(lecture_module_content) %></td>
@@ -14,6 +15,17 @@
   <% if local_assigns.fetch :show_pdf %>
     <% if lecture_module_content.content? %>
     <iframe src="<%= lecture_module_content.content.url %>" allowfullscreeen></iframe>
+    <% end %>
+  <% end %>
+<% end %>
+
+<br>
+
+<% if local_assigns.has_key? :show_youTube %>
+  <% if local_assigns.fetch :show_youTube %>
+    <% if lecture_module_content.youTube_link? %>
+      <iframe src="<%= lecture_module_content.youTube_link %>"
+        allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <% end %>
   <% end %>
 <% end %>

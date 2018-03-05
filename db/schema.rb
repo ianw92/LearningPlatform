@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225101619) do
+ActiveRecord::Schema.define(version: 20180305103511) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
     t.string "code"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20180225101619) do
     t.string "content_content_type"
     t.integer "content_file_size"
     t.datetime "content_updated_at"
+    t.string "youTube_link"
     t.index ["lecture_module_id"], name: "index_lecture_module_contents_on_lecture_module_id"
   end
 

@@ -26,12 +26,21 @@
 </p>
 
 <p>
+  <strong>YouTube Link:</strong>
+  <%= @lecture_module_content.youTube_link %>
+</p>
+
+<p>
   <strong>Lecture module:</strong>
   <%= @lecture_module_content.lecture_module %>
 </p>
 
 <% if @lecture_module_content.content? %>
 <iframe src="<%= @lecture_module_content.content.url %>" allowfullscreen></iframe>
+<% end %>
+
+<% if @lecture_module_content.youTube_link? %>
+<iframe src="<%= @lecture_module_content.youTube_link %>" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 <% end %>
 
 <%= link_to 'Edit', edit_lecture_module_content_path(@lecture_module_content) %> |

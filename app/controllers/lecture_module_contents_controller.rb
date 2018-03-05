@@ -79,7 +79,7 @@ class LectureModuleContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_module_content_params
-      params.require(:lecture_module_content).permit(:code, :academic_year_end, :week, :description, :lecture_module_id, :content)
+      params.require(:lecture_module_content).permit(:code, :academic_year_end, :week, :description, :lecture_module_id, :content, :youTube_link)
     end
 
     def set_page_title_for_specific_content

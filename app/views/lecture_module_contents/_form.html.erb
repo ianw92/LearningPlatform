@@ -32,6 +32,12 @@
   </div>
 
   <div class="form-group">
+    <p>Please only include the source string of the youTube embed HTML</p>
+    <%= form.label :youTube_link %>
+    <%= form.text_field :youTube_link, id: :lecture_module_content_youTube_link %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :description %>
     <%= form.text_area :description, id: :lecture_module_content_description %>
   </div>

@@ -10,8 +10,15 @@ class LectureModuleContent < ApplicationRecord
                    inclusion: { within: 1..12 }
   validates_attachment :content, content_type: {content_type: ["application/pdf"]}
   validate :module_must_exist, :module_id_must_match_code_and_year
+  validate :content_description_or_youtube_must_exist
 
   ########## Validation methods
+
+  def content_description_or_youtube_must_exist
+    if content.blank? && youTube_link.blank? && description.blank?
+      errors.add(:base, "Lecture Module Content must have at least one of: content; youTube link; or description")
+    end
+  end
 
   # TODO do I need both of these two methods or will the bottom one only suffice?
   def module_must_exist

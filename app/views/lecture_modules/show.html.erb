@@ -19,7 +19,8 @@
           <%= render partial: "lecture_module_contents/lecture_module_content_in_module_show",
                      as: :lecture_module_content,
                      collection: @weekly_content[i],
-                     locals: { show_pdf: true } %>
+                     locals: { show_pdf: true,
+                               show_youTube: true } %>
         </ul>
       </div>
     </div>

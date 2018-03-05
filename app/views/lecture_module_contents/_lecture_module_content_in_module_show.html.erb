@@ -1,4 +1,4 @@
-<% if lecture_module_content.description? || lecture_module_content.content? %>
+<% if lecture_module_content.description? || lecture_module_content.content? || lecture_module_content.youTube_link? %>
   <li>
     <ul class="list-inline">
       <li class="list-inline-item"><%= lecture_module_content.description %></li>
@@ -12,6 +12,17 @@
       <% if local_assigns.fetch :show_pdf %>
         <% if lecture_module_content.content? %>
         <iframe src="<%= lecture_module_content.content.url %>" allowfullscreeen></iframe>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <br>
+
+    <% if local_assigns.has_key? :show_youTube %>
+      <% if local_assigns.fetch :show_youTube %>
+        <% if lecture_module_content.youTube_link? %>
+          <iframe src="<%= lecture_module_content.youTube_link %>"
+            allow="encrypted-media" allowfullscreen></iframe>
         <% end %>
       <% end %>
     <% end %>
