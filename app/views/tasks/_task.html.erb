@@ -1,7 +1,10 @@
 <% if local_assigns.has_key? :todo_list %> <!-- TODO Remove this line when task index page is deleted -->
   <% if (local_assigns.fetch :todo_list).id == task.todo_list_id %>
-    <% if !(((local_assigns.fetch :type) == 'popover') and task.completed?) %>
+      <% if task == @current_task %>
+      <li class='list-item current_task'>
+      <% else %>
       <li class='list-item'>
+      <% end %>
         <ul class='list-inline'>
           <li class='list-inline-item'>
             <div class='form-check'>
@@ -12,7 +15,7 @@
                 <% else %>
                   <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>'>
                 <% end %>
-                  <form class='button_to' method='post' action='/tasks/<%= task.id %>/complete'>
+                  <form class='button_to' method='post' action='/tasks/<%= task.id %>/complete' data-remote='true'>
                     <input type='submit' value='Toggle'>
                     <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'>
                   </form>
@@ -36,7 +39,7 @@
             <li class='list-item subtask-list'>
               <ul class='list-inline'>
                 <%= render partial: 'subtasks/subtask',
-                           collection: @subtasks,
+                           collection: @subtasks_global,
                            locals: { short_view: true, task: task } %>
               </ul>
             </li>
@@ -44,6 +47,5 @@
 
         </ul>
       </li>
-    <% end %>
   <% end %>
 <% end %>

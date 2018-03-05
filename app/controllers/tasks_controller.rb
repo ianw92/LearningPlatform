@@ -1,10 +1,12 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete]
+  before_action :set_task, only: [:show, :edit, :update, :destroy,]
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    # This can only be visited if adding new task from todo_list index page fails
+    # Therefore redirect back to that, if a user enters the url '/tasks', they will be redirected to root page
+    redirect_back fallback_location: root_path
   end
 
   # GET /tasks/1
@@ -13,10 +15,12 @@ class TasksController < ApplicationController
   end
 
   def complete
-    Task.change_completed_status(@task)
+    task_to_toggle_completion = Task.find(params[:id])
+    Task.change_completed_status(task_to_toggle_completion)
     respond_to do |format|
-      if @task.save
+      if task_to_toggle_completion.save
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully updated.' }
+        format.js { @current_task = task_to_toggle_completion }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -53,7 +57,7 @@ class TasksController < ApplicationController
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { render :new }
+        format.html { render "todo_lists/index" }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -64,7 +68,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to todo_lists_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -78,7 +82,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to todo_lists_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

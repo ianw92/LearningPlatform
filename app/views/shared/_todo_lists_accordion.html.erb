@@ -2,7 +2,7 @@
   <% @todo_lists_global.each_with_index do |todo_list, i| %>
   <div class='card'>
     <div class='card-header'>
-      <a class='card-link' data-toggle='collapse' data-parent='#accordion' href='#collapse_<%= local_assigns.fetch :type %>_<%= i %>'>
+      <a class='card-link' data-toggle='collapse' data-parent='#accordion' href='#collapse_<%= local_assigns.fetch :type %>_<%= todo_list.id %>'>
         <td><%= todo_list.title %></td>
 
         <% if (local_assigns.fetch :type) == 'main' %>
@@ -16,10 +16,12 @@
       </a>
     </div>
 
-    <% if i==0 %>
-    <div id='collapse_<%= local_assigns.fetch :type %>_<%= i %>' class='collapse show'>
+    <% if todo_list.id==@todo_lists_global[0].id %>
+    <div id='collapse_<%= local_assigns.fetch :type %>_<%= todo_list.id %>' class='collapse show'>
+    <% elsif !@current_task.nil? && todo_list.id==(@current_task.todo_list_id) %>
+    <div id='collapse_<%= local_assigns.fetch :type %>_<%= todo_list.id %>' class='collapse show'>
     <% else %>
-    <div id='collapse_<%= local_assigns.fetch :type %>_<%= i %>' class='collapse'>
+    <div id='collapse_<%= local_assigns.fetch :type %>_<%= todo_list.id %>' class='collapse'>
     <% end %>
 
       <div class='card-body'>
@@ -32,7 +34,7 @@
         </ul>
 
         <% if (local_assigns.fetch :type) == 'main' %>
-        <%= render 'tasks/add_new_task', task: @task, todo_list: todo_list %>
+        <%= render 'tasks/add_new_task', task: @task || Task.new, todo_list: todo_list %>
         <% end %>
 
       </div>

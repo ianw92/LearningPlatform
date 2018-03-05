@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui/effects/effect-blind
 //= require popper
 //= require bootstrap-sprockets
 //= require rails-ujs
