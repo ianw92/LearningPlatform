@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'lecture_modules#index'
+
+  get 'timer/start', to: 'timer#start'
+  get 'timer/stop', to: 'timer#stop'
+  get 'timer/reset', to: 'timer#reset'
 end
