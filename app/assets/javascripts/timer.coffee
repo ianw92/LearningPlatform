@@ -26,8 +26,8 @@ $(document).on 'turbolinks:load', ->
 
       # console.log("time left #{time_left}")
 
-    minutes = Math.floor((time_left / 60))
-    seconds = Math.floor((time_left % 60))
+    minutes = ("0" + Math.floor((time_left / 60))).slice(-2);
+    seconds = ("0" + Math.floor((time_left % 60))).slice(-2);
 
     # // Display the result in the element with id="timer"
     $('#timer').html("#{minutes}:#{seconds}")
@@ -38,6 +38,17 @@ $(document).on 'turbolinks:load', ->
       alert("Time up!")
 
   , 1000)
+
+  $('#start-btn').click( ->
+    localStorage.setItem("timer_running", true))
+
+  $('#stop-btn').click( ->
+    localStorage.setItem("timer_running", false))
+
+  $('#reset-btn').click( ->
+    localStorage.setItem("time_left", 1500)
+    $('#timer').html("25:00")
+    )
 
 $(document).on 'turbolinks:click', ->
   clearInterval(window.timer)

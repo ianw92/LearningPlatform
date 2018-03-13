@@ -1,50 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center fixed-top">
+  <a href="/" class="navbar-brand d-flex w-20 mr-auto">Home</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link"><%= link_to 'Modules', lecture_modules_path %><span class="sr-only">(current)</span></a>
+  <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
+    <ul class="nav navbar-nav mr-auto w-100 justify-content-start">
+      <li class="nav-item">
+        <%= link_to 'Modules', lecture_modules_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <a class="nav-link"><%= link_to 'All Module Content', lecture_module_contents_path %></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"><%= link_to 'All Todo Lists', todo_lists_path %></a>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link"><%= link_to 'All Tasks', tasks_path %></a>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link"><%= link_to 'All Subtasks', subtasks_path %></a>
-      </li> -->
-      <li class="nav-item">
-        <a class="nav-link"><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' if user_signed_in? %></a>
-      </li>
-
-      <li class="nav-item dropdown">
-        <!-- <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item"><%= link_to 'Modules', lecture_modules_path %></a>
-          <a class="dropdown-item"><%= link_to 'All Module Content', lecture_module_contents_path %></a>
-          <a class="dropdown-item"><%= link_to 'All Todo Lists', todo_lists_path %></a>
-          <!-- <a class="dropdown-item"><%= link_to 'All Tasks', tasks_path %></a> -->
-          <!-- <a class="dropdown-item"><%= link_to 'All Subtasks', subtasks_path %></a> -->
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item"><%= link_to 'Log Out', destroy_user_session_path, :method=>'delete' if user_signed_in? %></a>
-        </div>
+        <%= link_to 'Todo Lists', todo_lists_path, class: "nav-link" %>
       </li>
     </ul>
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <ul class="nav navbar-nav mx-auto w-100 justify-content-center align-items-center" id="nav_timer_list" >
+      <li class="nav-item">
+          <a id='timer'><span id='minutes'></span>:<span id='seconds'></span></a>
+      </li>
+      <li class="nav-item">
+        <ul class="list-inline" id="timer_buttons">
+          <li class="list-inline-item">
+            <i class='far fa-play-circle btn btn-outline-light' id="start-btn"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class='far fa-pause-circle btn btn-outline-light' id="stop-btn"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class='fas fa-undo-alt btn btn-outline-light' id="reset-btn"></i>
+          </li>
+        </ul>
+      </li>
+    </ul>
 
+    <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+      <li class="nav-item">
+        <% if user_signed_in? %>
+          <%= link_to destroy_user_session_path, :method=>'delete', class: "nav-link" do %>
+            <i class='fa fa-sign-out-alt'></i> Log Out
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
   </div>
-
 </nav>

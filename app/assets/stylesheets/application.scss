@@ -17,19 +17,9 @@
 @import "bootstrap-datepicker";
 @import "lecture_modules";
 @import "lecture_module_contents";
-
-#header_bar {
-  background: #9c9;
-  border-bottom: 2px solid;
-  font: small-caps 40px/40px "Times New Roman", serif;
-  color: #282;
-  text-align: center;
-
-  #nav_menu {
-    margin-left: 0;
-    width: 10%;
-  }
-}
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "navbar";
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -71,7 +61,7 @@ form {
 }
 
 .popover {
-  height: 400px;
+  max-height: 400px;
   width: 250px;
   overflow-y: scroll;
 }

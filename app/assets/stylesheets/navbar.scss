@@ -1,0 +1,24 @@
+.navbar-nav {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  li {
+    a {
+      color: rgba(255, 255, 255, 0.5);
+      &#timer {
+        padding: 5px;
+      }
+    }
+  }
+
+  .btn {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &.collapsed-timer {
+    padding: 10px;
+  }
+
+  #timer_buttons.collapsed-timer-buttons {
+    padding-top: 5px;
+  }
+}
