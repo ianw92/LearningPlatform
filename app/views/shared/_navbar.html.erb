@@ -1,47 +1,52 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-dark justify-content-center fixed-top">
-  <a href="/" class="navbar-brand d-flex w-20 mr-auto">Home</a>
+  <div class="container">
+    <a href="/" class="navbar-brand d-flex w-20 mr-auto">Home</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
-    <ul class="nav navbar-nav mr-auto w-100 justify-content-start">
-      <li class="nav-item">
-        <%= link_to 'Modules', lecture_modules_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Todo Lists', todo_lists_path, class: "nav-link" %>
-      </li>
-    </ul>
+    <% if user_signed_in? %>
 
-    <ul class="nav navbar-nav mx-auto w-100 justify-content-center align-items-center" id="nav_timer_list" >
-      <li class="nav-item">
-          <a id='timer'><span id='minutes'></span>:<span id='seconds'></span></a>
-      </li>
-      <li class="nav-item">
-        <ul class="list-inline" id="timer_buttons">
-          <li class="list-inline-item">
-            <i class='far fa-play-circle btn btn-outline-light' id="start-btn"></i>
+      <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
+        <ul class="nav navbar-nav mr-auto w-100 justify-content-start">
+          <li class="nav-item">
+            <%= link_to 'Modules', lecture_modules_path, class: "nav-link" %>
           </li>
-          <li class="list-inline-item">
-            <i class='far fa-pause-circle btn btn-outline-light' id="stop-btn"></i>
-          </li>
-          <li class="list-inline-item">
-            <i class='fas fa-undo-alt btn btn-outline-light' id="reset-btn"></i>
+          <li class="nav-item">
+            <%= link_to 'Todo Lists', todo_lists_path, class: "nav-link" %>
           </li>
         </ul>
-      </li>
-    </ul>
 
-    <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-      <li class="nav-item">
-        <% if user_signed_in? %>
-          <%= link_to destroy_user_session_path, :method=>'delete', class: "nav-link" do %>
-            <i class='fa fa-sign-out-alt'></i> Log Out
-          <% end %>
-        <% end %>
-      </li>
-    </ul>
+        <ul class="nav navbar-nav mx-auto w-100 justify-content-center align-items-center" id="nav_timer_list" >
+          <li class="nav-item">
+              <a id='timer'><span id='minutes'></span>:<span id='seconds'></span></a>
+          </li>
+          <li class="nav-item">
+            <ul class="list-inline" id="timer_buttons">
+              <li class="list-inline-item">
+                <i class='far fa-play-circle btn btn-outline-light' id="start-btn"></i>
+              </li>
+              <li class="list-inline-item">
+                <i class='far fa-pause-circle btn btn-outline-light' id="stop-btn"></i>
+              </li>
+              <li class="list-inline-item">
+                <i class='fas fa-undo-alt btn btn-outline-light' id="reset-btn"></i>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+          <li class="nav-item">
+            <% if user_signed_in? %>
+              <%= link_to destroy_user_session_path, :method=>'delete', class: "nav-link" do %>
+                <i class='fa fa-sign-out-alt'></i> Log Out
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </nav>

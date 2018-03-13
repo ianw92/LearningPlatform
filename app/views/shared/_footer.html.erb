@@ -1,6 +1,8 @@
 <footer class="footer fixed-bottom">
-  <div class="container">
-    <%= render partial:'shared/todo_list_popover' %>
+  <div class="container footer">
+    <% if user_signed_in? %>
+      <%= render partial:'shared/todo_list_popover' %>
+    <% end %>
     <span class="text-muted">Place sticky footer content here.</span>
   </div>
 </footer>
