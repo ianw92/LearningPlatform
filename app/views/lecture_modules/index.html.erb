@@ -1,11 +1,8 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<dl>
-  <dt>Current Modules</dt>
-  <%= render(@current_modules) %>
-  <dt>Completed Modules</dt>
-  <%= render(@completed_modules) %>
-</dl>
+<div id="modules_index">
+  <%= render partial: 'lecture_modules/modules_index' %>
+</div>
 
 <br>
 <%= link_to 'New Lecture Module', new_lecture_module_path %>

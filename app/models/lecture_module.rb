@@ -1,4 +1,6 @@
 class LectureModule < ApplicationRecord
+  has_many :user_module_linkers
+  has_many :users, :through => :user_module_linkers
   has_many :lecture_module_contents, dependent: :destroy
 
   validates :code, :academic_year_end, :semester, :name, presence: true
@@ -41,6 +43,28 @@ class LectureModule < ApplicationRecord
     "#{code} - #{name} -
      #{"ACADEMIC YEAR" if semester == 0}#{"AUTUMN" if semester == 1}#{"SPRING" if semester == 2}
      #{academic_year_end - 1}/#{academic_year_end}"
+   end
+
+   #TODO test this
+   def self.get_my_current_modules(user)
+     self.set_current_year_and_semester
+     user_id = user.id
+     my_module_linkers = UserModuleLinker.where("user_id = ?", user_id)
+     my_module_ids = my_module_linkers.pluck(:lecture_module_id)
+     LectureModule.where(id: my_module_ids).where("academic_year_end = ?", @current_year_end).where("semester = 0 OR semester = ?", @current_semester)
+   end
+
+   #TODO test this
+   def self.get_my_completed_modules(user)
+     self.set_current_year_and_semester
+     user_id = user.id
+     my_module_linkers = UserModuleLinker.where("user_id = ?", user_id)
+     my_module_ids = my_module_linkers.pluck(:lecture_module_id)
+     if @current_semester == 1
+       LectureModule.where(id: my_module_ids).where("academic_year_end != ?", @current_year_end).order(:code)
+     else
+       LectureModule.where(id: my_module_ids).where("academic_year_end != ? OR academic_year_end = ? AND semester = 1", @current_year_end, @current_year_end).order(:code)
+     end
    end
 
 end

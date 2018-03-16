@@ -16,9 +16,9 @@ class TasksController < ApplicationController
 
   def complete
     task_to_toggle_completion = Task.find(params[:id])
-    Task.change_completed_status(task_to_toggle_completion)
+    task = Task.change_completed_status(task_to_toggle_completion)
     respond_to do |format|
-      if task_to_toggle_completion.save
+      if task.save
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully updated.' }
         format.js { @current_task = task_to_toggle_completion }
         format.json { head :ok }

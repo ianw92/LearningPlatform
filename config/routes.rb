@@ -5,13 +5,18 @@ Rails.application.routes.draw do
   resources :subtasks do
     post 'complete', on: :member
   end
+
   resources :tasks do
     post 'complete', on: :member
   end
 
   resources :todo_lists
   resources :lecture_module_contents
-  resources :lecture_modules
+
+  resources :lecture_modules do
+    post 'add_to_my_modules', on: :member
+    post 'remove_from_my_modules', on: :member
+  end
 
   get "/pages/*page" => "pages#show"
 

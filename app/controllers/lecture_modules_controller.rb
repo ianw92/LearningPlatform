@@ -6,9 +6,37 @@ class LectureModulesController < ApplicationController
   # GET /lecture_modules.json
   def index
     @page_title = "Lecture Modules"
-    @lecture_modules = LectureModule.all
-    @current_modules = LectureModule.current
-    @completed_modules = LectureModule.completed
+    set_module_collections
+  end
+
+  def add_to_my_modules
+    module_to_add = LectureModule.find(params[:id])
+    user_module_linker = UserModuleLinker.add_new_linker(module_to_add, current_user)
+
+
+    respond_to do |format|
+      if user_module_linker.save
+        set_module_collections
+        format.html { redirect_back fallback_location: root_path, notice: 'Lecture module was successfully added to My Modules.' }
+        format.js
+        format.json { head :ok }
+      else
+        format.html { redirect_back fallback_location: root_path, notice: 'Lecture module could not be added to My Modules.' }
+        format.json { head :ok }
+      end
+    end
+  end
+
+  def remove_from_my_modules
+    module_to_remove = LectureModule.find(params[:id])
+    user_module_linker = UserModuleLinker.remove_linker(module_to_remove, current_user)
+
+    set_module_collections
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path, notice: 'Lecture module was successfully removed from My Modules.' }
+      format.js
+      format.json { head :no_content }
+    end
   end
 
   # GET /lecture_modules/1
@@ -90,6 +118,13 @@ class LectureModulesController < ApplicationController
 
     def set_page_title_for_specific_module
       @page_title = @lecture_module.get_module_full_title
+    end
+
+    def set_module_collections
+      @my_current_modules = LectureModule.get_my_current_modules(current_user)
+      @my_completed_modules = LectureModule.get_my_completed_modules(current_user)
+      @all_current_modules = LectureModule.current
+      @all_completed_modules = LectureModule.completed
     end
 
 end

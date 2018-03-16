@@ -1,0 +1,32 @@
+<dl>
+  <dt>My Modules</dt>
+    <div class="container">
+      <dl>
+        <dt>Current Modules</dt>
+        <%= render partial:'lecture_modules/lecture_module',
+                   collection: @my_current_modules,
+                   locals: {my_module: true} %>
+        <dt>Completed Modules</dt>
+        <%= render partial:'lecture_modules/lecture_module',
+                   collection: @my_completed_modules,
+                   locals: {my_module: true} %>
+      </dl>
+    </div>
+
+  <br>
+  <br>
+
+  <dt>All Modules</dt>
+    <div class="container">
+      <dl>
+        <dt>Current Modules</dt>
+        <%= render partial:'lecture_modules/lecture_module',
+                   collection: @all_current_modules,
+                   locals: {my_module: false} %>
+        <dt>Completed Modules</dt>
+        <%= render partial:'lecture_modules/lecture_module',
+                   collection: @all_completed_modules,
+                   locals: {my_module: false} %>
+      </dl>
+    </div>
+</dl>
