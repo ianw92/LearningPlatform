@@ -1,15 +1,11 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
-<div class="container-fluid">
-  <dl>
-    <dt>Current Modules</dt>
-    <%= render(@current_modules) %>
-    <dt>Completed Modules</dt>
-    <%= render(@completed_modules) %>
-  </dl>
+<dl>
+  <dt>Current Modules</dt>
+  <%= render(@current_modules) %>
+  <dt>Completed Modules</dt>
+  <%= render(@completed_modules) %>
+</dl>
 
-  <br>
-  <%= link_to 'New Lecture Module', new_lecture_module_path %>
-
-  <iframe src="https://cmisgonow.sheffield.ac.uk/CMISGo/Web/Timetable" style="width:100%; height:500px;"></iframe>
-</div>
+<br>
+<%= link_to 'New Lecture Module', new_lecture_module_path %>

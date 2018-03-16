@@ -16,10 +16,15 @@
     <%= render partial: "shared/navbar" %>
 
     <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% if !notice.nil? %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if !alert.nil? %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
 
-      <h1><%= @page_title || "Dissertation" %></h1>
+      <h1><%= @page_title %></h1>
+
       <%= yield %>
     </div>
 
