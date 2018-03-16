@@ -2,7 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
+study_timer_time = 1500
+short_break_time = 300
+long_break_time = 600
 
 $(document).on 'turbolinks:load', ->
   $('[data-toggle="popover"]').popover({
@@ -39,6 +41,7 @@ $(document).on 'turbolinks:load', ->
 
   , 1000)
 
+  # Timer Controls
   $('#start-btn').click( ->
     localStorage.setItem("timer_running", true))
 
@@ -50,6 +53,24 @@ $(document).on 'turbolinks:load', ->
     $('#timer').html("25:00")
     )
 
+  # Timer Settings
+  $('#study-timer-btn').click( ->
+    localStorage.setItem("time_left", study_timer_time))
+
+  $('#short-break-btn').click( ->
+    localStorage.setItem("time_left", short_break_time))
+
+  $('#long-break-btn').click( ->
+    localStorage.setItem("time_left", long_break_time))
+
+  $('#save-timer-settings').click( ->
+
+    study_timer_time = $('#study_timer_input').val()*60
+    short_break_time = $('#short_break_input').val()*60
+    long_break_time = $('#long_break_input').val()*60
+    alert("Timer settings successfully saved")
+    )
+
+
 $(document).on 'turbolinks:click', ->
   clearInterval(window.timer)
-  # console.log("before unload event")

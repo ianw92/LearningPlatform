@@ -8,6 +8,7 @@
 
     <% if user_signed_in? %>
 
+      <!-- Left hand side: Home, Modules, Todo Lists -->
       <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
         <ul class="nav navbar-nav mr-auto w-100 justify-content-start">
           <li class="nav-item">
@@ -18,9 +19,29 @@
           </li>
         </ul>
 
+        <!-- Middle: Timer dropdown, timer, start, pause, reset -->
         <ul class="nav navbar-nav mx-auto w-100 justify-content-center align-items-center" id="nav_timer_list" >
           <li class="nav-item">
-              <a id='timer'><span id='minutes'></span>:<span id='seconds'></span></a>
+            <div class="btn-group">
+              <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Timer
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" id="study-timer-btn">Study</a>
+                <a class="dropdown-item" id="short-break-btn">Short Break</a>
+                <a class="dropdown-item" id="long-break-btn">Long Break</a>
+                <!-- <a class="dropdown-item">Settings</a> -->
+                <!-- Button trigger modal -->
+                <button type="button" class="dropdown-item" data-toggle="modal" data-target="#timer_settings_modal">
+                  <i class="fas fa-cog"></i> Settings
+                </button>
+
+
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+              <a id='timer'><span id='minutes'></span>00:00<span id='seconds'></span></a>
           </li>
           <li class="nav-item">
             <ul class="list-inline" id="timer_buttons">
@@ -37,6 +58,7 @@
           </li>
         </ul>
 
+        <!-- Right hand side: Log out -->
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
           <li class="nav-item">
             <% if user_signed_in? %>
@@ -47,6 +69,7 @@
           </li>
         </ul>
       </div>
+
     <% end %>
   </div>
 </nav>
