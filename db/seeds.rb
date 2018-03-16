@@ -28,11 +28,3 @@ LectureModule.create!(code: 'COM1001',
                       academic_year_end: 2016,
                       semester: 0,
                       name: "Introduction to Software Engineering")
-
-
-LectureModuleContent.create!(code: 'COM3501',
-                             academic_year_end: 2018,
-                             week: 1,
-                             data_source: "test",
-                             description: "test",
-                             lecture_module_id: LectureModule.where("code = ?", "COM3501").where("academic_year_end = ?", 2018).first.id)
