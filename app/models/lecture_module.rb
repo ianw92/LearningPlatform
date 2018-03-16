@@ -12,6 +12,24 @@ class LectureModule < ApplicationRecord
   validates :name, length: { in: 5..50 }
   validates :code, uniqueness: { scope: :academic_year_end, message: 'Code/AcademicYear pair must be unique' }
 
+  # Change semester input from a string to an integer representing that string
+  def semester=(val)
+    write_attribute(:semester, process_semester(val))
+  end
+
+  def process_semester(semester_as_text)
+    case semester_as_text
+    when "Academic Year"
+      return 0
+    when "Autumn"
+      return 1
+    when "Spring"
+      return 2
+    end
+  end
+
+
+
   def self.current
     self.set_current_year_and_semester
     current = LectureModule.where("academic_year_end = ?", @current_year_end).where("semester = 0 OR semester = ?", @current_semester)
