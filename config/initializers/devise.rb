@@ -3,30 +3,18 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  # ==> CAS configuration
-  # Use CAS to log in, location configured in epi_cas_settings.yml
-  config.cas_base_url = EpiCas::Settings.cas_base_url
-  # Redirect log out to app logout page, which then uses CAS to log out
-  config.cas_logout_url = EpiCas::Settings.app_logout_url
-  config.cas_logout_url_param = 'destination'
-  config.cas_enable_single_sign_out = true
-  # By default, devise_cas_authenticatable will create users.  If you would rather
-  # require user records to already exist locally before they can authenticate via
-  # CAS, uncomment the following line:
-  # config.cas_create_user = false
-
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '998da8fa2925f47c24ec41b963d64e93adda281ca9f44df2961bd8d26ae8ab6639ccc8009eb5ef4a53935e7a56e0ed9db943ff5564d23a1360e545a23226e741'
+  # config.secret_key = '35fdbf78d6e43a7db77bcd01f490f56b1e5db2ba3d20848b66d4332a844f30848277dc77eb6ba8ba09cfd2d7bb3dca727d5bae5993dab2029d9a76fc531436dd'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'My App <no-reply@sheffield.ac.uk>'
+  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -48,7 +36,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [ :username ]
+  config.authentication_keys = [:login]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -60,12 +48,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :username ]
+  config.case_insensitive_keys = [:login]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :username ]
+  config.strip_whitespace_keys = [:login]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -122,7 +110,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '5bac86b1b99c5a2df14bfd9bb76f1d734fac1e87d164f1c1c0b08e885db79e82d4b6b6af8872f925dc361d737fb05625bff4b4f2eaa5c7065cf56d06bed41814'
+  # config.pepper = '1482c4ae294f1366a2db07254d2279475eae18834f2a57aa2deafe4cfc146b35d4b6c8efc1ba928dd79af0e2bb4bee2fafb37d6ff5f143a9dd5ebd89c8a9869a'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -212,7 +200,7 @@ Devise.setup do |config|
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account
-  # config.reset_password_keys = [:email]
+  config.reset_password_keys = [:login]
 
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to

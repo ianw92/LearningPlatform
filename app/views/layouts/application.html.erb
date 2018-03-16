@@ -16,8 +16,11 @@
     <%= render partial: "shared/navbar" %>
 
     <div class="container">
-        <h1><%= @page_title || "Dissertation" %></h1>
-        <%= yield %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <h1><%= @page_title || "Dissertation" %></h1>
+      <%= yield %>
     </div>
 
     <%= render partial: "shared/footer" %>

@@ -36,7 +36,3 @@ LectureModuleContent.create!(code: 'COM3501',
                              data_source: "test",
                              description: "test",
                              lecture_module_id: LectureModule.where("code = ?", "COM3501").where("academic_year_end = ?", 2018).first.id)
-
-User.where(email: 'my.email.address@sheffield.ac.uk')
-    .first_or_create(password: 'mypassword123',
-                     password_confirmation: 'mypassword123')
