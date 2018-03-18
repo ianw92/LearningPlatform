@@ -10,9 +10,7 @@ class ApplicationController < ActionController::Base
       my_username = User.find(me.id).username
       # TODO create methods in the models to get these lists
       @todo_lists_global = TodoList.where("todo_lists.user = ?", my_username)
-      logger.debug "Todo lists global: #{@todo_lists_global.ids}"
       @tasks_global = Task.where(todo_list_id: @todo_lists_global.pluck(:id)).order(:completed).order(:due_date)
-      logger.debug "Tasks global: #{@tasks_global.ids}"
       @subtasks_global = Subtask.where(task_id: @tasks_global.ids).order(:completed)
     end
   end

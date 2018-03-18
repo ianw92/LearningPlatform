@@ -2,8 +2,8 @@ class User < ApplicationRecord
   has_many :user_module_linkers
   has_many :lecture_modules, :through => :user_module_linkers
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :confirmable, :lockable and :omniauthable
+  devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessor :login
