@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318105232) do
+ActiveRecord::Schema.define(version: 20180318164044) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
     t.string "code"
@@ -62,7 +62,8 @@ ActiveRecord::Schema.define(version: 20180318105232) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "user"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_todo_lists_on_user_id"
   end
 
   create_table "user_module_linkers", force: :cascade do |t|
