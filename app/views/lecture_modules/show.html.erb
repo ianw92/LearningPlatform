@@ -16,11 +16,16 @@
     <div id="collapse<%= i %>" class="collapse">
       <div class="card-body">
         <ul class="list">
-          <%= render partial: "lecture_module_contents/lecture_module_content_in_module_show",
-                     as: :lecture_module_content,
-                     collection: @weekly_content[i],
-                     locals: { show_pdf: true,
-                               show_youTube: true } %>
+          <% puts @weekly_content[i].length %>
+          <% if @weekly_content[i].length === 0 %>
+            <li>No content exists for Week <%= i %> of this module yet</li>
+          <% else %>
+            <%= render partial: "lecture_module_contents/lecture_module_content_in_module_show",
+                       as: :lecture_module_content,
+                       collection: @weekly_content[i],
+                       locals: { show_pdf: true,
+                                 show_youTube: true } %>
+         <% end %>
         </ul>
       </div>
     </div>
