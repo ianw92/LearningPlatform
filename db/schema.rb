@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316161046) do
+ActiveRecord::Schema.define(version: 20180318105232) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
     t.string "code"
@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(version: 20180316161046) do
 
   create_table "todo_lists", force: :cascade do |t|
     t.string "title"
-    t.string "user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user"
   end
 
   create_table "user_module_linkers", force: :cascade do |t|
