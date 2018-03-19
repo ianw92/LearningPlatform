@@ -15,9 +15,9 @@
     </div>
     <div id="collapse<%= i %>" class="collapse">
       <div class="card-body">
-        <ul class="list">
+        <ul class="list-unstyled">
           <% if @weekly_content[i].length === 0 %>
-            <li>No content exists for Week <%= i %> of this module yet</li>
+            <li class="list-item">No content exists for Week <%= i %> of this module yet</li>
           <% else %>
             <%= render partial: "lecture_module_contents/lecture_module_content_in_module_show",
                        as: :lecture_module_content,
