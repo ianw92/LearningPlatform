@@ -2,15 +2,17 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-study_timer_time = 1500
-short_break_time = 300
-long_break_time = 600
+
 
 $(document).on 'turbolinks:load', ->
   $('[data-toggle="popover"]').popover({
     html:true
     trigger:'click'
     });
+
+  study_timer_time = $('#study_timer_input').val()*60
+  short_break_time = $('#short_break_input').val()*60
+  long_break_time = $('#long_break_input').val()*60
 
   if localStorage.getItem("time_left") is null
     localStorage.setItem("time_left", 1500)
@@ -37,7 +39,7 @@ $(document).on 'turbolinks:load', ->
     if time_left is 0
       localStorage.setItem("timer_running", false)
       localStorage.setItem("time_left", 1500)
-      alert("Time up!")
+      alert("Time up! Do you need a break? Have a drink of water and go for a brief walk!")
 
   , 1000)
 
@@ -49,8 +51,8 @@ $(document).on 'turbolinks:load', ->
     localStorage.setItem("timer_running", false))
 
   $('#reset-btn').click( ->
-    localStorage.setItem("time_left", 1500)
-    $('#timer').html("25:00")
+    localStorage.setItem("time_left", study_timer_time)
+    $('#timer').html("#{study_timer_time/60}:00")
     )
 
   # Timer Settings

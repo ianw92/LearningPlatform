@@ -3,10 +3,17 @@ class User < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :lecture_modules, :through => :user_module_linkers
   has_many :todo_lists, dependent: :destroy
+  has_one :timer, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable and :omniauthable
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  after_create :create_timer
+
+  def create_timer
+    Timer.create(user: self, study_length: 25, short_break_length: 5, long_break_length: 10)
+  end
 
   attr_accessor :login
 

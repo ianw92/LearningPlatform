@@ -13,32 +13,37 @@
           <form>
             <div class="row">
               <div class="col-sm">
-
-                  <div class="form-group">
-                    <label for="study_timer_input">Study</label>
-                    <input type="number" class="form-control" id="study_timer_input" aria-describedby="emailHelp" value=25 min=1>
-                  </div>
-
+                <div class="form-group">
+                  <label for="study_timer_input">Study</label>
+                  <input type="number" class="form-control" id="study_timer_input" aria-describedby="emailHelp" value=<%= Timer.find(current_user.id).study_length %> min=1> <!-- TODO use a global variable for the timer -->
+                </div>
               </div>
               <div class="col-sm">
                 <div class="form-group">
                   <label for="short_break_input">Short Break</label>
-                  <input type="number" class="form-control" id="short_break_input" aria-describedby="emailHelp" value=5 min=1>
+                  <input type="number" class="form-control" id="short_break_input" aria-describedby="emailHelp" value=<%= Timer.find(current_user.id).short_break_length %> min=1>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="form-group">
                   <label for="long_break_input">Long Break</label>
-                  <input type="number" class="form-control" id="long_break_input" aria-describedby="emailHelp" value=10 min=1>
+                  <input type="number" class="form-control" id="long_break_input" aria-describedby="emailHelp" value=<%= Timer.find(current_user.id).long_break_length %> min=1>
                 </div>
               </div>
             </div>
           </form>
+
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button id="save-timer-settings" type="button" class="btn btn-primary">Save changes</button>
+
+
+        <!-- <form id="save-timer-settings" class='button_to btn btn-primary' method='post' action='/timers/<%= Timer.find(current_user.id).id %>/save_timer_settings' data-remote='true'>
+          <input type='submit' value='Save Changes'>
+          <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'>
+        </form> -->
       </div>
     </div>
   </div>

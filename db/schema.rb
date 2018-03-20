@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320075938) do
+ActiveRecord::Schema.define(version: 20180320155901) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
     t.string "code"
@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(version: 20180320075938) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["todo_list_id"], name: "index_tasks_on_todo_list_id"
+  end
+
+  create_table "timers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "study_length"
+    t.integer "short_break_length"
+    t.integer "long_break_length"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_timers_on_user_id"
   end
 
   create_table "todo_lists", force: :cascade do |t|
