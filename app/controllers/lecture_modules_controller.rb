@@ -47,6 +47,8 @@ class LectureModulesController < ApplicationController
     for i in 1..12 do
       @weekly_content[i] = LectureModuleContent.get_content_for_module_and_week(@lecture_module, i)
     end
+    @notes = Note.get_notes_for_module_and_user(@lecture_module, current_user)
+    @weeks_with_notes = @notes.pluck(:week)
   end
 
   # GET /lecture_modules/new

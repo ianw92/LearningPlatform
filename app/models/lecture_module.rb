@@ -1,5 +1,6 @@
 class LectureModule < ApplicationRecord
-  has_many :user_module_linkers
+  has_many :user_module_linkers, dependent: :destroy
+  has_many :notes, dependent: :destroy
   has_many :users, :through => :user_module_linkers
   has_many :lecture_module_contents, dependent: :destroy
 

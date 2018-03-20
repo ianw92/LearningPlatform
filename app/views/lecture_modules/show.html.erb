@@ -24,6 +24,23 @@
                        collection: @weekly_content[i],
                        locals: { show_pdf: true,
                                  show_youTube: true } %>
+
+            <!-- TODO make this next bit a partial? -->
+            <li class="list-item">
+              <% if @weeks_with_notes.include? i %>
+                <% @notes.each do |note| %>
+                  <% if note.week == i %>
+                    <h3>Notes</h3>
+                    <%= render 'notes/add_edit_notes', note: note, user: current_user, lecture_module: @lecture_module, week: i %>
+
+                  <% end %>
+                <% end %>
+              <% else %>
+                <h3>Add new note</h3>
+                <%= render 'notes/add_edit_notes', note: Note.new, user: current_user, lecture_module: @lecture_module, week: i %>
+              <% end %>
+
+            </li>
          <% end %>
         </ul>
       </div>

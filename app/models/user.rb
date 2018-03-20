@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :user_module_linkers
+  has_many :user_module_linkers, dependent: :destroy
+  has_many :notes, dependent: :destroy
   has_many :lecture_modules, :through => :user_module_linkers
   has_many :todo_lists, dependent: :destroy
   # Include default devise modules. Others available are:
