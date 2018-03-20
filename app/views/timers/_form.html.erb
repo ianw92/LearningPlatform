@@ -1,4 +1,4 @@
-<%= form_with(model: timer, local: true) do |form| %>
+<%= form_with(model: timer, remote: true) do |form| %>
   <% if timer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(timer.errors.count, "error") %> prohibited this timer from being saved:</h2>
@@ -11,27 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :timer_user_id %>
+  <div class="form-group">
+    <%= form.hidden_field :user_id, id: :timer_user_id %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :study_length %>
-    <%= form.number_field :study_length, id: :timer_study_length %>
+    <%= form.number_field :study_length, id: :study_timer_input, class: 'form-control', min: 1 %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :short_break_length %>
-    <%= form.number_field :short_break_length, id: :timer_short_break_length %>
+    <%= form.number_field :short_break_length, id: :short_break_input, class: 'form-control', min: 1 %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :long_break_length %>
-    <%= form.number_field :long_break_length, id: :timer_long_break_length %>
+    <%= form.number_field :long_break_length, id: :long_break_input, class: 'form-control', min: 1 %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Save Changes', :class => "btn btn-primary", :id => "save-timer-settings" %>
   </div>
 <% end %>

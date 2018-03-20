@@ -30,8 +30,10 @@
 
     <%= render partial: "shared/footer" %>
 
-    <!-- Modal for timer settings -->
-    <%= render partial: "shared/timer_settings_modal" %>
+    <% if user_signed_in? %>
+      <!-- Modal for timer settings -->
+      <%= render partial: "shared/timer_settings_modal" %>
+    <% end %>
 
   </body>
 </html>

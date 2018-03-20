@@ -7,13 +7,6 @@ class TimersController < ApplicationController
     @timers = Timer.all
   end
 
-  def save_timer_settings
-    timer = Timer.find(params[:id])
-    puts "PARAMS = #{params}"
-    timer.update(study_timer_length: x, short_break_length: y, long_break_length: z)
-    timer.save
-  end
-
   # GET /timers/1
   # GET /timers/1.json
   def show
@@ -49,7 +42,7 @@ class TimersController < ApplicationController
   def update
     respond_to do |format|
       if @timer.update(timer_params)
-        format.html { redirect_to @timer, notice: 'Timer was successfully updated.' }
+        format.html { redirect_back fallback_location: root_path, notice: 'Timer was successfully updated.' }
         format.json { render :show, status: :ok, location: @timer }
       else
         format.html { render :edit }
