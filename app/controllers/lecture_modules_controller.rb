@@ -13,7 +13,6 @@ class LectureModulesController < ApplicationController
     module_to_add = LectureModule.find(params[:id])
     user_module_linker = UserModuleLinker.add_new_linker(module_to_add, current_user)
 
-
     respond_to do |format|
       if user_module_linker.save
         set_module_collections
