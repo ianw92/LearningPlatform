@@ -13,41 +13,41 @@
 
   <div class="form-group">
     <%= form.label :code %>
-    <%= form.text_field :code, id: :lecture_module_content_code %>
+    <%= form.text_field :code, id: :lecture_module_content_code, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :academic_year_end %>
-    <%= form.number_field :academic_year_end, id: :lecture_module_content_academic_year_end %>
+    <%= form.number_field :academic_year_end, id: :lecture_module_content_academic_year_end, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :week %>
-    <%= form.number_field :week, id: :lecture_module_content_week %>
+    <%= form.number_field :week, id: :lecture_module_content_week, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :content %>
-    <%= form.file_field :content, id: :lecture_module_content_content_file_name %>
+    <%= form.file_field :content, id: :lecture_module_content_content_file_name, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <p>Please only include the source string of the youTube embed HTML</p>
     <%= form.label :youTube_link %>
-    <%= form.text_field :youTube_link, id: :lecture_module_content_youTube_link %>
+    <%= form.text_field :youTube_link, id: :lecture_module_content_youTube_link, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :description %>
-    <%= form.text_area :description, id: :lecture_module_content_description %>
+    <%= form.text_area :description, id: :lecture_module_content_description, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :lecture_module_id %>
-    <%= form.text_field :lecture_module_id, id: :lecture_module_content_lecture_module_id %>
+    <%= form.text_field :lecture_module_id, id: :lecture_module_content_lecture_module_id, class: 'form-control' %>
   </div>
 
   <div class="form-group actions">
-    <%= form.submit %>
+    <%= form.submit :class => "btn btn-primary" %>
   </div>
 <% end %>

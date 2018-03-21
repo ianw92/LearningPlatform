@@ -9,19 +9,26 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-
-
   <body class='<%= controller.controller_name %>'>
 
     <%= render partial: "shared/navbar" %>
+    
+    <% if !notice.nil? %>
+      <div class="notice">
+        <div class="container">
+          <p><%= notice %></p>
+        </div>
+      </div>
+    <% end %>
+    <% if !alert.nil? %>
+      <div class="alert">
+        <div class="container">
+          <p><%= alert %></p>
+        </div>
+      </div>
+    <% end %>
 
     <div class="container">
-      <% if !notice.nil? %>
-        <p class="notice"><%= notice %></p>
-      <% end %>
-      <% if !alert.nil? %>
-        <p class="alert"><%= alert %></p>
-      <% end %>
 
       <h1><%= @page_title %></h1>
 

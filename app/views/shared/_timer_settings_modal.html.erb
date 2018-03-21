@@ -9,20 +9,10 @@
       </div>
       <div class="modal-body">
         <div class="container">
-          <h3>Set Timer Length</h3>
-          <%= render 'timers/form', timer: Timer.find(current_user.id)%>
+          <h3>Set Timer Lengths (in minutes)</h3>
+          <%= render 'timers/form', timer: Timer.find_by(user_id: current_user.id)%>
         </div>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="save-timer-settings" type="button" class="btn btn-primary">Save changes</button>
-
-
-        <form id="save-timer-settings" class='button_to btn btn-primary' method='post' action='/timers/<%= Timer.find(current_user.id).id %>/save_timer_settings' data-remote='true'>
-          <input type='submit' value='Save Changes'>
-          <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'>
-        </form>
-      </div> -->
     </div>
   </div>
 </div>

@@ -24,10 +24,10 @@
   </div>
 
   <div class="field">
-    <%= form.text_area :notes, id: :notes_textarea, value: note.notes %>
+    <%= form.text_area :notes, id: :notes_textarea, value: note.notes, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit :class => "btn btn-primary" %>
   </div>
 <% end %>

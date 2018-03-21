@@ -38,7 +38,7 @@ class LectureModuleContentsController < ApplicationController
 
     respond_to do |format|
       if @lecture_module_content.save
-        format.html { redirect_to @lecture_module_content, notice: 'Lecture module content was successfully created.' }
+        format.html { redirect_to lecture_module_path(@lecture_module_content.lecture_module_id), notice: 'Lecture module content was successfully created.' }
         format.json { render :show, status: :created, location: @lecture_module_content }
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class LectureModuleContentsController < ApplicationController
   def update
     respond_to do |format|
       if @lecture_module_content.update(lecture_module_content_params)
-        format.html { redirect_to @lecture_module_content, notice: 'Lecture module content was successfully updated.' }
+        format.html { redirect_to lecture_module_path(@lecture_module_content.lecture_module_id), notice: 'Lecture module content was successfully updated.' }
         format.json { render :show, status: :ok, location: @lecture_module_content }
       else
         format.html { render :edit }

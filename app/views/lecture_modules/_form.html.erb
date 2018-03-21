@@ -13,25 +13,25 @@
 
   <div class="form-group">
     <%= form.label :code %>
-    <%= form.text_field :code, id: :lecture_module_code %>
+    <%= form.text_field :code, id: :lecture_module_code, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :academic_year_end %>
-    <%= form.number_field :academic_year_end, id: :lecture_module_academic_year_end %>
+    <%= form.number_field :academic_year_end, id: :lecture_module_academic_year_end, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :semester %>
-    <%= form.select :semester, ['Autumn','Spring','Academic Year'], id: :lecture_module_semester %>
+    <%= form.select :semester, ['Autumn','Spring','Academic Year'], {}, id: :lecture_module_semester, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_area :name, id: :lecture_module_name %>
+    <%= form.text_area :name, id: :lecture_module_name, class: 'form-control' %>
   </div>
 
   <div class="form-group actions">
-    <%= form.submit %>
+    <%= form.submit :class => "btn btn-primary" %>
   </div>
 <% end %>

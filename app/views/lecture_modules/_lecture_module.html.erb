@@ -1,4 +1,4 @@
-<dd>
+<!-- <dd>
   <ul class="list-inline">
     <li class="list-inline-item col-sm-7"><%= link_to lecture_module.get_module_full_title, lecture_module %></li>
     <li class="list-inline-item col-sm-1"><%= link_to 'Edit', edit_lecture_module_path(lecture_module) %></li>
@@ -6,12 +6,34 @@
 
     <li class="list-inline-item col-sm-2">
       <% if local_assigns.fetch :my_module %>
-        <%= button_to 'Remove From My Modules', remove_from_my_modules_lecture_module_path(lecture_module), method: :post, remote: true %>
+        <%= button_to 'Remove From My Modules', remove_from_my_modules_lecture_module_path(lecture_module), class: 'btn btn-sm btn-secondary', method: :post, remote: true %>
       <% elsif (@my_current_modules.ids.include? lecture_module.id) or (@my_completed_modules.ids.include? lecture_module.id)  %>
         <span>------------------------------</span>
       <% else %>
-        <%= button_to 'Add To My Modules', add_to_my_modules_lecture_module_path(lecture_module), method: :post, remote: true %>
+        <%= button_to 'Add To My Modules', add_to_my_modules_lecture_module_path(lecture_module), class: 'btn btn-sm btn-secondary', method: :post, remote: true %>
       <% end %>
     </li>
   </ul>
+</dd> -->
+
+
+
+<dd>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-8'><%= link_to lecture_module.get_module_full_title, lecture_module %></div>
+      <div class='col-1'><%= link_to 'Edit', edit_lecture_module_path(lecture_module) %></div>
+      <div class='col-1'><%= link_to 'Destroy', lecture_module, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+
+      <div class='col-2'>
+        <% if local_assigns.fetch :my_module %>
+          <%= button_to 'Remove From My Modules', remove_from_my_modules_lecture_module_path(lecture_module), class: 'btn btn-sm btn-secondary', method: :post, remote: true %>
+        <% elsif (@my_current_modules.ids.include? lecture_module.id) or (@my_completed_modules.ids.include? lecture_module.id)  %>
+          <span>------------------------------</span>
+        <% else %>
+          <%= button_to 'Add To My Modules', add_to_my_modules_lecture_module_path(lecture_module), class: 'btn btn-sm btn-secondary', method: :post, remote: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </dd>

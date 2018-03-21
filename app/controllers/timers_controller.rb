@@ -45,7 +45,7 @@ class TimersController < ApplicationController
         format.html { redirect_back fallback_location: root_path, notice: 'Timer was successfully updated.' }
         format.json { render :show, status: :ok, location: @timer }
       else
-        format.html { render :edit }
+        format.html { redirect_to :edit }
         format.json { render json: @timer.errors, status: :unprocessable_entity }
       end
     end

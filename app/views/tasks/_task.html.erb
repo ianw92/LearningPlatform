@@ -1,4 +1,5 @@
-<% if local_assigns.has_key? :todo_list %> <!-- TODO Remove this line when task index page is deleted -->
+<!-- TODO Remove this line when task index page is deleted -->
+<!-- <% if local_assigns.has_key? :todo_list %>
   <% if (local_assigns.fetch :todo_list).id == task.todo_list_id %>
       <% if task == @current_task %>
       <li class='list-item current_task'>
@@ -8,9 +9,9 @@
         <ul class='list-inline'>
           <li class='list-inline-item'>
             <div class='form-check'>
-              <label class='form-check-label' style='inline'>
+              <label class='form-check-label' style='inline'> -->
                 <!-- TODO Make this work using checking/unchecking box to trigger action. Use javascript to make AJAX request -->
-                <% if task.completed? %>
+                <!-- <% if task.completed? %>
                   <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>' checked>
                 <% else %>
                   <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>'>
@@ -33,10 +34,10 @@
             <li class='list-inline-item'><%= task.due_date %></li>
             <li class='list-inline-item'><%= link_to 'Show', task %></li>
             <li class='list-inline-item'><%= link_to 'Edit', edit_task_path(task) %></li>
-            <li class='list-inline-item'><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+            <li class='list-inline-item'><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></li> -->
 
             <!-- Subtasks -->
-            <li class='list-item subtask-list'>
+            <!-- <li class='list-item subtask-list'>
               <ul class='list-inline'>
                 <%= render partial: 'subtasks/subtask',
                            collection: @subtasks_global,
@@ -47,5 +48,64 @@
 
         </ul>
       </li>
+  <% end %>
+<% end %> -->
+
+
+
+
+<!-- TODO Remove this line when task index page is deleted -->
+<% if local_assigns.has_key? :todo_list %>
+  <% if (local_assigns.fetch :todo_list).id == task.todo_list_id %>
+    <% if task.due_date < Date.today %>
+    <% puts task.due_date %>
+    <div class='task_overdue'>
+    <% elsif task.due_date == Date.today %>
+    <div class='task_due_today'>
+    <% elsif task.due_date == Date.tomorrow %>
+    <div class='task_due_tomorrow'>
+    <% else %>
+    <div>
+    <% end %>
+      <% if task == @current_task %>
+      <li class='list-item current_task'>
+      <% else %>
+      <li class='list-item'>
+      <% end %>
+        <div class='row'>
+          <div class='col-1'>
+            <div class='form-check'>
+              <label class='form-check-label' style='inline'>
+                <!-- TODO Make this work using checking/unchecking box to trigger action. Use javascript to make AJAX request -->
+                <% if task.completed? %>
+                  <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>' checked>
+                <% else %>
+                  <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>'>
+                <% end %>
+                  <form class='button_to' method='post' action='/tasks/<%= task.id %>/complete' data-remote='true'>
+                    <input type='submit' value='Toggle'>
+                    <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'>
+                  </form>
+              </label>
+            </div>
+          </div>
+
+          <% if (local_assigns.fetch :type) == 'main' %>
+            <div class='col-8'>
+          <% else %>
+            <div class='col-11'>
+          <% end %>
+            <%= task.title %>
+          </div>
+          <% if (local_assigns.fetch :type) == 'main' %>
+            <div class='col-1'><%= task.due_date %></div>
+            <div class='col-1'><%= link_to 'Edit', edit_task_path(task) %></div>
+            <div class='col-1'><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+
+          <% end %>
+
+        </div>
+      </li>
+    </div>
   <% end %>
 <% end %>
