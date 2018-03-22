@@ -64,6 +64,18 @@ class LectureModulesController < ApplicationController
 
   # GET /lecture_modules/1/edit
   def edit
+    # Set params for semester so that select form will pre-select the correct option
+    case @lecture_module.semester
+    when 0
+      params[:semester] = "Academic Year"
+    when 1
+      params[:semester] = "Autumn"
+    when 2
+      params[:semester] = "Spring"
+    else
+      params[:semester] = "Academic Year"
+    end
+
   end
 
   # POST /lecture_modules

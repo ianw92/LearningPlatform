@@ -1,4 +1,24 @@
-<h1>Todo Lists</h1>
+<div class='row'>
+  <div class='col-8 col-sm-9 col-lg-10'>
+    <h1>Todo Lists</h1>
+  </div>
+  <div class='col-4 col-sm-3 col-lg-2 todo_list_key'>
+    <div class='container'>
+      <div class='row key_title'>
+        Key:
+      </div>
+      <div class='row task_overdue'>
+        Overdue
+      </div>
+      <div class='row task_due_today'>
+        Due Today
+      </div>
+      <div class='row task_due_tomorrow'>
+        Due Tomorrow
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id='todo_lists_accordion_main'>
   <%= render partial: 'shared/todo_lists_accordion',

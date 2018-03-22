@@ -1,4 +1,4 @@
-<% if lecture_module_content.description? || lecture_module_content.content? || lecture_module_content.youTube_link? %>
+<!-- <% if lecture_module_content.description? || lecture_module_content.content? || lecture_module_content.youTube_link? %>
   <li class="list-item">
     <ul class="list-inline">
       <li class="list-inline-item"><%= lecture_module_content.description %></li>
@@ -6,6 +6,53 @@
       <li class="list-inline-item"><%= link_to 'Edit', edit_lecture_module_content_path(lecture_module_content) %></li>
       <li class="list-inline-item"><%= link_to 'Destroy', lecture_module_content, method: :delete, data: { confirm: 'Are you sure?' } %></li>
     </ul>
+
+    <% if local_assigns.has_key? :show_pdf %>
+      <% if local_assigns.fetch :show_pdf %>
+        <% if lecture_module_content.content? %>
+        <iframe src="<%= lecture_module_content.content.url %>" allowfullscreeen></iframe>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <br>
+
+    <% if local_assigns.has_key? :show_youTube %>
+      <% if local_assigns.fetch :show_youTube %>
+        <% if lecture_module_content.youTube_link? %>
+          <iframe src="<%= lecture_module_content.youTube_link %>"
+            allow="encrypted-media" allowfullscreen></iframe>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </li>
+<% end %>
+ -->
+
+
+
+
+
+
+<% if lecture_module_content.description? || lecture_module_content.content? || lecture_module_content.youTube_link? %>
+  <li class="list-item">
+    <div class='row'>
+      <div class='col-9 col-sm-10 col-lg-11'>
+        <%= lecture_module_content.description %>
+        |
+        <%= lecture_module_content.content.original_filename %>
+      </div>
+      <div class='col-3 col-sm-2 col-lg-1'>
+        <%= link_to edit_lecture_module_content_path(lecture_module_content), data: { toggle: 'edit-lecture-module-content-tooltip'}, title: 'Edit Content' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        |
+        <%= link_to lecture_module_content, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-content-tooltip'}, title: 'Delete Content' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+    </div>
 
     <% if local_assigns.has_key? :show_pdf %>
       <% if local_assigns.fetch :show_pdf %>

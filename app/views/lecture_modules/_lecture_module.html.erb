@@ -22,10 +22,17 @@
   <div class='container'>
     <div class='row'>
       <div class='col-8'><%= link_to lecture_module.get_module_full_title, lecture_module %></div>
-      <div class='col-1'><%= link_to 'Edit', edit_lecture_module_path(lecture_module) %></div>
-      <div class='col-1'><%= link_to 'Destroy', lecture_module, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <div class='col-1'>
+        <%= link_to edit_lecture_module_path(lecture_module), data: { toggle: 'edit-lecture-module-tooltip'}, title: 'Edit Module' do %>
+          <i class="fas fa-pencil-alt"></i>
+        <% end %>
+        |
+        <%= link_to lecture_module, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-tooltip'}, title: 'Delete Module' do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
 
-      <div class='col-2'>
+      <div class='col-3'>
         <% if local_assigns.fetch :my_module %>
           <%= button_to 'Remove From My Modules', remove_from_my_modules_lecture_module_path(lecture_module), class: 'btn btn-sm btn-secondary', method: :post, remote: true %>
         <% elsif (@my_current_modules.ids.include? lecture_module.id) or (@my_completed_modules.ids.include? lecture_module.id)  %>

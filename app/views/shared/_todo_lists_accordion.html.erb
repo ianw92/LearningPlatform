@@ -7,8 +7,17 @@
 
         <% if (local_assigns.fetch :type) == 'main' %>
         <div class='edit-destroy-links'>
-          <td><%= link_to 'Edit', edit_todo_list_path(todo_list) %></td> |
-          <td><%= link_to 'Destroy', todo_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td>
+            <%= link_to edit_todo_list_path(todo_list), data: { toggle: 'edit-todo-list-tooltip'}, title: 'Edit Todo List' do %>
+              <i class="fas fa-pencil-alt"></i>
+            <% end %>
+          </td>
+          |
+          <td>
+            <%= link_to todo_list, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-todo-list-tooltip'}, title: 'Delete Todo List' do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </td>
         </div>
         <% end %>
 

@@ -1,4 +1,4 @@
-<%= form_with(model: task, local: true, :html => { :class => 'form-inline' }) do |form| %>
+<%= form_with(model: task, local: true) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
@@ -11,30 +11,53 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.hidden_field :todo_list_id, id: :task_todo_list_id, value: todo_list.id %>
-  </div>
+  <div class="container">
+    <div class="row">
+      <div class="form-group">
+        <%= form.hidden_field :todo_list_id, id: :task_todo_list_id, value: todo_list.id %>
+      </div>
 
-  <div class="form-group">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :task_title, class: 'form-control' %>
-  </div>
+      <div class="col-lg-7">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-1">
+              <%= form.label :title %>
+            </div>
+            <div class="col-lg-11">
+              <%= form.text_field :title, id: :task_title, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= form.label :due_date %>
-    <%= form.text_field :due_date, id: :task_due_date,
-            class: 'form-control',
-            value: Time.now.strftime('%Y-%m-%d'),
-            "data-provide" => "datepicker",
-            "data-date-format" => "yyyy-mm-dd",
-            "data-date-orientation" => "auto" %>
-  </div>
+      <div class="col-lg-3">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-4">
+              <%= form.label :due_date %>
+            </div>
+            <div class="col-lg-8">
+              <%= form.text_field :due_date, id: :task_due_date,
+                      class: 'form-control',
+                      value: Time.now.strftime('%Y-%m-%d'),
+                      "data-provide" => "datepicker",
+                      "data-date-format" => "yyyy-mm-dd",
+                      "data-date-orientation" => "auto" %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= form.hidden_field :completed, id: :task_completed, value: false %>
-  </div>
+      <div class="form-group">
+        <%= form.hidden_field :completed, id: :task_completed, value: false %>
+      </div>
 
-  <div class="form-group actions">
-    <%= form.submit :class => "btn btn-primary" %>
+
+      <div class="col-lg-2">
+        <div class="form-group actions">
+          <%= form.submit :class => "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>

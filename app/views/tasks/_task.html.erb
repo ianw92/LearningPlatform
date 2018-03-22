@@ -58,7 +58,6 @@
 <% if local_assigns.has_key? :todo_list %>
   <% if (local_assigns.fetch :todo_list).id == task.todo_list_id %>
     <% if task.due_date < Date.today %>
-    <% puts task.due_date %>
     <div class='task_overdue'>
     <% elsif task.due_date == Date.today %>
     <div class='task_due_today'>
@@ -72,8 +71,13 @@
       <% else %>
       <li class='list-item'>
       <% end %>
+
         <div class='row'>
-          <div class='col-1'>
+          <% if (local_assigns.fetch :type) == 'main' %>
+            <div class='col-3 col-sm-2 col-md-2 col-lg-1'>
+          <% else %>
+            <div class='col-3'>
+          <% end %>
             <div class='form-check'>
               <label class='form-check-label' style='inline'>
                 <!-- TODO Make this work using checking/unchecking box to trigger action. Use javascript to make AJAX request -->
@@ -91,21 +95,30 @@
           </div>
 
           <% if (local_assigns.fetch :type) == 'main' %>
-            <div class='col-8'>
+            <div class='col-9 col-sm-9 col-md-9 col-lg-9'>
           <% else %>
-            <div class='col-11'>
+            <div class='col-9'>
           <% end %>
-            <%= task.title %>
-          </div>
+              <%= task.title %>
+            </div>
           <% if (local_assigns.fetch :type) == 'main' %>
-            <div class='col-1'><%= task.due_date %></div>
-            <div class='col-1'><%= link_to 'Edit', edit_task_path(task) %></div>
-            <div class='col-1'><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></div>
-
+            <div class='col-7 col-sm-8 col-md-9 col-lg-10'></div>
+            <div class='col-5 col-sm-4 col-md-3 col-lg-2'>
+              <%= task.due_date %>
+              |
+              <%= link_to edit_task_path(task), data: { toggle: 'edit-task-tooltip'}, title: 'Edit Task' do %>
+                <i class="fas fa-pencil-alt"></i>
+              <% end %>
+              |
+              <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, title: 'Delete Task' do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            </div>
           <% end %>
 
         </div>
       </li>
+      <hr>
     </div>
   <% end %>
 <% end %>

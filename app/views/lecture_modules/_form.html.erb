@@ -23,7 +23,7 @@
 
   <div class="form-group">
     <%= form.label :semester %>
-    <%= form.select :semester, ['Autumn','Spring','Academic Year'], {}, id: :lecture_module_semester, class: 'form-control' %>
+    <%= form.select :semester, ['Autumn','Spring','Academic Year'], { :selected => params[:semester] }, id: :lecture_module_semester, class: 'form-control' %>
   </div>
 
   <div class="form-group">

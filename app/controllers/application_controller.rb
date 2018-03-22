@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   before_action :set_todo_lists
+  before_action :set_previous_page
 
   def set_todo_lists
     if current_user != nil
@@ -11,6 +12,10 @@ class ApplicationController < ActionController::Base
       @tasks_global = Task.where(todo_list_id: @todo_lists_global.pluck(:id)).order(:completed).order(:due_date)
       @subtasks_global = Subtask.where(task_id: @tasks_global.ids).order(:completed)
     end
+  end
+
+  def set_previous_page
+    session[:previous_page] = request.env['HTTP_REFERER']
   end
 
   protected

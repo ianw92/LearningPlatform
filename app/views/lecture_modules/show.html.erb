@@ -1,7 +1,19 @@
-<%= link_to 'Edit', edit_lecture_module_path(@lecture_module) %> |
-<%= link_to 'Back', lecture_modules_path %>
+<div class='row'>
+  <div class='col-12 col-lg-11'>
+    <h3><%= @page_title %></h3>
+  </div>
+  <div class='col-3 col-lg-1'>
+    <%= link_to edit_lecture_module_path(@lecture_module), data: { toggle: 'edit-lecture-module-tooltip'}, title: 'Edit Module' do %>
+      <i class="fas fa-pencil-alt"></i>
+    <% end %>
+    |
+    <%= link_to @lecture_module, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-tooltip'}, title: 'Delete Module' do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
+  </div>
+</div>
 
-<h1>Lecture Module Contents</h1>
+
 
 <div id="accordion">
   <% for i in 1..12 do %>
