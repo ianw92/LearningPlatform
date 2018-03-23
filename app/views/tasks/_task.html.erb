@@ -57,7 +57,9 @@
 <!-- TODO Remove this line when task index page is deleted -->
 <% if local_assigns.has_key? :todo_list %>
   <% if (local_assigns.fetch :todo_list).id == task.todo_list_id %>
-    <% if task.due_date < Date.today %>
+    <% if task.completed? %>
+    <div class='task_completed'>
+    <% elsif task.due_date < Date.today %>
     <div class='task_overdue'>
     <% elsif task.due_date == Date.today %>
     <div class='task_due_today'>

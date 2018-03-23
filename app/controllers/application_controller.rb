@@ -9,7 +9,17 @@ class ApplicationController < ActionController::Base
     if current_user != nil
       # TODO create methods in the models to get these lists
       @todo_lists_global = TodoList.where("user_id = ?", current_user)
-      @tasks_global = Task.where(todo_list_id: @todo_lists_global.pluck(:id)).order(:completed).order(:due_date)
+      @tasks_global = Task.where(todo_list_id: @todo_lists_global.pluck(:id)).order(:completed)
+
+      my_sort_style = Profile.find_by(user_id: current_user.id).sort_tasks_by
+      if my_sort_style == 'due_date'
+        @tasks_global = @tasks_global.order(:due_date)
+      elsif my_sort_style == 'title'
+        @tasks_global = @tasks_global.order('lower(title)')
+      elsif my_sort_style == 2
+        @tasks_global = @tasks_global.order(:custom_order)
+      end
+
       @subtasks_global = Subtask.where(task_id: @tasks_global.ids).order(:completed)
     end
   end

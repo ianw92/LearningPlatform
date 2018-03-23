@@ -14,6 +14,18 @@ class TasksController < ApplicationController
   def show
   end
 
+  def sort_by_due_date
+    change_sorting_parameter('due_date')
+  end
+
+  def sort_by_title
+    change_sorting_parameter('title')
+  end
+
+  def sort_by_custom
+    #TODO if I get round to this
+  end
+
   def complete
     task_to_toggle_completion = Task.find(params[:id])
     task = Task.change_completed_status(task_to_toggle_completion)
@@ -96,6 +108,22 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:todo_list_id, :title, :due_date, :completed)
+    end
+
+    def change_sorting_parameter(new_param)
+      profile = Profile.find_by(user_id: current_user.id)
+      profile = Profile.change_sort_parameter(profile, new_param)
+      respond_to do |format|
+        if profile.save
+          set_todo_lists
+          format.html { redirect_back fallback_location: root_path, notice: 'Profile was successfully updated.' }
+          format.js
+          format.json { head :ok }
+        else
+          format.html { redirect_back fallback_location: root_path, notice: 'Profile could not be updated.' }
+          format.json { render json: profile.errors, status: :unprocessable_entity }
+        end
+      end
     end
 
 end

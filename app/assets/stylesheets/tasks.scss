@@ -26,3 +26,11 @@
   font-weight: bold;
   text-decoration: underline;
 }
+
+.task_completed {
+  display: none;
+}
+
+.task_show {
+  display: block;
+}

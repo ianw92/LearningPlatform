@@ -9,13 +9,13 @@
         <div class='edit-destroy-links'>
           <td>
             <%= link_to edit_todo_list_path(todo_list), data: { toggle: 'edit-todo-list-tooltip'}, title: 'Edit Todo List' do %>
-              <i class="fas fa-pencil-alt"></i>
+              <i class='fas fa-pencil-alt'></i>
             <% end %>
           </td>
           |
           <td>
             <%= link_to todo_list, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-todo-list-tooltip'}, title: 'Delete Todo List' do %>
-              <i class="fas fa-trash-alt"></i>
+              <i class='fas fa-trash-alt'></i>
             <% end %>
           </td>
         </div>
@@ -33,14 +33,25 @@
     <% end %>
 
       <div class='card-body'>
+
+        <button id='tasks_sort' class='btn btn-sm btn-outline-dark dropdown-toggle' type='button' data-toggle='dropdown'>
+          Sort by
+        </button>
+        <div class='dropdown-menu'>
+          <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_due_date'>Due Date</a>
+          <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_title'>Title</a>
+          <a class='dropdown-item' id=''>Custom</a>
+        </div>
+
         <ul class='list-unstyled'>
           <%= render partial: 'tasks/task',
                      collection: @tasks_global,
                      locals: { short_view: true, # need to remove this variable when i get rid of the view all tasks page
                                todo_list: todo_list,
                                type: (local_assigns.fetch :type) } %>
-        </ul>
 
+          <button id='show_hide_completed_tasks_btn' type='button' class='btn btn-sm btn-outline-dark'>Show completed</button>
+        </ul>
         <% if (local_assigns.fetch :type) == 'main' %>
         <%= render 'tasks/add_new_task', task: @task || Task.new, todo_list: todo_list %>
         <% end %>

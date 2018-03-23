@@ -9,8 +9,10 @@ $(document).on 'turbolinks:load', ->
     trigger:'click'
     });
 
-# $(document).on 'turbolinks:load', ->
-#   $('[data-toggle="popover"]').on("click", ->
-#     console.log("test");
-#     $('[data-toggle="popover"]').data('bs.popover').setContent("<%=j render partial:'shared/todo_lists_accordion', locals:{ type: 'popover' } %>");
-#     );
+  $(document).on('click', '#show_hide_completed_tasks_btn', ->
+    if $('.task_completed').hasClass('task_show')
+      $(this).html('Show completed')
+    else
+      $(this).html('Hide completed')
+    $('.task_completed').toggleClass('task_show')
+    )

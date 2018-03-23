@@ -10,6 +10,11 @@ Rails.application.routes.draw do
 
   resources :tasks do
     post 'complete', on: :member
+    collection do
+      post 'sort_by_due_date'
+      post 'sort_by_title'
+      post 'sort_by_custom'
+    end
   end
 
   resources :todo_lists
