@@ -1,5 +1,5 @@
 add_remove_timer_align = ->
-  if window.matchMedia("(min-width: 768px)").matches
+  if window.matchMedia("(min-width: 992px)").matches
     $('#nav_timer_list').toggleClass("align-items-center", true)
     $('#nav_timer_list').toggleClass("collapsed-timer", false)
     $('#timer_buttons').toggleClass("collapsed-timer-buttons", false)

@@ -14,21 +14,21 @@
     <%= render partial: "shared/navbar" %>
 
     <% if !notice.nil? %>
-      <div class="notice">
+      <div class="notice remove_top_gap">
         <div class="container">
           <p><%= notice %></p>
         </div>
       </div>
     <% end %>
     <% if !alert.nil? %>
-      <div class="alert">
+      <div class="alert remove_top_gap">
         <div class="container">
           <p><%= alert %></p>
         </div>
       </div>
     <% end %>
 
-    <div class="container">
+    <div class="container remove_top_gap">
       <%= yield %>
     </div>
 

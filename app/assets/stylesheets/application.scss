@@ -23,11 +23,17 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "navbar";
+@import "footer";
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 12px;
   line-height: 14px;
+}
+
+.remove_top_gap {
+  position: relative;
+  top: -24px;
 }
 
 body {

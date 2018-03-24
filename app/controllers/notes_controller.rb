@@ -43,6 +43,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.update(note_params)
         format.html { redirect_back fallback_location: root_path, notice: 'Note was successfully updated.' }
+        format.js
         format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }
