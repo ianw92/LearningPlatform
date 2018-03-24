@@ -2,6 +2,7 @@ class LectureModule < ApplicationRecord
   has_many :user_module_linkers, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :users, :through => :user_module_linkers
+  belongs_to :user
   has_many :lecture_module_contents, dependent: :destroy
 
   validates :code, :academic_year_end, :semester, :name, presence: true
@@ -12,6 +13,12 @@ class LectureModule < ApplicationRecord
                        inclusion: { in: 0..2 }
   validates :name, length: { in: 5..50 }
   validates :code, uniqueness: { scope: :academic_year_end, message: 'Code/AcademicYear pair must be unique' }
+
+  after_create :create_user_module_linker
+
+  def create_user_module_linker
+    UserModuleLinker.create(lecture_module: self, user: self.user)
+  end
 
   # Change semester input from a string to an integer representing that string
   def semester=(val)

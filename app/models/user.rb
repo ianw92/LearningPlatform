@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :todo_lists, dependent: :destroy
   has_one :timer, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_many :lecture_modules
   # Include default devise modules. Others available are:
   # :confirmable, :lockable and :omniauthable
   devise :database_authenticatable, :registerable, :timeoutable,

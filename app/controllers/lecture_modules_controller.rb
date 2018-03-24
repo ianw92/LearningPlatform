@@ -59,7 +59,8 @@ class LectureModulesController < ApplicationController
     semester = 0
     month > 1 && month < 10 ? semester = 1 : semester = 2
     @lecture_module = LectureModule.new(academic_year_end: year,
-                                        semester: semester)
+                                        semester: semester,
+                                        user_id: current_user.id)
   end
 
   # GET /lecture_modules/1/edit
@@ -126,7 +127,7 @@ class LectureModulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_module_params
-      params.require(:lecture_module).permit(:code, :academic_year_end, :semester, :name)
+      params.require(:lecture_module).permit(:code, :academic_year_end, :semester, :name, :user_id)
     end
 
     def set_page_title_for_specific_module
