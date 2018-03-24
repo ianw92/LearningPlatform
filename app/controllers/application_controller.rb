@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
   before_action :set_todo_lists
   before_action :set_previous_page
 
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.json { head :forbidden, content_type: 'text/html' }
+      format.html { redirect_back fallback_location: root_path, alert: exception.message }
+      format.js   { head :forbidden, content_type: 'text/html' }
+    end
+  end
+
   def set_todo_lists
     if current_user != nil
       # TODO create methods in the models to get these lists

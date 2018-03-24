@@ -1,5 +1,6 @@
 class TimersController < ApplicationController
   before_action :set_timer, only: [:show, :edit, :update, :destroy]
+  authorize_resource
 
   # GET /timers
   # GET /timers.json

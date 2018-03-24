@@ -1,6 +1,7 @@
 class LectureModuleContentsController < ApplicationController
   before_action :set_lecture_module_content, only: [:show, :edit, :update, :destroy]
   before_action :set_page_title_for_specific_content, only: [:show, :edit, :update]
+  authorize_resource
 
   # GET /lecture_module_contents
   # GET /lecture_module_contents.json

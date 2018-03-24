@@ -1,6 +1,7 @@
 class LectureModulesController < ApplicationController
   before_action :set_lecture_module, only: [:show, :edit, :update, :destroy]
   before_action :set_page_title_for_specific_module, only: [:show, :edit]
+  authorize_resource
 
   # GET /lecture_modules
   # GET /lecture_modules.json
