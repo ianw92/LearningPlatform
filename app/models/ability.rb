@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     return unless user.present?
     can [:create, :edit, :update, :destroy, :complete], Task, todo_list: { user_id: user.id }
+    can [:sort_by_due_date, :sort_by_title, :sort_by_custom], Task
     can [:create, :update], Note, user_id: user.id
     can [:update], Timer, user_id: user.id
     # can do any action to a todo_list that the user owns apart from view the show page

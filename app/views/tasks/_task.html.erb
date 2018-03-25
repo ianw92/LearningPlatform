@@ -69,37 +69,27 @@
     <div>
     <% end %>
       <% if task == @current_task %>
-      <li class='list-item current_task'>
+      <li class='list-item task-item current_task'>
       <% else %>
-      <li class='list-item'>
+      <li class='list-item task-item'>
       <% end %>
 
         <div class='row'>
-          <% if (local_assigns.fetch :type) == 'main' %>
-            <div class='col-3 col-sm-2 col-md-2 col-lg-1'>
-          <% else %>
-            <div class='col-3'>
-          <% end %>
+
+            <div class='col-1'>
             <div class='form-check'>
-              <label class='form-check-label' style='inline'>
-                <!-- TODO Make this work using checking/unchecking box to trigger action. Use javascript to make AJAX request -->
-                <% if task.completed? %>
-                  <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>' checked>
-                <% else %>
-                  <input type='checkbox' class='form-check-input' id='task_completed_check_<%= task.id %>'>
-                <% end %>
-                  <form class='button_to' method='post' action='/tasks/<%= task.id %>/complete' data-remote='true'>
-                    <input type='submit' value='Toggle'>
-                    <input name='authenticity_token' value='<%= form_authenticity_token %>' type='hidden'>
-                  </form>
-              </label>
+              <input type='checkbox' name='checkbox' id='checkbox'
+                     value='<%= task.id %>' data-remote='true'
+                     data-url='/tasks/<%= task.id %>/complete'
+                     data-method='post' class='form-check-input toggle-task-checkbox'
+                     <%= task.completed? ? "checked" : "unchecked" %>>
             </div>
           </div>
 
           <% if (local_assigns.fetch :type) == 'main' %>
-            <div class='col-9 col-sm-9 col-md-9 col-lg-9'>
+            <div class='col-10 col-sm-9 col-md-9 col-lg-9'>
           <% else %>
-            <div class='col-9'>
+            <div class='col-10'>
           <% end %>
               <%= task.title %>
             </div>
@@ -109,18 +99,18 @@
               <%= task.due_date %>
               |
               <%= link_to edit_task_path(task), data: { toggle: 'edit-task-tooltip'}, title: 'Edit Task' do %>
-                <i class="fas fa-pencil-alt"></i>
+                <i class='fas fa-pencil-alt'></i>
               <% end %>
               |
               <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, title: 'Delete Task' do %>
-                <i class="fas fa-trash-alt"></i>
+                <i class='fas fa-trash-alt'></i>
               <% end %>
             </div>
           <% end %>
 
         </div>
       </li>
-      <hr>
     </div>
+    <hr>
   <% end %>
 <% end %>
