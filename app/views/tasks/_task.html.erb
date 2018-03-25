@@ -111,6 +111,10 @@
         </div>
       </li>
     </div>
+    <% if task.completed? %>
+    <hr class='task_completed'>
+    <% else %>
     <hr>
+    <% end %>
   <% end %>
 <% end %>

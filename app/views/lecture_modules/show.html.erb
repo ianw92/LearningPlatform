@@ -63,6 +63,14 @@
   <% end %>
 </div>
 
+<br>
+
 <% if can? :new, LectureModuleContent.new(lecture_module: @lecture_module) %>
   <%= link_to 'New Lecture Module Content', new_lecture_module_content_path(:lecture_module => @lecture_module) %>
 <% end %>
+
+<br>
+<br>
+<hr>
+<br>
+<p>Any notes that you add to a module will only be visible by you.</p>

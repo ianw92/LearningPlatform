@@ -138,8 +138,8 @@ class LectureModulesController < ApplicationController
     def set_module_collections
       @my_current_modules = LectureModule.get_my_current_modules(current_user)
       @my_completed_modules = LectureModule.get_my_completed_modules(current_user)
-      @all_current_modules = LectureModule.current
-      @all_completed_modules = LectureModule.completed
+      @all_current_modules = LectureModule.get_other_current_modules(current_user)
+      @all_completed_modules = LectureModule.get_other_completed_modules(current_user)
     end
 
 end

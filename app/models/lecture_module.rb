@@ -37,25 +37,8 @@ class LectureModule < ApplicationRecord
   end
 
 
-
-  def self.current
-    self.set_current_year_and_semester
-    current = LectureModule.where("academic_year_end = ?", @current_year_end).where("semester = 0 OR semester = ?", @current_semester)
-    current.order(:code)
-  end
-
-  def self.completed
-    self.set_current_year_and_semester
-    if @current_semester == 1
-      completed = LectureModule.all(:conditions => ["academic_year_end != ?", @current_year_end])
-    else
-      completed = LectureModule.where("academic_year_end != ? OR academic_year_end = ? AND semester = 1", @current_year_end, @current_year_end)
-    end
-    completed.order(:code)
-  end
-
-  # TODO this method should only be called once, not in both self.current
-  # and self.completed, how do I do this??
+  # TODO this method should only be called once, not in both self.get_other_current_modules
+  # and self.get_other_completed_modules, how do I do this??
   def self.set_current_year_and_semester
     time = Time.now
     current_year = time.year
@@ -71,6 +54,7 @@ class LectureModule < ApplicationRecord
      #{academic_year_end - 1}/#{academic_year_end}"
    end
 
+   # My modules
    #TODO test this
    def self.get_my_current_modules(user)
      self.set_current_year_and_semester
@@ -91,6 +75,33 @@ class LectureModule < ApplicationRecord
      else
        LectureModule.where(id: my_module_ids).where("academic_year_end != ? OR academic_year_end = ? AND semester = 1", @current_year_end, @current_year_end).order(:code)
      end
+   end
+
+   # Other modules
+   def self.get_other_current_modules(user)
+     self.set_current_year_and_semester
+
+     user_id = user.id
+     my_module_linkers = UserModuleLinker.where("user_id = ?", user_id)
+     my_module_ids = my_module_linkers.pluck(:lecture_module_id)
+
+     current = LectureModule.where("academic_year_end = ?", @current_year_end).where("semester = 0 OR semester = ?", @current_semester).where.not(id: my_module_ids)
+     current.order(:code)
+   end
+
+   def self.get_other_completed_modules(user)
+     self.set_current_year_and_semester
+
+     user_id = user.id
+     my_module_linkers = UserModuleLinker.where("user_id = ?", user_id)
+     my_module_ids = my_module_linkers.pluck(:lecture_module_id)
+
+     if @current_semester == 1
+       completed = LectureModule.all(:conditions => ["academic_year_end != ?", @current_year_end]).where.not(id: my_module_ids)
+     else
+       completed = LectureModule.where("academic_year_end != ? OR academic_year_end = ? AND semester = 1", @current_year_end, @current_year_end).where.not(id: my_module_ids)
+     end
+     completed.order(:code)
    end
 
 end
