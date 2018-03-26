@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery-ui/effects/effect-blind
+//= require jquery-ui/widget
+//= require jquery-ui/widgets/sortable
 //= require popper
 //= require bootstrap-sprockets
 //= require rails-ujs

@@ -16,3 +16,7 @@ $(document).on 'turbolinks:load', ->
       $(this).html('Hide completed')
     $('.task_completed').toggleClass('task_show')
     )
+
+  $('.dropdown-toggle').click ->
+    $('.dropdown-toggle').val $(this).text()
+    return

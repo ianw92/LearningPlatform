@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325144017) do
+ActiveRecord::Schema.define(version: 20180326125421) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
     t.integer "week"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20180325144017) do
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position"
     t.index ["todo_list_id"], name: "index_tasks_on_todo_list_id"
   end
 

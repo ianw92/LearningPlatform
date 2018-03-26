@@ -10,6 +10,14 @@ class TasksController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  def reorder
+    params[:task].each_with_index do |id, index|
+      Task.where(id: id).update_all(position: index+1)
+    end
+
+    head :ok
+  end
+
   # GET /tasks/1
   # GET /tasks/1.json
   def show
@@ -24,7 +32,7 @@ class TasksController < ApplicationController
   end
 
   def sort_by_custom
-    #TODO if I get round to this
+    change_sorting_parameter('position')
   end
 
   def complete

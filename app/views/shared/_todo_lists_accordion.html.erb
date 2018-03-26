@@ -34,16 +34,23 @@
 
       <div class='card-body'>
 
-        <button id='tasks_sort' class='btn btn-sm btn-outline-dark dropdown-toggle' type='button' data-toggle='dropdown'>
-          Sort by
+        <button id='tasks_sort_btn' class='btn btn-sm btn-outline-dark dropdown-toggle' type='button' data-toggle='dropdown'>
+          Sort By: <%= @my_sort_style == 'position' ? 'Custom' : @my_sort_style.humanize %>
         </button>
         <div class='dropdown-menu'>
           <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_due_date'>Due Date</a>
           <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_title'>Title</a>
-          <a class='dropdown-item' id=''>Custom</a>
+          <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_custom'>Custom</a>
         </div>
 
+        <br>
+        <hr>
+
+        <% if @my_sort_style == 'position' %>
+        <ul class='list-unstyled tasks-sortable' data-url='<%= reorder_tasks_path %>'>
+        <% else %>
         <ul class='list-unstyled'>
+        <% end %>
           <%= render partial: 'tasks/task',
                      collection: @tasks_global,
                      locals: { short_view: true, # need to remove this variable when i get rid of the view all tasks page
