@@ -68,15 +68,18 @@ $(document).on 'turbolinks:load', ->
   # Timer Settings
   $('#study-timer-btn').click( ->
     localStorage.setItem("time_left", study_timer_time)
-    localStorage.setItem("timer_type", "study"))
+    localStorage.setItem("timer_type", "study")
+    $('#timer-select-btn').text('Study'))
 
   $('#short-break-btn').click( ->
     localStorage.setItem("time_left", short_break_time)
-    localStorage.setItem("timer_type", "short_break"))
+    localStorage.setItem("timer_type", "short_break")
+    $('#timer-select-btn').text('Short break'))
 
   $('#long-break-btn').click( ->
     localStorage.setItem("time_left", long_break_time)
-    localStorage.setItem("timer_type", "long_break"))
+    localStorage.setItem("timer_type", "long_break")
+    $('#timer-select-btn').text('Long break'))
 
   $('#save-timer-settings').click( ->
 
