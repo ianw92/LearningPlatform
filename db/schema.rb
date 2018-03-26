@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324201709) do
+ActiveRecord::Schema.define(version: 20180325144017) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
-    t.string "code"
-    t.integer "academic_year_end"
     t.integer "week"
     t.text "description"
     t.integer "lecture_module_id"

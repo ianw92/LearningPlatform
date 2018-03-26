@@ -19,9 +19,7 @@ class LectureModuleContentsController < ApplicationController
   def new
     if !params[:lecture_module].nil?
       lecture_module = LectureModule.find(params[:lecture_module])
-      @lecture_module_content = LectureModuleContent.new(code: lecture_module.code,
-                                                         academic_year_end: lecture_module.academic_year_end,
-                                                         lecture_module_id: lecture_module.id)
+      @lecture_module_content = LectureModuleContent.new(lecture_module_id: lecture_module.id)
     else
       @lecture_module_content = LectureModuleContent.new
     end
@@ -67,7 +65,7 @@ class LectureModuleContentsController < ApplicationController
   def destroy
     @lecture_module_content.destroy
     respond_to do |format|
-      format.html { redirect_to lecture_module_contents_url, notice: 'Lecture module content was successfully destroyed.' }
+      format.html { redirect_back fallback_location: root_path, notice: 'Lecture module content was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -80,10 +78,10 @@ class LectureModuleContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_module_content_params
-      params.require(:lecture_module_content).permit(:code, :academic_year_end, :week, :description, :lecture_module_id, :content, :youTube_link)
+      params.require(:lecture_module_content).permit(:week, :description, :lecture_module_id, :content, :youTube_link)
     end
 
     def set_page_title_for_specific_content
-      @page_title = "#{@lecture_module_content.code} #{@lecture_module_content.academic_year_end.to_s} - Week #{@lecture_module_content.week.to_s}"
+      @page_title = @lecture_module_content.get_module_full_title
     end
 end
