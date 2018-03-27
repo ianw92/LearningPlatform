@@ -42,10 +42,10 @@
 
 
       <ul class="list-unstyled">
-        <% if @weekly_content[i-1].nil? %>
-          <li class="list-item">No content exists for Week <%= i %> of this module yet</li>
+        <% if @weekly_content[i-1].empty? %>
+          <li class="list-item">No content exists for Week <%= i %> of this module yet.</li>
         <% else %>
-          <%= render partial: "lecture_module_contents/lecture_module_content_in_module_show",
+          <%= render partial: "lecture_module_contents/lecture_module_content",
                      as: :lecture_module_content,
                      collection: @weekly_content[i-1],
                      locals: { show_pdf: true,
@@ -76,52 +76,6 @@
   <% end %>
 </div>
 
-
-<!-- <div id="accordion">
-  <% for i in 1..12 do %>
-  <div class="card">
-    <div class="card-header">
-      <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= i %>">
-        Week <%= i %>
-      </a>
-    </div>
-    <div id="collapse<%= i %>" class="collapse">
-      <div class="card-body">
-        <ul class="list-unstyled">
-          <% if @weekly_content[i].nil? %>
-            <li class="list-item">No content exists for Week <%= i %> of this module yet</li>
-          <% else %>
-            <%= render partial: "lecture_module_contents/lecture_module_content_in_module_show",
-                       as: :lecture_module_content,
-                       collection: @weekly_content[i],
-                       locals: { show_pdf: true,
-                                 show_youTube: true } %>
-
-            <!-- TODO make this next bit a partial? -->
-            <!-- <li class="list-item">
-              <% if @weeks_with_notes.include? i %>
-                <% @notes.each do |note| %>
-                  <% if note.week == i %>
-                    <h3>Notes</h3>
-                    <%= render 'notes/add_edit_notes', note: note, user: current_user, lecture_module: @lecture_module, week: i %>
-
-                  <% end %>
-                <% end %>
-              <% else %>
-                <h3>Add new note</h3>
-                <%= render 'notes/add_edit_notes', note: Note.new, user: current_user, lecture_module: @lecture_module, week: i %>
-              <% end %>
-
-            </li>
-         <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <% end %>
-</div> -->
-
-<br>
 <br>
 <hr>
 <br>

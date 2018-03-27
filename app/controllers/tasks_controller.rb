@@ -1,14 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy,]
+  before_action :set_task, only: [:edit, :update, :destroy,]
   authorize_resource
-
-  # GET /tasks
-  # GET /tasks.json
-  def index
-    # This can only be visited if adding new task from todo_list index page fails
-    # Therefore redirect back to that, if a user enters the url '/tasks', they will be redirected to root page
-    redirect_back fallback_location: root_path
-  end
 
   def reorder
     params[:task].each_with_index do |id, index|
@@ -16,11 +8,6 @@ class TasksController < ApplicationController
     end
 
     head :ok
-  end
-
-  # GET /tasks/1
-  # GET /tasks/1.json
-  def show
   end
 
   def sort_by_due_date
@@ -47,16 +34,6 @@ class TasksController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # GET /tasks/new
-  def new
-    if !params[:todo_list].nil?
-      todo_list = TodoList.find(params[:todo_list])
-      @task = Task.new(todo_list: todo_list)
-    else
-      @task = Task.new
     end
   end
 

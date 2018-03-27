@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :weeks
-  resources :timers
-  resources :notes
+  resources :timers, only: [:update]
+  resources :notes, except: [:show, :index, :edit]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
 
@@ -9,8 +8,10 @@ Rails.application.routes.draw do
     post 'complete', on: :member
   end
 
-  resources :tasks do
-    post 'complete', on: :member
+  resources :tasks, except: [:index, :show, :new] do
+    member do
+      post 'complete'
+    end
     collection do
       post 'sort_by_due_date'
       post 'sort_by_title'
@@ -19,8 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :todo_lists
-  resources :lecture_module_contents
+  resources :todo_lists, except: [:show]
+  resources :lecture_module_contents, except: [:show, :index]
 
   resources :lecture_modules do
     post 'add_to_my_modules', on: :member

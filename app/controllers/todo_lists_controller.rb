@@ -1,27 +1,13 @@
 class TodoListsController < ApplicationController
-  before_action :set_todo_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo_list, only: [:edit, :update, :destroy]
   authorize_resource
 
   # GET /todo_lists
   # GET /todo_lists.json
   def index
-    # Use global todo_lists and tasks
-
-    # me = current_user
-    # @todo_lists = TodoList.where("user = ?", me.username)
-    # @tasks = Task.find(@todo_lists.ids)
-    # @tasks.each do | task |
-    #   puts task.id
-    # end
     @subtasks = Subtask.all
 
     @task = Task.new
-  end
-
-  # GET /todo_lists/1
-  # GET /todo_lists/1.json
-  def show
-    @tasks = Task.get_tasks_for_list(@todo_list)
   end
 
   # GET /todo_lists/new

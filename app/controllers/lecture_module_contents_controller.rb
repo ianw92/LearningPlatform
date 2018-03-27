@@ -1,19 +1,7 @@
 class LectureModuleContentsController < ApplicationController
-  before_action :set_lecture_module_content, only: [:show, :edit, :update, :destroy]
-  before_action :set_page_title_for_specific_content, only: [:show, :edit, :update]
+  before_action :set_lecture_module_content, only: [:edit, :update, :destroy]
+  before_action :set_page_title_for_specific_content, only: [:edit, :update]
   authorize_resource
-
-  # GET /lecture_module_contents
-  # GET /lecture_module_contents.json
-  def index
-    @page_title = "All Module Content"
-    @lecture_module_contents = LectureModuleContent.all.order(:code, :academic_year_end, :week)
-  end
-
-  # GET /lecture_module_contents/1
-  # GET /lecture_module_contents/1.json
-  def show
-  end
 
   # GET /lecture_module_contents/new
   def new

@@ -1,31 +1,44 @@
-<tr>
-  <td><%= lecture_module_content.code %></td>
-  <td><%= lecture_module_content.academic_year_end %></td>
-  <td><%= lecture_module_content.week %></td>
-  <td><%= lecture_module_content.description %></td>
-  <td><%= lecture_module_content.content.original_filename %></td>
-  <td><%= lecture_module_content.youTube_link %></td>
-  <td><%= lecture_module_content.lecture_module.get_module_full_title %></td>
-  <td><%= link_to 'Show', lecture_module_content %></td>
-  <td><%= link_to 'Edit', edit_lecture_module_content_path(lecture_module_content) %></td>
-  <td><%= link_to 'Destroy', lecture_module_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-</tr>
+<% if lecture_module_content.description? || lecture_module_content.content? || lecture_module_content.youTube_link? %>
+  <li class="list-item">
+    <div class='row'>
+      <div class='col-9 col-sm-10 col-lg-11'>
+        <%= lecture_module_content.description %>
+        |
+        <%= lecture_module_content.content.original_filename %>
+      </div>
+      <div class='col-3 col-sm-2 col-lg-1'>
+        <% if can? :edit, lecture_module_content %>
+          <%= link_to edit_lecture_module_content_path(lecture_module_content), data: { toggle: 'edit-lecture-module-content-tooltip'}, title: 'Edit Content' do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+          |
+        <% end %>
+        <% if can? :destroy, lecture_module_content %>
+          <%= link_to lecture_module_content, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-content-tooltip'}, title: 'Delete Content' do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-<% if local_assigns.has_key? :show_pdf %>
-  <% if local_assigns.fetch :show_pdf %>
-    <% if lecture_module_content.content? %>
-    <iframe src="<%= lecture_module_content.content.url %>" allowfullscreeen></iframe>
+    <% if local_assigns.has_key? :show_pdf %>
+      <% if local_assigns.fetch :show_pdf %>
+        <% if lecture_module_content.content? %>
+        <iframe src="<%= lecture_module_content.content.url %>" allowfullscreen="allowfullscreen" webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-<% end %>
 
-<br>
+    <br>
 
-<% if local_assigns.has_key? :show_youTube %>
-  <% if local_assigns.fetch :show_youTube %>
-    <% if lecture_module_content.youTube_link? %>
-      <iframe src="<%= lecture_module_content.youTube_link %>"
-        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <% if local_assigns.has_key? :show_youTube %>
+      <% if local_assigns.fetch :show_youTube %>
+        <% if lecture_module_content.youTube_link? %>
+          <iframe src="<%= lecture_module_content.youTube_link %>"
+            allow="encrypted-media" allowfullscreen></iframe>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
+
+  </li>
 <% end %>
