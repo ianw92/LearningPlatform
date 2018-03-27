@@ -16,15 +16,11 @@
   </div>
 
   <div class="field">
-    <%= form.hidden_field :lecture_module_id, id: :note_lecture_module_id, value: lecture_module.id %>
+    <%= form.hidden_field :week_id, id: :note_week_id, value: week %>
   </div>
 
   <div class="field">
-    <%= form.hidden_field :week, id: :note_week, value: week %>
-  </div>
-
-  <div class="field">
-    <%= form.text_area :notes, id: :notes_textarea, value: note.notes, class: 'form-control' %>
+    <%= form.text_area :body, id: :body_textarea, value: note.body, class: 'form-control' %>
   </div>
 
   <div class="actions">

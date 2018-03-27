@@ -19,10 +19,8 @@ class LectureModulesController < ApplicationController
         set_module_collections
         format.html { redirect_back fallback_location: root_path, notice: 'Lecture module was successfully added to My Modules.' }
         format.js
-        format.json { head :ok }
       else
         format.html { redirect_back fallback_location: root_path, notice: 'Lecture module could not be added to My Modules.' }
-        format.json { head :ok }
       end
     end
   end
@@ -35,7 +33,6 @@ class LectureModulesController < ApplicationController
     respond_to do |format|
       format.html { redirect_back fallback_location: root_path, notice: 'Lecture module was successfully removed from My Modules.' }
       format.js
-      format.json { head :no_content }
     end
   end
 
@@ -43,15 +40,13 @@ class LectureModulesController < ApplicationController
   # GET /lecture_modules/1.json
   def show
     @weeks = @lecture_module.weeks
-    puts @weeks
     @weekly_content = Array.new(12)
     for i in 0..@weeks.length-1 do
       @weekly_content[i] = @weeks[i].lecture_module_contents
-      puts @weekly_content[i]
     end
 
     @notes = Note.get_notes_for_module_and_user(@lecture_module, current_user)
-    @weeks_with_notes = @notes.pluck(:week)
+    @weeks_with_notes = @notes.pluck(:week_id).map { |week_id| week_id % 12 }
   end
 
   # GET /lecture_modules/new
@@ -91,10 +86,8 @@ class LectureModulesController < ApplicationController
     respond_to do |format|
       if @lecture_module.save
         format.html { redirect_to @lecture_module, notice: 'Lecture module was successfully created.' }
-        format.json { render :show, status: :created, location: @lecture_module }
       else
         format.html { render :new }
-        format.json { render json: @lecture_module.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -105,10 +98,8 @@ class LectureModulesController < ApplicationController
     respond_to do |format|
       if @lecture_module.update(lecture_module_params)
         format.html { redirect_to @lecture_module, notice: 'Lecture module was successfully updated.' }
-        format.json { render :show, status: :ok, location: @lecture_module }
       else
         format.html { render :edit }
-        format.json { render json: @lecture_module.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -119,7 +110,6 @@ class LectureModulesController < ApplicationController
     @lecture_module.destroy
     respond_to do |format|
       format.html { redirect_to lecture_modules_url, notice: 'Lecture module was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

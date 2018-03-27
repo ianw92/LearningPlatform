@@ -29,10 +29,8 @@ class TasksController < ApplicationController
       if task.save
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully updated.' }
         format.js { @current_task = task_to_toggle_completion }
-        format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,10 +51,8 @@ class TasksController < ApplicationController
           format.html { redirect_to todo_lists_path }
         end
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
       else
         format.html { render "todo_lists/index" }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -67,10 +63,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to todo_lists_path, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -81,7 +75,6 @@ class TasksController < ApplicationController
     @task.destroy
     respond_to do |format|
       format.html { redirect_to todo_lists_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -104,10 +97,8 @@ class TasksController < ApplicationController
           set_todo_lists
           format.html { redirect_back fallback_location: root_path, notice: 'Profile was successfully updated.' }
           format.js
-          format.json { head :ok }
         else
           format.html { redirect_back fallback_location: root_path, notice: 'Profile could not be updated.' }
-          format.json { render json: profile.errors, status: :unprocessable_entity }
         end
       end
     end

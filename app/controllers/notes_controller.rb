@@ -15,10 +15,8 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.save
         format.html { redirect_back fallback_location: root_path, notice: 'Note was successfully created.' }
-        format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -30,10 +28,8 @@ class NotesController < ApplicationController
       if @note.update(note_params)
         format.html { redirect_back fallback_location: root_path, notice: 'Note was successfully updated.' }
         format.js
-        format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,7 +40,6 @@ class NotesController < ApplicationController
     @note.destroy
     respond_to do |format|
       format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -56,6 +51,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:user_id, :lecture_module_id, :week, :notes)
+      params.require(:note).permit(:user_id, :week_id, :body)
     end
 end
