@@ -1,10 +1,7 @@
 class LectureModuleContent < ApplicationRecord
-  belongs_to :lecture_module
+  belongs_to :week
   has_attached_file :content
 
-  validates :week, presence: true
-  validates :week, numericality: true,
-                   inclusion: { within: 1..12 }
   validates_attachment :content, content_type: {content_type: ["application/pdf"]}
   validate :content_xor_youtube_must_exist
 
@@ -41,7 +38,18 @@ class LectureModuleContent < ApplicationRecord
   end
 
   def get_module_full_title
-    LectureModule.find(lecture_module_id).get_module_full_title
+    week = Week.find(week_id)
+    LectureModule.where(id: week.lecture_module_id).first.get_module_full_title
+  end
+
+  def week_number
+    week = Week.find(week_id)
+    week.week_number
+  end
+
+  def lecture_module_id
+    week = Week.find(week_id)
+    week.lecture_module_id
   end
 
 

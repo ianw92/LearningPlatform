@@ -32,16 +32,22 @@
     <% else %>
     <div id="week<%= i %>" class="tab-pane fade">
     <% end %>
+      <br>
+      <% if can? :new, LectureModuleContent.new(week: @weeks[i-1]) %>
+        <%= link_to new_lecture_module_content_path(week: @weeks[i-1]), class: 'float-right' do %>
+          Add Content to Week <%= i %>
+        <% end %>
+      <% end %>
       <h3>Week <%= i %></h3>
 
 
       <ul class="list-unstyled">
-        <% if @weekly_content[i].length === 0 %>
+        <% if @weekly_content[i-1].nil? %>
           <li class="list-item">No content exists for Week <%= i %> of this module yet</li>
         <% else %>
           <%= render partial: "lecture_module_contents/lecture_module_content_in_module_show",
                      as: :lecture_module_content,
-                     collection: @weekly_content[i],
+                     collection: @weekly_content[i-1],
                      locals: { show_pdf: true,
                                show_youTube: true } %>
 
@@ -66,6 +72,7 @@
 
 
     </div>
+
   <% end %>
 </div>
 
@@ -81,7 +88,7 @@
     <div id="collapse<%= i %>" class="collapse">
       <div class="card-body">
         <ul class="list-unstyled">
-          <% if @weekly_content[i].length === 0 %>
+          <% if @weekly_content[i].nil? %>
             <li class="list-item">No content exists for Week <%= i %> of this module yet</li>
           <% else %>
             <%= render partial: "lecture_module_contents/lecture_module_content_in_module_show",
@@ -112,13 +119,7 @@
     </div>
   </div>
   <% end %>
-</div> --> 
-
-<br>
-
-<% if can? :new, LectureModuleContent.new(lecture_module: @lecture_module) %>
-  <%= link_to 'New Lecture Module Content', new_lecture_module_content_path(:lecture_module => @lecture_module) %>
-<% end %>
+</div> -->
 
 <br>
 <br>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lecture_module: one
+  week_number: 1
+
+two:
+  lecture_module: two
+  week_number: 1

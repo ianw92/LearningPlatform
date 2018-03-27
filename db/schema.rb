@@ -10,12 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326125421) do
+ActiveRecord::Schema.define(version: 20180327115623) do
 
   create_table "lecture_module_contents", force: :cascade do |t|
-    t.integer "week"
     t.text "description"
-    t.integer "lecture_module_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "content_file_name"
@@ -23,7 +21,8 @@ ActiveRecord::Schema.define(version: 20180326125421) do
     t.integer "content_file_size"
     t.datetime "content_updated_at"
     t.string "youTube_link"
-    t.index ["lecture_module_id"], name: "index_lecture_module_contents_on_lecture_module_id"
+    t.integer "week_id"
+    t.index ["week_id"], name: "index_lecture_module_contents_on_week_id"
   end
 
   create_table "lecture_modules", force: :cascade do |t|
@@ -122,6 +121,14 @@ ActiveRecord::Schema.define(version: 20180326125421) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "weeks", force: :cascade do |t|
+    t.integer "lecture_module_id"
+    t.integer "week_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lecture_module_id"], name: "index_weeks_on_lecture_module_id"
   end
 
 end

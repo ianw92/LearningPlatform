@@ -42,11 +42,14 @@ class LectureModulesController < ApplicationController
   # GET /lecture_modules/1
   # GET /lecture_modules/1.json
   def show
-    @module_content = LectureModuleContent.get_content_for_module(@lecture_module)
+    @weeks = @lecture_module.weeks
+    puts @weeks
     @weekly_content = Array.new(12)
-    for i in 1..12 do
-      @weekly_content[i] = LectureModuleContent.get_content_for_module_and_week(@lecture_module, i)
+    for i in 0..@weeks.length-1 do
+      @weekly_content[i] = @weeks[i].lecture_module_contents
+      puts @weekly_content[i]
     end
+
     @notes = Note.get_notes_for_module_and_user(@lecture_module, current_user)
     @weeks_with_notes = @notes.pluck(:week)
   end

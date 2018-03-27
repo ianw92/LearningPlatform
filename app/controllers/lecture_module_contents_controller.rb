@@ -17,11 +17,11 @@ class LectureModuleContentsController < ApplicationController
 
   # GET /lecture_module_contents/new
   def new
-    if !params[:lecture_module].nil?
-      lecture_module = LectureModule.find(params[:lecture_module])
-      @lecture_module_content = LectureModuleContent.new(lecture_module_id: lecture_module.id)
+    if !params[:week].nil?
+      week = Week.find(params[:week])
+      @lecture_module_content = LectureModuleContent.new(week_id: week.id)
     else
-      @lecture_module_content = LectureModuleContent.new
+      redirect_back fallback_location: root_path, alert: 'This URL cannot be accessed directly.'
     end
 
   end
@@ -78,7 +78,7 @@ class LectureModuleContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_module_content_params
-      params.require(:lecture_module_content).permit(:week, :description, :lecture_module_id, :content, :youTube_link)
+      params.require(:lecture_module_content).permit(:week_id, :description, :content, :youTube_link)
     end
 
     def set_page_title_for_specific_content

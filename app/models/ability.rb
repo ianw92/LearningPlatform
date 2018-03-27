@@ -15,7 +15,7 @@ class Ability
     can :read, LectureModule
     # can do any action to content belonging to a module that user owns apart from view the show page
     # TODO for some reason this still lets me add content to a module that I don't own
-    can [:new, :create, :edit, :update, :destroy], LectureModuleContent, lecture_module: { user_id: user.id }
+    can [:new, :create, :edit, :update, :destroy], LectureModuleContent, week: { lecture_module: { user_id: user.id } }
 
 
 
