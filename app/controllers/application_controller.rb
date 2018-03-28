@@ -28,7 +28,6 @@ class ApplicationController < ActionController::Base
         @tasks_global = @tasks_global.order(:position)
       end
 
-      @subtasks_global = Subtask.where(task_id: @tasks_global.ids).order(:completed)
     end
   end
 

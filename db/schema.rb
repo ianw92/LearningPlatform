@@ -65,16 +65,6 @@ ActiveRecord::Schema.define(version: 20180327232545) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "subtasks", force: :cascade do |t|
-    t.integer "task_id"
-    t.string "title"
-    t.date "due_date"
-    t.boolean "completed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_subtasks_on_task_id"
-  end
-
   create_table "tasks", force: :cascade do |t|
     t.integer "todo_list_id"
     t.string "title"

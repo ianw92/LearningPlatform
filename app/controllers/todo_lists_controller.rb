@@ -5,8 +5,6 @@ class TodoListsController < ApplicationController
   # GET /todo_lists
   # GET /todo_lists.json
   def index
-    @subtasks = Subtask.all
-
     @task = Task.new
   end
 
