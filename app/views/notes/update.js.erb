@@ -1,1 +1,1 @@
-alert("Note successfully updated");
+$('#notes-section').html("<%=j render partial:'notes/notes_section', locals: { week: @note.week } %>");

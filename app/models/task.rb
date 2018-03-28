@@ -19,4 +19,20 @@ class Task < ApplicationRecord
 
     return task
   end
+
+  def get_due_status
+    today = Date.today
+    tomorrow = today + 1.day
+    if completed?
+      return "_completed"
+    elsif due_date < today
+      return "_overdue"
+    elsif due_date == today
+      return "_due_today"
+    elsif due_date == tomorrow
+      return "_due_tomorrow"
+    else
+      return
+    end
+  end
 end

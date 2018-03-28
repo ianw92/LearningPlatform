@@ -1,72 +1,7 @@
 <div id='accordion'>
-  <% @todo_lists_global.each_with_index do |todo_list, i| %>
-  <div class='card'>
-    <div class='card-header'>
-      <a class='card-link' data-toggle='collapse' data-parent='#accordion' href='#collapse_<%= local_assigns.fetch :type %>_<%= todo_list.id %>'>
-        <td><%= todo_list.title %></td>
-
-        <% if (local_assigns.fetch :type) == 'main' %>
-        <div class='edit-destroy-links'>
-          <td>
-            <%= link_to edit_todo_list_path(todo_list), data: { toggle: 'edit-todo-list-tooltip'}, title: 'Edit Todo List' do %>
-              <i class='fas fa-pencil-alt'></i>
-            <% end %>
-          </td>
-          |
-          <td>
-            <%= link_to todo_list, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-todo-list-tooltip'}, title: 'Delete Todo List' do %>
-              <i class='fas fa-trash-alt'></i>
-            <% end %>
-          </td>
-        </div>
-        <% end %>
-
-      </a>
-    </div>
-
-    <% if todo_list.id==@todo_lists_global[0].id %>
-    <div id='collapse_<%= local_assigns.fetch :type %>_<%= todo_list.id %>' class='collapse show'>
-    <% elsif !@current_task.nil? && todo_list.id==(@current_task.todo_list_id) %>
-    <div id='collapse_<%= local_assigns.fetch :type %>_<%= todo_list.id %>' class='collapse show'>
-    <% else %>
-    <div id='collapse_<%= local_assigns.fetch :type %>_<%= todo_list.id %>' class='collapse'>
-    <% end %>
-
-      <div class='card-body'>
-
-        <button id='tasks_sort_btn' class='btn btn-sm btn-outline-dark dropdown-toggle' type='button' data-toggle='dropdown'>
-          Sort By: <%= @my_sort_style == 'position' ? 'Custom' : @my_sort_style.humanize %>
-        </button>
-        <div class='dropdown-menu'>
-          <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_due_date'>Due Date</a>
-          <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_title'>Title</a>
-          <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_custom'>Custom</a>
-        </div>
-
-        <br>
-        <hr>
-
-        <% if @my_sort_style == 'position' %>
-        <ul class='list-unstyled tasks-sortable' data-url='<%= reorder_tasks_path %>'>
-        <% else %>
-        <ul class='list-unstyled'>
-        <% end %>
-          <%= render partial: 'tasks/task',
-                     collection: @tasks_global,
-                     locals: { short_view: true, # need to remove this variable when i get rid of the view all tasks page
-                               todo_list: todo_list,
-                               type: (local_assigns.fetch :type) } %>
-
-          <button id='show_hide_completed_tasks_btn' type='button' class='btn btn-sm btn-outline-dark'>Show completed</button>
-        </ul>
-        <% if (local_assigns.fetch :type) == 'main' %>
-        <%= render 'tasks/add_new_task', task: @task || Task.new, todo_list: todo_list %>
-        <% end %>
-
-      </div>
-    </div>
-  </div>
-  <% end %>
+  <%= render partial: 'todo_lists/todo_list',
+             collection: @todo_lists_global,
+             locals: { type: type } %>
 
   <div class='card'>
     <div class='card-header'>

@@ -15,6 +15,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.save
         format.html { redirect_back fallback_location: root_path, notice: 'Note was successfully created.' }
+        format.js
       else
         format.html { render :new }
       end

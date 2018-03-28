@@ -44,7 +44,7 @@
       <% if @weekly_content[i-1].empty? %>
         <p>No content exists for Week <%= i %> of this module yet.</p>
       <% else %>
-        <div id="content-section">
+        <div id="content_section">
           <ul class="list-unstyled">
               <%= render partial: "lecture_module_contents/lecture_module_content",
                          collection: @weekly_content[i-1],
@@ -54,45 +54,17 @@
         </div>
 
 
-        <!-- TODO make this next bit a partial? -->
-        <div id="notes-section">
-          <% if @weeks_with_notes.include? i %>
-            <% @notes.each do |note| %>
-              <% if note.week_id % 12 == i %>
-                <h3>Notes</h3>
-                <%= render 'notes/add_edit_notes', note: note, user: current_user, lecture_module: @lecture_module, week: @weeks[i-1].id %>
-
-              <% end %>
-            <% end %>
-          <% else %>
-            <h3>Add new note</h3>
-            <%= render 'notes/add_edit_notes', note: Note.new, user: current_user, lecture_module: @lecture_module, week: @weeks[i-1].id %>
-          <% end %>
+        <div id="notes_section_<%= @weeks[i-1].id %>">
+          <%= render partial: 'notes/notes_section',
+                     locals: { week: @weeks[i-1] } %>
           <hr>
           <br>
         </div>
 
-
-        <div class="card bg-light" id="comment-section" style="max-height: 450px;">
-          <h3 style="padding-left:5px">Discussion</h3>
-          <% if can? :read, Comment.new(week_id: @weeks[i-1].id) %>
-            <div class="card-body" style="padding: 5px;overflow-y: scroll; overflow-x: hidden;">
-            <% if !@weeks[i-1].comments.empty? %>
-              <%= render partial: "comments/comment", locals: { week: @weeks[i-1] } %>
-            <% else %>
-              <p>No comments in this discussion yet.</p>
-            <% end %>
-            <%= render partial: "comments/form",
-                       locals: { week: @weeks[i-1],
-                                 comment: Comment.new(week_id: @weeks[i-1].id,
-                                                     user_id: current_user.id )
-                                } %>
-            </div>
-            <% else %>
-              <p style="padding-left:5px">Add this module to your modules to see the discussion.</p>
-            <% end %>
+        <div id="comments_section_<%= @weeks[i-1].id %>">
+          <%= render partial: 'comments/comments_section',
+                     locals: { week: @weeks[i-1] } %>
         </div>
-
       <% end %>
 
     </div>

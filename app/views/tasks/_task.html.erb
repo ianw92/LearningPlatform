@@ -1,60 +1,39 @@
-<!-- TODO Remove this line when task index page is deleted -->
-<% if local_assigns.has_key? :todo_list %>
-  <% if (local_assigns.fetch :todo_list).id == task.todo_list_id %>
-    <% if task.completed? %>
-    <div class='task_completed' id='task_<%= task.id %>'>
-    <% elsif task.due_date < Date.today %>
-    <div class='task_overdue' id='task_<%= task.id %>'>
-    <% elsif task.due_date == Date.today %>
-    <div class='task_due_today' id='task_<%= task.id %>'>
-    <% elsif task.due_date == Date.tomorrow %>
-    <div class='task_due_tomorrow' id='task_<%= task.id %>'>
+<% if todo_list.id == task.todo_list_id %>
+  <div class='task<%= task.get_due_status %>' id='task_<%= task.id %>'>
+    <% if task == @current_task %>
+    <li class='list-item task-item current_task'>
     <% else %>
-    <div id='task_<%= task.id %>'>
+    <li class='list-item task-item'>
     <% end %>
-      <% if task == @current_task %>
-      <li class='list-item task-item current_task'>
-      <% else %>
-      <li class='list-item task-item'>
-      <% end %>
+      <div class='row'>
 
-        <div class='row'>
+        <!-- Checkbox -->
+        <div class='col-1'>
+          <div class='form-check'>
+            <input type='checkbox' name='checkbox' id='checkbox'
+                   value='<%= task.id %>' data-remote='true'
+                   data-url='/tasks/<%= task.id %>/complete'
+                   data-method='post' class='form-check-input toggle-task-checkbox'
+                   <%= task.completed? ? "checked" : "unchecked" %>>
+          </div>
+        </div>
 
-            <div class='col-1'>
-            <div class='form-check'>
-              <input type='checkbox' name='checkbox' id='checkbox'
-                     value='<%= task.id %>' data-remote='true'
-                     data-url='/tasks/<%= task.id %>/complete'
-                     data-method='post' class='form-check-input toggle-task-checkbox'
-                     <%= task.completed? ? "checked" : "unchecked" %>>
-            </div>
+        <!-- Task Title -->
+        <% if type == 'main' %>
+          <div class='col-10 col-sm-9 col-md-9 col-lg-9'>
+        <% else %>
+          <div class='col-10'>
+        <% end %>
+            <%= task.title %>
           </div>
 
-          <% if (local_assigns.fetch :type) == 'main' %>
-            <div class='col-10 col-sm-9 col-md-9 col-lg-9'>
-          <% else %>
-            <div class='col-10'>
-          <% end %>
-              <%= task.title %>
-            </div>
-          <% if (local_assigns.fetch :type) == 'main' %>
-            <div class='col-7 col-sm-8 col-md-9 col-lg-10'></div>
-            <div class='col-5 col-sm-4 col-md-3 col-lg-2'>
-              <%= task.due_date %>
-              |
-              <%= link_to edit_task_path(task), data: { toggle: 'edit-task-tooltip'}, title: 'Edit Task' do %>
-                <i class='fas fa-pencil-alt'></i>
-              <% end %>
-              |
-              <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, title: 'Delete Task' do %>
-                <i class='fas fa-trash-alt'></i>
-              <% end %>
-            </div>
-          <% end %>
+        <!-- Task Due Date and Edit/Delete buttons -->
+        <% if type == 'main' %>
+          <%= render partial: 'tasks/task_date_edit_delete', locals: { task: task } %>
+        <% end %>
 
-        </div>
-      </li>
-      <hr>
-    </div>
-  <% end %>
+      </div>
+    </li>
+    <hr>
+  </div>
 <% end %>

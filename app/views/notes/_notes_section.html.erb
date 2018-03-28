@@ -1,0 +1,9 @@
+<% if week.get_note_for(current_user) %>
+
+  <h3>Notes</h3>
+  <%= render 'notes/add_edit_notes', note: week.get_note_for(current_user), user: current_user, week: week %>
+
+<% else %>
+  <h3>Add new note</h3>
+  <%= render 'notes/add_edit_notes', note: Note.new, user: current_user, week: week %>
+<% end %>

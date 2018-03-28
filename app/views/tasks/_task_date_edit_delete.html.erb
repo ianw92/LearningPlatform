@@ -1,0 +1,12 @@
+<div class='col-7 col-sm-8 col-md-9 col-lg-10'></div>
+<div class='col-5 col-sm-4 col-md-3 col-lg-2'>
+  <%= task.due_date %>
+  |
+  <%= link_to edit_task_path(task), data: { toggle: 'edit-task-tooltip'}, title: 'Edit Task' do %>
+    <i class='fas fa-pencil-alt'></i>
+  <% end %>
+  |
+  <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, title: 'Delete Task' do %>
+    <i class='fas fa-trash-alt'></i>
+  <% end %>
+</div>

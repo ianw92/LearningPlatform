@@ -46,11 +46,8 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        # TODO Find a less hacky way to do this redirect!!! Use a member route like I am for completed???
-        if params[:redirect] == "{:value=>1}"
-          format.html { redirect_to todo_lists_path }
-        end
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully created.' }
+        format.js { @saved_task = @task, @task = Task.new }
       else
         format.html { render "todo_lists/index" }
       end
