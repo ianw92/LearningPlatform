@@ -11,19 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.hidden_field :user_id, id: :note_user_id, value: user.id %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.hidden_field :week_id, id: :note_week_id, value: week %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.text_area :body, id: :body_textarea, value: note.body, class: 'form-control' %>
   </div>
 
-  <div class="actions">
+  <div class="form-group actions">
     <%= form.submit :class => "btn btn-primary" %>
   </div>
 <% end %>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_one :timer, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_many :lecture_modules
+  has_many :comments
   # Include default devise modules. Others available are:
   # :confirmable, :lockable and :omniauthable
   devise :database_authenticatable, :registerable, :timeoutable,

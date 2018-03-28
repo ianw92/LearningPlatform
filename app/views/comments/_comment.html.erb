@@ -1,0 +1,9 @@
+<% week.comments.each do |comment| %>
+  <div class="card card-body bg-light" style="padding:5px 10px;">
+    <div>
+      <span class="font-weight-bold"><%= comment.user.username %> </span>
+      <span class="text-muted"><%= comment.time_since_updated %></span>
+    </div>
+    <span><%= comment.body %></span>
+  </div>
+<% end %>
