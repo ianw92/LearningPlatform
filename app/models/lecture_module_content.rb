@@ -4,12 +4,16 @@ class LectureModuleContent < ApplicationRecord
 
   validates_attachment :content, content_type: {content_type: ["application/pdf"]}
   validate :content_xor_youtube_must_exist
+  validates_format_of :youTube_link, with: /\A(https:\/\/www.youtube.com\/embed\/[A-Za-z0-9_]*)*\z/i, on: [:create, :update]
 
   ########## Validation methods
 
   def content_xor_youtube_must_exist
     if content.blank? && youTube_link.blank?
-      errors.add(:base, "Lecture Module Content must have either pdf file or a youTube link")
+      errors.add(:base, "Lecture Module Content must have either a pdf file or a youTube link")
+    end
+    if !content.blank? && !youTube_link.blank?
+      errors.add(:base, "Lecture Module Content cannot have both a pdf file and a youTube link")
     end
   end
 
@@ -50,6 +54,22 @@ class LectureModuleContent < ApplicationRecord
   def lecture_module_id
     week = Week.find(week_id)
     week.lecture_module_id
+  end
+
+  def title
+    title = ""
+    if description?
+      title += "#{description} | "
+    end
+    if content?
+      if youTube_link?
+        title += "#{content} | #{youTube_link}"
+      else
+        title += "#{content_file_name}"
+      end
+    else
+      title += "#{youTube_link}"
+    end
   end
 
 

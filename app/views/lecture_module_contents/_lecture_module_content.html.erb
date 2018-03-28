@@ -1,10 +1,8 @@
 <% if lecture_module_content.description? || lecture_module_content.content? || lecture_module_content.youTube_link? %>
-  <li class="list-item">
+  <div>
     <div class='row'>
       <div class='col-9 col-sm-10 col-lg-11'>
-        <%= lecture_module_content.description %>
-        |
-        <%= lecture_module_content.content.original_filename %>
+        <h6><%= lecture_module_content.title %></h6>
       </div>
       <div class='col-3 col-sm-2 col-lg-1'>
         <% if can? :edit, lecture_module_content %>
@@ -40,7 +38,7 @@
       <% end %>
     <% end %>
 
-  </li>
+  </div>
   <br>
   <hr>
   <br>

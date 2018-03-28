@@ -31,6 +31,10 @@ p, ol, ul, td {
   line-height: 14px;
 }
 
+.hidden-to-start {
+  display: none;
+}
+
 .remove_top_gap {
   position: relative;
   top: -24px;
