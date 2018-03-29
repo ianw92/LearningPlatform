@@ -85,9 +85,11 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
+    @todo_list = @task.todo_list
     @task.destroy
     respond_to do |format|
       format.html { redirect_to todo_lists_url, notice: 'Task was successfully destroyed.' }
+      format.js { @task = Task.new }
     end
   end
 

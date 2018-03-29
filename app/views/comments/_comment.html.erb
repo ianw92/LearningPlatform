@@ -1,5 +1,5 @@
 <% week.comments.each do |comment| %>
-  <div class="card card-body bg-light" style="padding:5px 10px;">
+  <div id="comment_<%= comment.id %>" class="card card-body" style="padding:5px 10px;">
     <div>
       <span class="font-weight-bold"><%= comment.user.username %> </span>
       <span class="text-muted"><%= comment.time_since_updated %></span>

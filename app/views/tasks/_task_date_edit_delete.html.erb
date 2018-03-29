@@ -6,7 +6,7 @@
     <i class='fas fa-pencil-alt'></i>
   <% end %>
   |
-  <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, title: 'Delete Task' do %>
+  <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, remote: true, title: 'Delete Task' do %>
     <i class='fas fa-trash-alt'></i>
   <% end %>
 </div>

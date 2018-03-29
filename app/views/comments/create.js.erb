@@ -1,1 +1,7 @@
 $('#comments_section_<%= @comment.week.id %>').html("<%=j render partial:'comments/comments_section', locals: { week: @comment.week } %>");
+
+$('#comment_<%= @comment.id %>').get(0).scrollIntoView({
+    behavior: "smooth"
+});
+
+$('#comment_<%= @comment.id %>').css({'background-color':'#88ff88'}).animate({'background-color':'#ffffff'}, 3000);

@@ -1,0 +1,2 @@
+$('#collapse_main_<%= @todo_list.id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @todo_list, type: 'main' } %>");
+$('#collapse_popover_<%= @todo_list.id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @todo_list, type: 'popover' } %>");
