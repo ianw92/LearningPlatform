@@ -1,4 +1,13 @@
-$('#todo_lists_accordion_main').html("<%=j render partial:'shared/todo_lists_accordion', locals:{ type: 'main' } %>");
-$('#todo_lists_accordion_popover').html("<%=j render partial:'shared/todo_lists_accordion', locals:{ type: 'popover' } %>");
+$('#collapse_main_<%= @completed_task.todo_list.id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @completed_task.todo_list, type: 'main' } %>");
+$('#collapse_popover_<%= @completed_task.todo_list.id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @completed_task.todo_list, type: 'popover' } %>");
 
-$('.current_task').css({'background-color':'#88ff88'}).animate({'background-color':'#ffffff'}, 1000);
+if ($('.completed_task').hasClass('task_overdue')) {
+  $('.completed_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FF0000'}, 3000);
+} else if ($('.completed_task').hasClass('task_due_today')) {
+  console.log("HELLO");
+  $('.completed_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FFA500'}, 3000);
+} else if ($('.completed_task').hasClass('task_due_tomorrow')) {
+  $('.completed_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FFFF00'}, 3000);
+} else {
+  $('.completed_task').css({'background-color':'#88ff88'}).animate({'background-color':'#ffffff'}, 3000);
+}

@@ -1,9 +1,19 @@
-<% puts @saved_task[0].todo_list_id %>
-$('#collapse_main_<%= @saved_task[0].todo_list.id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @saved_task[0].todo_list, type: 'main' } %>");
-$('#collapse_popover_<%= @saved_task[0].todo_list.id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @saved_task[0].todo_list, type: 'popover' } %>");
+$('#collapse_main_<%= @new_task[0].todo_list.id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @new_task[0].todo_list, type: 'main' } %>");
+$('#collapse_popover_<%= @new_task[0].todo_list.id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @new_task[0].todo_list, type: 'popover' } %>");
 
 $('.task_title').val('');
 
-$('#task_<%= @saved_task[0].id %>').get(0).scrollIntoView({
+$('#task_<%= @new_task[0].id %>').get(0).scrollIntoView({
     behavior: "smooth"
 });
+
+
+if ($('.new_task').hasClass('task_overdue')) {
+  $('.new_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FF0000'}, 3000);
+} else if ($('.new_task').hasClass('task_due_today')) {
+  $('.new_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FFA500'}, 3000);
+} else if ($('.new_task').hasClass('task_due_tomorrow')) {
+  $('.new_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FFFF00'}, 3000);
+} else {
+  $('.new_task').css({'background-color':'#88ff88'}).animate({'background-color':'#ffffff'}, 3000);
+}

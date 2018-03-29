@@ -1,10 +1,12 @@
 <% if todo_list.id == task.todo_list_id %>
+  <% if !@new_task.nil? && task == @new_task[0] %>
+  <div class='task<%= task.get_due_status %> new_task' id='task_<%= task.id %>'>
+  <% elsif !@completed_task.nil? && task == @completed_task %>
+  <div class='task<%= task.get_due_status %> completed_task' id='task_<%= task.id %>'>
+  <% else %>
   <div class='task<%= task.get_due_status %>' id='task_<%= task.id %>'>
-    <% if task == @current_task %>
-    <li class='list-item task-item current_task'>
-    <% else %>
+  <% end %>
     <li class='list-item task-item'>
-    <% end %>
       <div class='row'>
 
         <!-- Checkbox -->

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327232545) do
+ActiveRecord::Schema.define(version: 20180328224015) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "week_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20180327232545) do
     t.integer "sort_tasks_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "show_completed_tasks"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

@@ -1,0 +1,8 @@
+<% for i in 0..@todo_lists.length-1 do %>
+  $('#collapse_main_<%= @todo_lists[i].id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @todo_lists[i], type: 'main' } %>");
+  $('#collapse_popover_<%= @todo_lists[i].id %>').html("<%=j render partial:'todo_lists/todo_list_body', locals: { todo_list: @todo_lists[i], type: 'popover' } %>");
+<% end %>
+
+$('#show_hide_completed_tasks_btn_<%= @todo_list_id %>').get(0).scrollIntoView({
+    behavior: "smooth"
+});

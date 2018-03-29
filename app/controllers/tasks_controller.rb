@@ -22,13 +22,29 @@ class TasksController < ApplicationController
     change_sorting_parameter('position')
   end
 
+  def show_completed_toggle
+    @todo_list_id = params[:todo_list_id]
+    @todo_lists = TodoList.where(user: current_user)
+    profile = Profile.find_by(user_id: current_user.id)
+    profile = profile.change_show_completed_state
+    respond_to do |format|
+      if profile.save
+        set_todo_lists
+        format.html { redirect_back fallback_location: root_path, notice: 'Profile was successfully updated.' }
+        format.js
+      else
+        format.html { redirect_back fallback_location: root_path, notice: 'Profile could not be updated.' }
+      end
+    end
+  end
+
   def complete
     task_to_toggle_completion = Task.find(params[:id])
     task = Task.change_completed_status(task_to_toggle_completion)
     respond_to do |format|
       if task.save
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully updated.' }
-        format.js { @current_task = task_to_toggle_completion }
+        format.js { @completed_task = task_to_toggle_completion }
       else
         format.html { render action: "edit" }
       end
@@ -47,7 +63,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully created.' }
-        format.js { @saved_task = @task, @task = Task.new }
+        format.js { @new_task = @task, @task = Task.new }
       else
         format.html { render "todo_lists/index" }
       end

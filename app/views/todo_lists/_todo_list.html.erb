@@ -13,12 +13,12 @@
 
   <% if todo_list.id==@todo_lists_global[0].id %>
   <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse show'>
-  <% elsif !@current_task.nil? && todo_list.id==(@current_task.todo_list_id) %>
+  <% elsif !@completed_task.nil? && todo_list.id==(@completed_task.todo_list_id) %>
   <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse show'>
   <% else %>
   <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse'>
   <% end %>
-  
+
     <%= render partial: 'todo_lists/todo_list_body',
                locals: { todo_list: todo_list,
                          type: type } %>

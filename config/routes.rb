@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post 'sort_by_due_date'
       post 'sort_by_title'
       post 'sort_by_custom'
+      post 'show_completed_toggle'
       patch 'reorder'
     end
   end

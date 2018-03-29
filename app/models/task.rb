@@ -24,7 +24,11 @@ class Task < ApplicationRecord
     today = Date.today
     tomorrow = today + 1.day
     if completed?
-      return "_completed"
+      if self.todo_list.user.profile.show_completed_tasks?
+        return "_completed task_show"
+      else
+        return "_completed"
+      end
     elsif due_date < today
       return "_overdue"
     elsif due_date == today
