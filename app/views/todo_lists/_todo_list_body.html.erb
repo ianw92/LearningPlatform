@@ -26,7 +26,7 @@
             data-method='post'
             data-remote='true'
             href='/tasks/show_completed_toggle?todo_list_id=<%= todo_list.id %>'
-            class='btn btn-sm btn-outline-dark show_hide_completed_tasks_btn'><%= current_user.profile.show_or_hide_button_text %></a>
+            class='btn btn-sm btn-outline-dark show_hide_completed_tasks_btn'><%= current_user.profile.show_or_hide_button_text('tasks') %></a>
   </ul>
   <% if type == 'main' %>
     <%= render partial: 'tasks/add_new_task',

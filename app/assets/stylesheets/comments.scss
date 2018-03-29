@@ -1,3 +1,15 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comments_hidden {
+  display: none;
+}
+
+.comments_card {
+  max-height: 450px;
+}
+
+.comments_padding {
+  margin: 5px 2px;
+}

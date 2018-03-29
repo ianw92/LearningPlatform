@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  resources :comments, except: [:show, :index]
+  resources :comments, except: [:show, :index] do
+    collection do
+      post 'show_comments_toggle'
+    end
+  end
   resources :timers, only: [:update]
-  resources :notes, except: [:show, :index, :edit]
+  resources :notes, except: [:show, :index, :edit] do
+    collection do
+      post 'show_notes_toggle'
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
 

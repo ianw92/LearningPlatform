@@ -1,7 +1,23 @@
-<div class="card bg-light"  style="max-height: 450px;">
-  <h3 style="padding-left:5px">Discussion</h3>
+<div class="card bg-light comments_card">
+  <div class="row comments_padding">
+    <div class="col-7 col-sm-8 col-md-9 col-lg-10">
+      <h3>Discussion</h3>
+    </div>
+    <% if can? :read, Comment.new(week_id: week.id) %>
+      <div class="col-5 col-sm-4 col-md-3 col-lg-2 float-right">
+        <a id='show_hide_comments_btn_<%= week.id %>'
+                data-method='post'
+                data-remote='true'
+                href='/comments/show_comments_toggle?week_id=<%= week.id %>'
+                class='btn btn-sm btn-outline-dark show_hide_comments_btn'><%= current_user.profile.show_or_hide_button_text('comments') %></a>
+      </div>
+    <% end %>
+  </div>
+
+
+
   <% if can? :read, Comment.new(week_id: week.id) %>
-    <div class="card-body" style="padding: 5px;overflow-y: scroll; overflow-x: hidden;">
+    <div class="card-body comments_padding <%= current_user.profile.get_show_comments_status %>" style="padding: 5px;overflow-y: scroll; overflow-x: hidden;">
       <% if !week.comments.empty? %>
         <%= render partial: "comments/comment", locals: { week: week } %>
       <% else %>

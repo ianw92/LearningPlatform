@@ -3,19 +3,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 toggleSubmitButtonDisabled = ->
-  if $('.comment_body').val().length > 0
-    $('.comment_submit_btn').removeAttr('disabled')
+  valid_input = false
+  $('.comment_body').each( ->
+    if $(this).val().length > 0
+      valid_input = true
+    )
+  if valid_input
+    $('.comment_submit_btn').prop('disabled', false)
   else
-    $('.comment_submit_btn').attr('disabled', 'disabled')
+    $('.comment_submit_btn').prop('disabled', true)
+
 
 $(document).on 'turbolinks:load', ->
-  # When you click on a tab to change the week, delete any unsaved comment and make the submit button disabled again
-  $('[data-toggle="tab"]').each( ->
-    $(this).on('click', ->
-      $('.comment_body').each( -> $(this).val(''))
-      toggleSubmitButtonDisabled()
+  $('.comment_submit_btn').attr('disabled', 'disabled')
+
+  $(document).on('keyup', ->
+    $('.comment_body').on('keyup', toggleSubmitButtonDisabled)
+    $('[data-toggle="tab"]').each( ->
+      $(this).on('click', ->
+        $('.comment_body').each( -> $(this).val(''))
+        toggleSubmitButtonDisabled()
+        )
       )
     )
-
-  $('.comment_submit_btn').attr('disabled', 'disabled')
-  $('.comment_body').on('keyup', toggleSubmitButtonDisabled)

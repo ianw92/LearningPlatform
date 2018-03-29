@@ -1,9 +1,25 @@
+<div class='row'>
+  <div class='col-8 col-sm-9 col-md-10'>
+    <% if week.get_note_for(current_user) %>
+      <h3>Notes</h3>
+    <% else %>
+      <h3>Add New Note</h3>
+    <% end %>
+  </div>
+  <div class='col-4 col-sm-3 col-md-2 float-right'>
+    <a id='show_hide_notes_btn_<%= week.id %>'
+            data-method='post'
+            data-remote='true'
+            href='/notes/show_notes_toggle?week_id=<%= week.id %>'
+            class='btn btn-sm btn-outline-dark'><%= current_user.profile.show_or_hide_button_text('notes') %></a>
+  </div>
+</div>
+
 <% if week.get_note_for(current_user) %>
-
-  <h3>Notes</h3>
   <%= render 'notes/add_edit_notes', note: week.get_note_for(current_user), user: current_user, week: week %>
-
 <% else %>
-  <h3>Add new note</h3>
   <%= render 'notes/add_edit_notes', note: Note.new, user: current_user, week: week %>
 <% end %>
+
+<hr>
+<br>

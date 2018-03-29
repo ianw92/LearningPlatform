@@ -7,6 +7,22 @@ class NotesController < ApplicationController
     @note = Note.new
   end
 
+  def show_notes_toggle
+    @week_id = params[:week_id]
+    lecture_module_id = Week.find(@week_id).lecture_module.id
+    @weeks = Week.where(lecture_module_id: lecture_module_id)
+    profile = Profile.find_by(user_id: current_user.id)
+    profile = profile.change_show_notes_state
+    respond_to do |format|
+      if profile.save
+        format.html { redirect_back fallback_location: root_path, notice: 'Profile was successfully updated.' }
+        format.js
+      else
+        format.html { redirect_back fallback_location: root_path, notice: 'Profile could not be updated.' }
+      end
+    end
+  end
+
   # POST /notes
   # POST /notes.json
   def create

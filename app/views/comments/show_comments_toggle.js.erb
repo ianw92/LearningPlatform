@@ -1,0 +1,12 @@
+<% for i in 0..11 do %>
+  $('#comments_section_<%= @weeks[i].id %>').html("<%=j render partial:'comments/comments_section', locals: { week: @weeks[i] } %>");
+<% end %>
+
+$('.comment_body').get(0).scrollIntoView({
+    behavior: "smooth"
+});
+
+$('.comment_body').each( function() {
+  $(this).val('');
+  $('.comment_submit_btn').attr('disabled', 'disabled')
+});

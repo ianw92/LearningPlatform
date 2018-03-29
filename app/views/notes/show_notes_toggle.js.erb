@@ -1,0 +1,3 @@
+<% for i in 0..11 do %>
+  $('#notes_section_<%= @weeks[i].id %>').html("<%=j render partial:'notes/notes_section', locals: { week: @weeks[i] } %>");
+<% end %>
