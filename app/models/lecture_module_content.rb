@@ -72,5 +72,10 @@ class LectureModuleContent < ApplicationRecord
     end
   end
 
+  def s3_url
+    stored_url = content.url
+    stored_url.sub! 'amazonaws', 'eu-west-2.amazonaws'
+  end
+
 
 end

@@ -22,7 +22,7 @@
     <% if local_assigns.has_key? :show_pdf %>
       <% if local_assigns.fetch :show_pdf %>
         <% if lecture_module_content.content? %>
-        <iframe src="<%= lecture_module_content.content.url %>" allowfullscreen="allowfullscreen" webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+        <iframe src="<%= lecture_module_content.s3_url %>" allowfullscreen="allowfullscreen" webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
         <% end %>
       <% end %>
     <% end %>
