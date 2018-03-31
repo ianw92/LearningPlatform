@@ -73,12 +73,28 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to todo_lists_path, notice: 'Task was successfully updated.' }
-      else
-        format.html { render :edit }
+    if params[:title].nil?
+      respond_to do |format|
+        if @task.update(task_params)
+          format.html { redirect_to todo_lists_path, notice: 'Task was successfully updated.' }
+        else
+          format.html { render :edit }
+        end
       end
+    # else update using ajax request from contenteditable div
+    else
+      @task = Task.find(params[:id])
+      if params[:title] != @task.title
+        respond_to do |format|
+          if @task.update(title: params[:title])
+            format.js { @updated_task = @task, @task = Task.new }
+          else
+            format.html { redirect_to todo_lists_path, alert: 'Task could not be updated.' }
+          end
+        end
+      end
+
+      head :ok
     end
   end
 

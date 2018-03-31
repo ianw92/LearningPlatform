@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-toggleSubmitButtonDisabled = ->
+toggleCommentSubmitButtonDisabled = ->
   valid_input = false
   $('.comment_body').each( ->
     if $(this).val().length > 0
@@ -18,11 +18,11 @@ $(document).on 'turbolinks:load', ->
   $('.comment_submit_btn').attr('disabled', 'disabled')
 
   $(document).on('keyup', ->
-    $('.comment_body').on('keyup', toggleSubmitButtonDisabled)
+    $('.comment_body').on('keyup', toggleCommentSubmitButtonDisabled)
     $('[data-toggle="tab"]').each( ->
       $(this).on('click', ->
         $('.comment_body').each( -> $(this).val(''))
-        toggleSubmitButtonDisabled()
+        toggleCommentSubmitButtonDisabled()
         )
       )
     )

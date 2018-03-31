@@ -3,6 +3,8 @@
   <div class='task<%= task.get_due_status %> new_task' id='task_<%= task.id %>'>
   <% elsif !@completed_task.nil? && task == @completed_task %>
   <div class='task<%= task.get_due_status %> completed_task' id='task_<%= task.id %>'>
+  <% elsif !@updated_task.nil? && task == @updated_task %>
+  <div class='task<%= task.get_due_status %> updated_task' id='task_<%= task.id %>'>
   <% else %>
   <div class='task<%= task.get_due_status %>' id='task_<%= task.id %>'>
   <% end %>
@@ -22,11 +24,18 @@
 
         <!-- Task Title -->
         <% if type == 'main' %>
-          <div class='col-10 col-sm-9 col-md-9 col-lg-9'>
+          <div id='task_<%= task.id %>_title' class='col-10 col-sm-9 col-md-9 col-lg-9'
+               contenteditable='true'
+               data-url='/tasks/<%= task.id %>'
+               data-task='<%= task %>'>
         <% else %>
-          <div class='col-10'>
+          <div id='task_<%= task.id %>_title_popover' class='col-10'
+               contenteditable='true'
+               data-url='/tasks/<%= task.id %>'
+               data-task='<%= task %>'>
         <% end %>
             <%= task.title %>
+            <span class='edit_icon'><i class='fas fa-pencil-alt'></i></span>
           </div>
 
         <!-- Task Due Date and Edit/Delete buttons -->
