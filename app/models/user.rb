@@ -8,9 +8,9 @@ class User < ApplicationRecord
   has_many :lecture_modules
   has_many :comments
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable and :omniauthable
+  # :lockable and :omniauthable
   devise :database_authenticatable, :registerable, :timeoutable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   after_create :create_timer
   after_create :create_profile
