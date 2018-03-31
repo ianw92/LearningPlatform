@@ -3,7 +3,9 @@
   <div class="row">
     <div class="col-1">
       <% if user_signed_in? %>
-        <%= render partial:'shared/todo_list_popover' %>
+        <% unless request.fullpath == '/todo_lists' %>
+          <%= render partial:'shared/todo_list_popover' %>
+        <% end %>
       <% end %>
     </div>
     <div class="col-10" id="footer_title">

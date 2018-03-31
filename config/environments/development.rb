@@ -59,10 +59,5 @@ Rails.application.configure do
     s3_region: 'eu-west-2',
     bucket: 'learning-platform-bucket',
     s3_credentials: "#{Rails.root}/config/aws.yml"
-    # {
-    #   access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-    #   secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-    # }
-
   }
 end
