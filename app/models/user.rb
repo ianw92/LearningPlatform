@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def create_profile
-    Profile.create(user: self, sort_tasks_by: 0, show_completed_tasks: false)
+    Profile.create(user: self, sort_tasks_by: 0, show_completed_tasks: false, show_notes:false, show_comments: false)
   end
 
   attr_accessor :login
