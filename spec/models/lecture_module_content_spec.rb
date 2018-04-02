@@ -66,37 +66,6 @@ RSpec.describe LectureModuleContent, :type => :model do
     end
   end
 
-  # describe ".get_content_for_module(lecture_module)" do
-  #   context "when content exists for the given lecture_module" do
-  #     lecture_module = LectureModule.find_by(name: 'Test 1 Module')
-  #     contents = LectureModuleContent.get_content_for_module(lecture_module)
-  #     expect(contents.size).to eq 1
-  #     expect(contents[0].content_file_name).to eq 'test.pdf'
-  #   end
-  #
-  #   context "when no content exists for the given lecture_module" do
-  #
-  #   end
-  # end
-  #
-  # describe ".get_content_for_module_and_week(lecture_module, week)" do
-  #   context "when content exists for the given lecture_module and week" do
-  #
-  #   end
-  #
-  #   context "when no content exists for the given lecture_module and week" do
-  #
-  #   end
-  # end
-  #
-  # describe "#get_module_code" do
-  #
-  # end
-  #
-  # describe "#get_module_name" do
-  #
-  # end
-
   describe "#get_module_full_title" do
     it "returns the full title of the associated lecture_module" do
       title = @lecture_module_content.get_module_full_title

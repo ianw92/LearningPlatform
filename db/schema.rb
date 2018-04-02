@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331154853) do
+ActiveRecord::Schema.define(version: 20180402122347) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "week_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20180331154853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "week_id"
+    t.index ["user_id", "week_id"], name: "index_notes_on_user_id_and_week_id", unique: true
     t.index ["user_id"], name: "index_notes_on_user_id"
     t.index ["week_id"], name: "index_notes_on_week_id"
   end
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(version: 20180331154853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lecture_module_id"], name: "index_user_module_linkers_on_lecture_module_id"
+    t.index ["user_id", "lecture_module_id"], name: "index_user_module_linkers_on_user_id_and_lecture_module_id", unique: true
     t.index ["user_id"], name: "index_user_module_linkers_on_user_id"
   end
 

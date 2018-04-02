@@ -28,11 +28,14 @@ RSpec.describe Comment, :type => :model do
   end
 
   describe "#time_since_updated" do
+    before do
+      @datetime = "31 August 2018 00:00:00".to_datetime
+      @comment.updated_at = @datetime
+    end
+
     context "when comment updated within last 60 seconds" do
       it "returns a string in the format 'no_of_seconds seconds ago'" do
-        datetime = "31 August 2018 00:00:00".to_datetime
-        @comment.updated_at = datetime
-        Timecop.freeze(datetime + 3.seconds) do
+        Timecop.freeze(@datetime + 3.seconds) do
           text = @comment.time_since_updated
           expect(text).to eq "3 seconds ago"
         end
@@ -41,9 +44,7 @@ RSpec.describe Comment, :type => :model do
 
     context "when comment updated within last 60 minutes" do
       it "returns a string in the format 'no_of_minutes minutes ago'" do
-        datetime = "31 August 2018 00:00:00".to_datetime
-        @comment.updated_at = datetime
-        Timecop.freeze(datetime + 5.minutes) do
+        Timecop.freeze(@datetime + 5.minutes) do
           text = @comment.time_since_updated
           expect(text).to eq "5 minutes ago"
         end
@@ -52,9 +53,7 @@ RSpec.describe Comment, :type => :model do
 
     context "when comment updated within last 24 hours" do
       it "returns a string in the format 'no_of_hours hours ago'" do
-        datetime = "31 August 2018 00:00:00".to_datetime
-        @comment.updated_at = datetime
-        Timecop.freeze(datetime + 17.hours) do
+        Timecop.freeze(@datetime + 17.hours) do
           text = @comment.time_since_updated
           expect(text).to eq "17 hours ago"
         end
@@ -63,9 +62,7 @@ RSpec.describe Comment, :type => :model do
 
     context "when comment updated more than 24 hours ago" do
       it "returns a string in the format 'no_of_days days ago'" do
-        datetime = "31 August 2018 00:00:00".to_datetime
-        @comment.updated_at = datetime
-        Timecop.freeze(datetime + 2.days) do
+        Timecop.freeze(@datetime + 2.days) do
           text = @comment.time_since_updated
           expect(text).to eq "2 days ago"
         end

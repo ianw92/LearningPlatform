@@ -90,6 +90,18 @@ RSpec.describe LectureModule, :type => :model do
     end
   end
 
+  describe '#delete_assosciated_user_module_linkers' do
+    it "is triggered around lecture_module deletion" do
+      is_expected.to callback(:delete_assosciated_user_module_linkers).around(:destroy)
+    end
+
+    it "destroys all associated user_module_linkers" do
+      lecture_module_id = @lecture_module.id
+      @lecture_module.destroy
+      expect(UserModuleLinker.find_by(lecture_module_id: lecture_module_id, user_id: @lecture_module.user_id)).to_not be_present
+    end
+  end
+
   describe "#semester=(val)" do
     context "when val is 'Spring'" do
       it "inputs '2' as the semester attribute for the lecture_module" do
@@ -139,8 +151,8 @@ RSpec.describe LectureModule, :type => :model do
 
   describe ".set_current_year_and_semester" do
     context "when date is between 1st September and January 31st (inclusive)" do
+      let(:date) { "1 September 2017".to_datetime }
       it "will set current_year_end to the next numerical year" do
-        date = "1 September 2017".to_datetime
         Timecop.freeze(date) do
           current_year_end, current_semester = LectureModule.set_current_year_and_semester
           expect(current_year_end).to eq (date.year + 1)
@@ -148,7 +160,6 @@ RSpec.describe LectureModule, :type => :model do
       end
 
       it "will set current_semester to 1" do
-        date = "1 September 2017".to_datetime
         Timecop.freeze(date) do
           current_year_end, current_semester = LectureModule.set_current_year_and_semester
           expect(current_semester).to eq 1
@@ -157,8 +168,8 @@ RSpec.describe LectureModule, :type => :model do
     end
 
     context "when date is between 1st February and 31st August (inclusive)" do
+      let(:date) { "31 August 2018".to_datetime }
       it "will set @current_year_end to the current numerical year" do
-        date = "31 August 2018".to_datetime
         Timecop.freeze(date) do
           current_year_end, current_semester = LectureModule.set_current_year_and_semester
           expect(current_year_end).to eq (date.year)
@@ -166,7 +177,6 @@ RSpec.describe LectureModule, :type => :model do
       end
 
       it "will set @current_semester to 2" do
-        date = "31 August 2018".to_datetime
         Timecop.freeze(date) do
           current_year_end, current_semester = LectureModule.set_current_year_and_semester
           expect(current_semester).to eq 2
@@ -216,87 +226,73 @@ RSpec.describe LectureModule, :type => :model do
     end
   end
 
-  describe ".get_my_current_modules(user)" do
-    it "returns all current modules that the user is linked with" do
-      user1 = User.find_by(username: 'test')
-      user2 = create(:user, email: 'test2@example.com', username: 'test2')
-      lecture_module2 = create(:lecture_module, user: user1, code: 'TEST222', academic_year_end: 2017, name: "Test 2 Module")
-      lecture_module3 = create(:lecture_module, user: user2, code: 'TEST333', academic_year_end: 2018, name: "Test 3 Module")
-      lecture_module4 = create(:lecture_module, user: user2, code: 'TEST444', academic_year_end: 2017, name: "Test 4 Module")
+  describe "getting current/completed modules methods" do
+    before do
+      @user1 = User.find_by(username: 'test')
+      @user2 = create(:user, email: 'test2@example.com', username: 'test2')
+      @lecture_module2 = create(:lecture_module, user: @user1, code: 'TEST222', academic_year_end: 2017, name: "Test 2 Module")
+      @lecture_module3 = create(:lecture_module, user: @user2, code: 'TEST333', academic_year_end: 2018, name: "Test 3 Module")
+      @lecture_module4 = create(:lecture_module, user: @user2, code: 'TEST444', academic_year_end: 2017, name: "Test 4 Module")
+    end
 
-      date = "1 March 2018".to_datetime
-      Timecop.freeze(date) do
-        my_current_modules = LectureModule.get_my_current_modules(user1)
-        expect(my_current_modules.count).to eq 1
-        expect(my_current_modules[0].name).to eq "Test 1 Module"
+    describe ".get_my_current_modules(user)" do
+      it "returns all current modules that the user is linked with" do
+        date = "1 March 2018".to_datetime
+        Timecop.freeze(date) do
+          my_current_modules = LectureModule.get_my_current_modules(@user1)
+          expect(my_current_modules.count).to eq 1
+          expect(my_current_modules[0].name).to eq "Test 1 Module"
+        end
       end
     end
-  end
 
-  describe ".get_my_completed_modules(user)" do
-    it "returns all completed modules that the user is linked with" do
-      user1 = User.find_by(username: 'test')
-      user2 = create(:user, email: 'test2@example.com', username: 'test2')
-      lecture_module2 = create(:lecture_module, user: user1, code: 'TEST222', academic_year_end: 2017, name: "Test 2 Module")
-      lecture_module3 = create(:lecture_module, user: user2, code: 'TEST333', academic_year_end: 2018, name: "Test 3 Module")
-      lecture_module4 = create(:lecture_module, user: user2, code: 'TEST444', academic_year_end: 2017, name: "Test 4 Module")
+    describe ".get_my_completed_modules(user)" do
+      it "returns all completed modules that the user is linked with" do
+        date = "1 March 2018".to_datetime
+        Timecop.freeze(date) do
+          my_completed_modules = LectureModule.get_my_completed_modules(@user1)
+          expect(my_completed_modules.count).to eq 1
+          expect(my_completed_modules[0].name).to eq "Test 2 Module"
+        end
+        Timecop.return
 
-      date = "1 March 2018".to_datetime
-      Timecop.freeze(date) do
-        my_completed_modules = LectureModule.get_my_completed_modules(user1)
-        expect(my_completed_modules.count).to eq 1
-        expect(my_completed_modules[0].name).to eq "Test 2 Module"
-      end
-      Timecop.return
-
-      date = "1 September 2018".to_datetime
-      Timecop.freeze(date) do
-        my_completed_modules = LectureModule.get_my_completed_modules(user1)
-        expect(my_completed_modules.count).to eq 2
-        expect(my_completed_modules[0].name).to eq "Test 1 Module"
-        expect(my_completed_modules[1].name).to eq "Test 2 Module"
+        date = "1 September 2018".to_datetime
+        Timecop.freeze(date) do
+          my_completed_modules = LectureModule.get_my_completed_modules(@user1)
+          expect(my_completed_modules.count).to eq 2
+          expect(my_completed_modules[0].name).to eq "Test 1 Module"
+          expect(my_completed_modules[1].name).to eq "Test 2 Module"
+        end
       end
     end
-  end
 
-  describe ".get_other_current_modules(user)" do
-    it "returns all current modules that the user is NOT linked with" do
-      user1 = User.find_by(username: 'test')
-      user2 = create(:user, email: 'test2@example.com', username: 'test2')
-      lecture_module2 = create(:lecture_module, user: user1, code: 'TEST222', academic_year_end: 2017, name: "Test 2 Module")
-      lecture_module3 = create(:lecture_module, user: user2, code: 'TEST333', academic_year_end: 2018, name: "Test 3 Module")
-      lecture_module4 = create(:lecture_module, user: user2, code: 'TEST444', academic_year_end: 2017, name: "Test 4 Module")
-
-      date = "1 March 2018".to_datetime
-      Timecop.freeze(date) do
-        other_current_modules = LectureModule.get_other_current_modules(user1)
-        expect(other_current_modules.count).to eq 1
-        expect(other_current_modules[0].name).to eq "Test 3 Module"
+    describe ".get_other_current_modules(user)" do
+      it "returns all current modules that the user is NOT linked with" do
+        date = "1 March 2018".to_datetime
+        Timecop.freeze(date) do
+          other_current_modules = LectureModule.get_other_current_modules(@user1)
+          expect(other_current_modules.count).to eq 1
+          expect(other_current_modules[0].name).to eq "Test 3 Module"
+        end
       end
     end
-  end
 
-  describe ".get_other_completed_modules(user)" do
-    it "returns all completed modules that the user is NOT linked with" do
-      user1 = User.find_by(username: 'test')
-      user2 = create(:user, email: 'test2@example.com', username: 'test2')
-      lecture_module2 = create(:lecture_module, user: user1, code: 'TEST222', academic_year_end: 2017, name: "Test 2 Module")
-      lecture_module3 = create(:lecture_module, user: user2, code: 'TEST333', academic_year_end: 2018, name: "Test 3 Module")
-      lecture_module4 = create(:lecture_module, user: user2, code: 'TEST444', academic_year_end: 2017, name: "Test 4 Module")
+    describe ".get_other_completed_modules(user)" do
+      it "returns all completed modules that the user is NOT linked with" do
+        date = "1 March 2018".to_datetime
+        Timecop.freeze(date) do
+          other_completed_modules = LectureModule.get_other_completed_modules(@user1)
+          expect(other_completed_modules.count).to eq 1
+          expect(other_completed_modules[0].name).to eq "Test 4 Module"
+        end
 
-      date = "1 March 2018".to_datetime
-      Timecop.freeze(date) do
-        other_completed_modules = LectureModule.get_other_completed_modules(user1)
-        expect(other_completed_modules.count).to eq 1
-        expect(other_completed_modules[0].name).to eq "Test 4 Module"
-      end
-
-      date = "1 September 2018".to_datetime
-      Timecop.freeze(date) do
-        other_completed_modules = LectureModule.get_other_completed_modules(user1)
-        expect(other_completed_modules.count).to eq 2
-        expect(other_completed_modules[0].name).to eq "Test 3 Module"
-        expect(other_completed_modules[1].name).to eq "Test 4 Module"
+        date = "1 September 2018".to_datetime
+        Timecop.freeze(date) do
+          other_completed_modules = LectureModule.get_other_completed_modules(@user1)
+          expect(other_completed_modules.count).to eq 2
+          expect(other_completed_modules[0].name).to eq "Test 3 Module"
+          expect(other_completed_modules[1].name).to eq "Test 4 Module"
+        end
       end
     end
   end

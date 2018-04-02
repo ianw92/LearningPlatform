@@ -2,11 +2,11 @@ require "rails_helper"
 RSpec.describe User, :type => :model do
 
   before do
-    @user1 = create(:user)
+    @user = create(:user)
   end
 
   it "is valid with valid attributes" do
-    expect(@user1).to be_valid
+    expect(@user).to be_valid
   end
 
   it "has a unique username" do
@@ -55,7 +55,7 @@ RSpec.describe User, :type => :model do
     end
 
     it "creates a timer for the user that has just been created" do
-      expect(Timer.find_by(user_id: @user1.id)).to be_present
+      expect(Timer.find_by(user_id: @user.id)).to be_present
     end
   end
 
@@ -65,7 +65,8 @@ RSpec.describe User, :type => :model do
     end
 
     it "creates a profile for the user that has just been created" do
-      expect(Profile.find_by(user_id: @user1.id)).to be_present
+      expect(Profile.find_by(user_id: @user.id)).to be_present
     end
   end
+  
 end

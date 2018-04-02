@@ -3,7 +3,7 @@ RSpec.describe UserModuleLinker, :type => :model do
 
   before do
     @user_module_linker = build(:user_module_linker, user: nil)
-    # Delete the linker that wask autocreated when the lecture_module was created
+    # Delete the linker that was autocreated when the lecture_module was created
     UserModuleLinker.destroy_all
     user = User.find_by(username: 'test')
     @user_module_linker.user = user
@@ -24,25 +24,33 @@ RSpec.describe UserModuleLinker, :type => :model do
     expect(@user_module_linker).to_not be_valid
   end
 
-  describe ".add_new_linker(lecture_module, user)" do
-    it "adds a new user_module_linker record for the given lecture_module and user" do
-      UserModuleLinker.destroy_all
-      expect(UserModuleLinker.all.count).to eq 0
+  it "has a unique user/lecture_module pair" do
+    lecture_module = LectureModule.find_by(name: 'Test 1 Module')
+    user = User.find_by(username: 'test')
+    user_module_linker2 = build(:user_module_linker, user: user, lecture_module: lecture_module)
+    expect(user_module_linker2).to_not be_valid
+  end
 
-      lecture_module = LectureModule.find_by(name: 'Test 1 Module')
-      user = User.find_by(username: 'test')
-      linker = UserModuleLinker.add_new_linker(lecture_module, user)
-      linker.save
-      expect(UserModuleLinker.all.count).to eq 1
+  describe "add/remove methods" do
+    let(:lecture_module) { LectureModule.find_by(name: 'Test 1 Module') }
+    let(:user) { User.find_by(username: 'test') }
+    describe ".add_new_linker(lecture_module, user)" do
+      it "adds a new user_module_linker record for the given lecture_module and user" do
+        UserModuleLinker.destroy_all
+        expect(UserModuleLinker.all.count).to eq 0
+
+        linker = UserModuleLinker.add_new_linker(lecture_module, user)
+        linker.save
+        expect(UserModuleLinker.all.count).to eq 1
+      end
+    end
+
+    describe ".remove_linker(lecture_module, user)" do
+      it "deletes the user_module_linker for the given lecture_module and user" do
+        UserModuleLinker.remove_linker(lecture_module, user)
+        expect(UserModuleLinker.all.count).to eq 0
+      end
     end
   end
 
-  describe ".remove_linker(lecture_module, user)" do
-    it "deletes the user_module_linker for the given lecture_module and user" do
-      lecture_module = LectureModule.find_by(name: 'Test 1 Module')
-      user = User.find_by(username: 'test')
-      UserModuleLinker.remove_linker(lecture_module, user)
-      expect(UserModuleLinker.all.count).to eq 0
-    end
-  end
 end

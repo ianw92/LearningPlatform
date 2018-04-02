@@ -25,9 +25,10 @@ RSpec.describe Week, :type => :model do
   end
 
   describe "#get_note_for(user)" do
+    let(:user1) { User.find_by(username: 'test') }
+    
     context "when no note exists for the week for the given user" do
       it "returns nil" do
-        user1 = User.find_by(username: 'test')
         note = @week.get_note_for(user1)
         expect(note).to eq nil
       end
@@ -35,7 +36,6 @@ RSpec.describe Week, :type => :model do
 
     context "when a note does exist for the week for the given user" do
       it "returns the note" do
-        user1 = User.find_by(username: 'test')
         note = create(:note, user: user1, week: @week)
         note = @week.get_note_for(user1)
         expect(note).to be_present

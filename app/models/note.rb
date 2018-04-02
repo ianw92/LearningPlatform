@@ -4,7 +4,7 @@ class Note < ApplicationRecord
 
   validates :week, :body, presence: true
 
-  #TODO write validation method for can only have on notew for each user/module/week combo
+  validates :user, uniqueness: { scope: :week, message: 'User/Week pair must be unique' }
 
   def self.get_notes_for_module_and_user(lecture_module, user)
     weeks = Week.where(lecture_module: lecture_module)
