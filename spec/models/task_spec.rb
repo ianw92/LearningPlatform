@@ -29,7 +29,27 @@ RSpec.describe Task, :type => :model do
     expect(@task).to_not be_valid
   end
 
-  describe "#get_tasks_for_list" do
+  describe ".get_tasks_for_lists(todo_lists)" do
+    context "when tasks exist for the given todo_lists" do
+      it "returns all tasks for the given todo_lists" do
+        todo_lists = TodoList.all
+        tasks = Task.get_tasks_for_lists(todo_lists)
+        expect(tasks.count).to eq 1
+        expect(tasks[0].title).to eq 'Task test'
+      end
+    end
+
+    context "when no tasks exist for the given todo_lists" do
+      it "returns an empty list" do
+        Task.destroy_all
+        todo_lists = TodoList.all
+        tasks = Task.get_tasks_for_lists(todo_lists)
+        expect(tasks.count).to eq 0
+      end
+    end
+  end
+
+  describe ".get_tasks_for_list" do
     it "returns a list of all tasks that belong to the supplied todo_list" do
       todo_list = TodoList.find_by(title: "Todo List Test")
       task2 = Task.create(todo_list: todo_list, title: "Task test 2", due_date: Date.new, completed:false)
@@ -38,7 +58,7 @@ RSpec.describe Task, :type => :model do
     end
   end
 
-  describe "#change_completed_status" do
+  describe ".change_completed_status" do
     context "when completed is false" do
       it "changes completed to true" do
         Task.change_completed_status(@task)
@@ -53,6 +73,42 @@ RSpec.describe Task, :type => :model do
         Task.change_completed_status(@task)
         task = Task.find(@task.id)
         expect(task.completed).to eq false
+      end
+    end
+  end
+
+  describe ".sort_tasks(tasks, sort_style)" do
+    context "when sort_style is 'due_date'" do
+      it "returns the list of tasks sorted by due_date" do
+        todo_list = TodoList.find_by(title: 'Todo List Test')
+        task2 = create(:task, todo_list: todo_list, due_date: Date.today - 1.days, title: "test 2")
+        tasks = Task.sort_tasks(Task.all, 'due_date')
+        expect(tasks.count).to eq 2
+        expect(tasks[0].title).to eq 'test 2'
+        expect(tasks[1].title).to eq 'Task test'
+      end
+    end
+
+    context "when sort_style is 'title'" do
+      it "returns the list of tasks sorted by title" do
+        todo_list = TodoList.find_by(title: 'Todo List Test')
+        task2 = create(:task, todo_list: todo_list, title: "aaa")
+        tasks = Task.sort_tasks(Task.all, 'title')
+        expect(tasks.count).to eq 2
+        expect(tasks[0].title).to eq 'aaa'
+        expect(tasks[1].title).to eq 'Task test'
+      end
+    end
+
+    context "when sort_style is 'position'" do
+      it "returns the list of tasks sorted according to the position field" do
+        @task.update_attribute(:position, 2)
+        todo_list = TodoList.find_by(title: 'Todo List Test')
+        task2 = create(:task, todo_list: todo_list, position: 1, title: "test 2")
+        tasks = Task.sort_tasks(Task.all, 'position')
+        expect(tasks.count).to eq 2
+        expect(tasks[0].title).to eq 'test 2'
+        expect(tasks[1].title).to eq 'Task test'
       end
     end
   end

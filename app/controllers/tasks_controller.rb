@@ -24,9 +24,9 @@ class TasksController < ApplicationController
 
   def show_completed_toggle
     @todo_list_id = params[:todo_list_id]
-    @todo_lists = TodoList.where(user: current_user)
+    @todo_lists = current_user.todo_lists
     profile = Profile.find_by(user_id: current_user.id)
-    profile = profile.change_show_completed_state
+    profile.change_show_completed_state
     respond_to do |format|
       if profile.save
         set_todo_lists

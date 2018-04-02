@@ -15,19 +15,11 @@ class ApplicationController < ActionController::Base
 
   def set_todo_lists
     if current_user != nil
-      # TODO create methods in the models to get these lists
-      @todo_lists_global = TodoList.where("user_id = ?", current_user)
-      @tasks_global = Task.where(todo_list_id: @todo_lists_global.pluck(:id)).order(:completed)
+      @todo_lists_global = TodoList.get_todo_lists_for_user(current_user)
+      @tasks_global = Task.get_tasks_for_lists(@todo_lists_global)
 
       @my_sort_style = Profile.find_by(user_id: current_user.id).sort_tasks_by
-      if @my_sort_style == 'due_date'
-        @tasks_global = @tasks_global.order(:due_date)
-      elsif @my_sort_style == 'title'
-        @tasks_global = @tasks_global.order('lower(title)')
-      elsif @my_sort_style == 'position'
-        @tasks_global = @tasks_global.order(:position)
-      end
-
+      @tasks_global = Task.sort_tasks(@tasks_global, @my_sort_style)
     end
   end
 

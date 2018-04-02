@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.notes {
+// These styles apply to the notes which are only accessible in the lecture_modules show page
+// Therefore, they are contained within the .lecture_modules class
+.lecture_modules {
   .notes_hidden {
     display: none;
   }

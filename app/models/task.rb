@@ -4,6 +4,10 @@ class Task < ApplicationRecord
   validates :title, :due_date, presence: true
   validates :completed, inclusion: { in: [true, false] }
 
+  def self.get_tasks_for_lists(todo_lists)
+    Task.where(todo_list_id: todo_lists.pluck(:id)).order(:completed)
+  end
+
   def self.get_tasks_for_list(todo_list)
     list_id = todo_list.id
     Task.where("todo_list_id = ?", list_id).order(:completed).order(:due_date)
@@ -15,8 +19,17 @@ class Task < ApplicationRecord
     else
       Task.update(task.id, :completed => true)
     end
-
     return task
+  end
+
+  def self.sort_tasks(tasks, sort_style)
+    if sort_style == 'due_date'
+      return tasks.order(:due_date)
+    elsif sort_style == 'title'
+      return tasks.order('lower(title)')
+    elsif sort_style == 'position'
+      return tasks.order(:position)
+    end
   end
 
   def get_due_status

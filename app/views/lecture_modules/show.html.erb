@@ -54,7 +54,7 @@
         </div>
 
 
-        <div id="notes_section_<%= @weeks[i-1].id %>">
+        <div id="notes_section_<%= @weeks[i-1].id %>" class="notes_section">
           <%= render partial: 'notes/notes_section',
                      locals: { week: @weeks[i-1] } %>
         </div>

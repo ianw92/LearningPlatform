@@ -82,18 +82,18 @@ class LectureModule < ApplicationRecord
    end
 
    # My modules
+   # TODO make these into one method that returns 4 lists?
+   # TODO And/or set current_year_end and current_semester using a before_action callback
    def self.get_my_current_modules(user)
      current_year_end, current_semester = self.set_current_year_and_semester
-     my_module_linkers = UserModuleLinker.where(user: user)
-     my_module_ids = my_module_linkers.pluck(:lecture_module_id)
+     my_module_ids = UserModuleLinker.where(user: user).pluck(:lecture_module_id)
 
      LectureModule.where(id: my_module_ids).where(academic_year_end: current_year_end).where("semester = 0 OR semester = ?", current_semester)
    end
 
    def self.get_my_completed_modules(user)
      current_year_end, current_semester = self.set_current_year_and_semester
-     my_module_linkers = UserModuleLinker.where(user: user)
-     my_module_ids = my_module_linkers.pluck(:lecture_module_id)
+     my_module_ids = UserModuleLinker.where(user: user).pluck(:lecture_module_id)
 
      if current_semester == 1
        LectureModule.where(id: my_module_ids).where.not(academic_year_end: current_year_end).order(:code)

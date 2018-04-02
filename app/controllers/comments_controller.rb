@@ -9,8 +9,8 @@ class CommentsController < ApplicationController
 
   def show_comments_toggle
     @week_id = params[:week_id]
-    lecture_module_id = Week.find(@week_id).lecture_module.id
-    @weeks = Week.where(lecture_module_id: lecture_module_id)
+    lecture_module = Week.find(@week_id).lecture_module
+    @weeks = lecture_module.weeks
     profile = Profile.find_by(user_id: current_user.id)
     profile = profile.change_show_comments_state
     respond_to do |format|
