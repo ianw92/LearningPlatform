@@ -4,6 +4,7 @@ class Profile < ApplicationRecord
   enum sort_tasks_by: [:due_date, :title, :position]
 
   validates :sort_tasks_by, presence: true
+  validates :show_completed_tasks, :show_notes, :show_comments, inclusion: { in: [true, false] }
 
   def self.change_sort_parameter(profile, new_param)
     Profile.update(profile.id, sort_tasks_by: new_param)

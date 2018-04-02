@@ -12,6 +12,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  validates :username, uniqueness: true
+
   after_create :create_timer
   after_create :create_profile
 

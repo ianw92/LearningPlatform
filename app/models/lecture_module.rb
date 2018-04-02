@@ -1,16 +1,14 @@
 class LectureModule < ApplicationRecord
   has_many :user_module_linkers, dependent: :destroy
-  has_many :notes, dependent: :destroy
   has_many :users, :through => :user_module_linkers
   belongs_to :user
   has_many :weeks, dependent: :destroy
 
   validates :code, :academic_year_end, :semester, :name, presence: true
   validates :code, length: { in: 5..20 }
-  validates :academic_year_end, numericality: true,
-                                inclusion: { within: 2000..2100 }
-  validates :semester, numericality: true,
-                       inclusion: { in: 0..2 }
+  validates :academic_year_end, numericality: { greater_than_or_equal_to: Date.today.year - 5,
+                                                less_than_or_equal_to: Date.today.year + 1 }
+  validates :semester, inclusion: { in: 0..2 }
   validates :name, length: { in: 5..50 }
   validates :code, uniqueness: { scope: :academic_year_end, message: 'Code/AcademicYear pair must be unique' }
 
@@ -29,10 +27,10 @@ class LectureModule < ApplicationRecord
 
   # Change semester input from a string to an integer representing that string
   def semester=(val)
-    write_attribute(:semester, process_semester(val))
+    write_attribute(:semester, LectureModule.process_semester(val))
   end
 
-  def process_semester(semester_as_text)
+  def self.process_semester(semester_as_text)
     case semester_as_text
     when "Academic Year"
       return 0
@@ -45,68 +43,75 @@ class LectureModule < ApplicationRecord
 
 
   # TODO this method should only be called once, not in both self.get_other_current_modules
-  # and self.get_other_completed_modules, how do I do this??
+  # and self.get_other_completed_modules, how do I do this?? Can I use a callback ?????
   def self.set_current_year_and_semester
     time = Time.now
     current_year = time.year
     current_month = time.month
-    current_month > 8 ? @current_year_end = current_year + 1 : @current_year_end = current_year
-    current_month > 1 && current_month < 9 ? @current_semester = 2 : @current_semester = 1
+    current_month > 8 ? current_year_end = current_year + 1 : current_year_end = current_year
+    current_month > 1 && current_month < 9 ? current_semester = 2 : current_semester = 1
+    return current_year_end, current_semester
   end
 
-  #TODO test this
   def get_module_full_title
-    "#{code} - #{name} -
-     #{"ACADEMIC YEAR" if semester == 0}#{"AUTUMN" if semester == 1}#{"SPRING" if semester == 2}
-     #{academic_year_end - 1}/#{academic_year_end}"
+    "#{code} - #{name} - #{self.semester_as_string} #{self.academic_year_string}"
+  end
+
+   def semester_as_string
+     if semester == 0
+       return "ACADEMIC YEAR"
+     elsif semester == 1
+       return "AUTUMN"
+     elsif semester == 2
+       return "SPRING"
+     end
+   end
+
+   def academic_year_string
+     year_start = academic_year_end - 1
+     return "#{year_start}/#{academic_year_end}"
    end
 
    # My modules
-   #TODO test this
    def self.get_my_current_modules(user)
-     self.set_current_year_and_semester
-     user_id = user.id
-     my_module_linkers = UserModuleLinker.where("user_id = ?", user_id)
+     current_year_end, current_semester = self.set_current_year_and_semester
+     my_module_linkers = UserModuleLinker.where(user: user)
      my_module_ids = my_module_linkers.pluck(:lecture_module_id)
-     LectureModule.where(id: my_module_ids).where("academic_year_end = ?", @current_year_end).where("semester = 0 OR semester = ?", @current_semester)
+     
+     LectureModule.where(id: my_module_ids).where("academic_year_end = ?", current_year_end).where("semester = 0 OR semester = ?", current_semester)
    end
 
-   #TODO test this
    def self.get_my_completed_modules(user)
-     self.set_current_year_and_semester
-     user_id = user.id
-     my_module_linkers = UserModuleLinker.where("user_id = ?", user_id)
+     current_year_end, current_semester = self.set_current_year_and_semester
+     my_module_linkers = UserModuleLinker.where(user: user)
      my_module_ids = my_module_linkers.pluck(:lecture_module_id)
-     if @current_semester == 1
-       LectureModule.where(id: my_module_ids).where("academic_year_end != ?", @current_year_end).order(:code)
+
+     if current_semester == 1
+       LectureModule.where(id: my_module_ids).where("academic_year_end != ?", current_year_end).order(:code)
      else
-       LectureModule.where(id: my_module_ids).where("academic_year_end != ? OR academic_year_end = ? AND semester = 1", @current_year_end, @current_year_end).order(:code)
+       LectureModule.where(id: my_module_ids).where("academic_year_end != ? OR academic_year_end = ? AND semester = 1", current_year_end, current_year_end).order(:code)
      end
    end
 
    # Other modules
    def self.get_other_current_modules(user)
-     self.set_current_year_and_semester
+     current_year_end, current_semester = self.set_current_year_and_semester
+     other_module_linkers = UserModuleLinker.where.not(user: user)
+     other_module_ids = other_module_linkers.pluck(:lecture_module_id)
 
-     user_id = user.id
-     my_module_linkers = UserModuleLinker.where("user_id = ?", user_id)
-     my_module_ids = my_module_linkers.pluck(:lecture_module_id)
-
-     current = LectureModule.where("academic_year_end = ?", @current_year_end).where("semester = 0 OR semester = ?", @current_semester).where.not(id: my_module_ids)
+     current = LectureModule.where(id: other_module_ids).where("academic_year_end = ?", current_year_end).where("semester = 0 OR semester = ?", current_semester)
      current.order(:code)
    end
 
    def self.get_other_completed_modules(user)
-     self.set_current_year_and_semester
+     current_year_end, current_semester = self.set_current_year_and_semester
+     other_module_linkers = UserModuleLinker.where.not(user: user)
+     other_module_ids = other_module_linkers.pluck(:lecture_module_id)
 
-     user_id = user.id
-     my_module_linkers = UserModuleLinker.where("user_id = ?", user_id)
-     my_module_ids = my_module_linkers.pluck(:lecture_module_id)
-
-     if @current_semester == 1
-       completed = LectureModule.all(:conditions => ["academic_year_end != ?", @current_year_end]).where.not(id: my_module_ids)
+     if current_semester == 1
+       completed = LectureModule.where(id: other_module_ids).where("academic_year_end != ?", current_year_end)
      else
-       completed = LectureModule.where("academic_year_end != ? OR academic_year_end = ? AND semester = 1", @current_year_end, @current_year_end).where.not(id: my_module_ids)
+       completed = LectureModule.where(id: other_module_ids).where("academic_year_end != ? OR academic_year_end = ? AND semester = 1", current_year_end, current_year_end).where(id: other_module_ids)
      end
      completed.order(:code)
    end

@@ -2,13 +2,13 @@ class UserModuleLinker < ApplicationRecord
   belongs_to :user
   belongs_to :lecture_module
 
-  #TODO test this
+  # TODO validation methods to ensure only one linker exists for a pair of user/module
+
   def self.add_new_linker(lecture_module, user)
-    UserModuleLinker.new(user_id: user.id, lecture_module_id: lecture_module.id)
+    UserModuleLinker.new(user: user, lecture_module: lecture_module)
   end
 
-  #TODO test this
   def self.remove_linker(lecture_module, user)
-    UserModuleLinker.where("user_id = ?", user.id).where("lecture_module_id = ?", lecture_module.id).destroy_all
+    UserModuleLinker.where(user: user).where(lecture_module: lecture_module).destroy_all
   end
 end
