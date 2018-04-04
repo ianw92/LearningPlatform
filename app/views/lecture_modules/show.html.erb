@@ -3,17 +3,8 @@
     <h3><%= @page_title %></h3>
   </div>
   <div class='col-3 col-lg-1'>
-    <% if can? :edit, @lecture_module %>
-      <%= link_to edit_lecture_module_path(@lecture_module), data: { toggle: 'edit-lecture-module-tooltip'}, title: 'Edit Module' do %>
-        <i class="fas fa-pencil-alt"></i>
-      <% end %>
-      |
-    <% end %>
-    <% if can? :destroy, @lecture_module %>
-      <%= link_to @lecture_module, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-tooltip'}, title: 'Delete Module' do %>
-        <i class="fas fa-trash-alt"></i>
-      <% end %>
-    <% end %>
+    <!-- Module Edit/Delete buttons -->
+    <%= render partial: 'lecture_modules/lecture_module_edit_delete_links', locals: { lecture_module: @lecture_module } %>
   </div>
 </div>
 

@@ -4,7 +4,7 @@ FactoryBot.define do
     code 'TEST123'
     academic_year_end 2018
     semester 'Spring'
-    name 'Test 1 Module'
+    name 'Test Module'
     user
   end
 

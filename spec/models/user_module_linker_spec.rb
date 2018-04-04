@@ -25,14 +25,14 @@ RSpec.describe UserModuleLinker, :type => :model do
   end
 
   it "has a unique user/lecture_module pair" do
-    lecture_module = LectureModule.find_by(name: 'Test 1 Module')
+    lecture_module = LectureModule.find_by(name: 'Test Module')
     user = User.find_by(username: 'test')
     user_module_linker2 = build(:user_module_linker, user: user, lecture_module: lecture_module)
     expect(user_module_linker2).to_not be_valid
   end
 
   describe "add/remove methods" do
-    let(:lecture_module) { LectureModule.find_by(name: 'Test 1 Module') }
+    let(:lecture_module) { LectureModule.find_by(name: 'Test Module') }
     let(:user) { User.find_by(username: 'test') }
     describe ".add_new_linker(lecture_module, user)" do
       it "adds a new user_module_linker record for the given lecture_module and user" do

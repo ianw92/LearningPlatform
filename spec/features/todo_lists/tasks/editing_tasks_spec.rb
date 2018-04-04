@@ -19,6 +19,24 @@ feature 'Editing tasks' do
     end
   end
 
+  feature "in place on the todo lists popover" do
+    # scenario "Editing a tasks title in place with a valid title", js: true do
+    #   given_a_signed_in_user_with_a_todo_list_and_a_task
+    #   given_user_is_on_the_todo_lists_index_page
+    #   when_they_click_the_task_title_and_edit_the_content_with_a_valid_title
+    #   when_they_unfocus_the_tasks_title
+    #   then_the_task_title_is_updated_in_the_database
+    # end
+    #
+    # scenario "Editing a tasks title in place with an invalid title", js: true do
+    #   given_a_signed_in_user_with_a_todo_list_and_a_task
+    #   given_user_is_on_the_todo_lists_index_page
+    #   when_they_click_the_task_title_and_edit_the_content_with_an_invalid_title
+    #   when_they_unfocus_the_tasks_title
+    #   then_the_task_title_is_not_updated_in_the_database
+    # end
+  end
+
   feature "on the edit tasks page" do
     scenario "Accessing the edit to do list page" do
       given_a_signed_in_user_with_a_todo_list_and_a_task

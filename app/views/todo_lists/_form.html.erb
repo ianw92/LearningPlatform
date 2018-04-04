@@ -21,10 +21,6 @@
   </div>
 
   <div class="form-group actions">
-    <% if todo_list.new_record? %>
-      <%= form.submit 'Create To Do List', :class => "btn btn-primary" %>
-    <% else %>
-      <%= form.submit 'Update To Do List', :class => "btn btn-primary" %>
-    <% end %>
+    <%= form.submit :class => "btn btn-primary" %>
   </div>
 <% end %>

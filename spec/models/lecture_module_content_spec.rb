@@ -69,7 +69,7 @@ RSpec.describe LectureModuleContent, :type => :model do
   describe "#get_module_full_title" do
     it "returns the full title of the associated lecture_module" do
       title = @lecture_module_content.get_module_full_title
-      expect(title).to eq "TEST123 - Test 1 Module - SPRING 2017/2018"
+      expect(title).to eq "TEST123 - Test Module - SPRING 2017/2018"
     end
   end
 
@@ -82,7 +82,7 @@ RSpec.describe LectureModuleContent, :type => :model do
 
   describe "#lecture_module_id" do
     it "returns the lecture_module_id of the associated lecture_module" do
-      lecture_module = LectureModule.find_by(name: 'Test 1 Module')
+      lecture_module = LectureModule.find_by(name: 'Test Module')
       lecture_module_id = @lecture_module_content.lecture_module_id
       expect(lecture_module_id).to eq lecture_module.id
     end

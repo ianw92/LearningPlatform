@@ -13,15 +13,12 @@ class LectureModulesController < ApplicationController
   def add_to_my_modules
     module_to_add = LectureModule.find(params[:id])
     user_module_linker = UserModuleLinker.add_new_linker(module_to_add, current_user)
+    user_module_linker.save
 
+    set_module_collections
     respond_to do |format|
-      if user_module_linker.save
-        set_module_collections
-        format.html { redirect_back fallback_location: root_path, notice: 'Lecture module was successfully added to My Modules.' }
-        format.js
-      else
-        format.html { redirect_back fallback_location: root_path, notice: 'Lecture module could not be added to My Modules.' }
-      end
+      format.html { redirect_back fallback_location: root_path, notice: 'Lecture Module was successfully added to My Modules.' }
+      format.js
     end
   end
 
@@ -31,7 +28,7 @@ class LectureModulesController < ApplicationController
 
     set_module_collections
     respond_to do |format|
-      format.html { redirect_back fallback_location: root_path, notice: 'Lecture module was successfully removed from My Modules.' }
+      format.html { redirect_back fallback_location: root_path, notice: 'Lecture Module was successfully removed from My Modules.' }
       format.js
     end
   end
@@ -75,7 +72,7 @@ class LectureModulesController < ApplicationController
 
     respond_to do |format|
       if @lecture_module.save
-        format.html { redirect_to @lecture_module, notice: 'Lecture module was successfully created.' }
+        format.html { redirect_to @lecture_module, notice: 'Lecture Module was successfully created.' }
       else
         format.html { render :new }
       end
@@ -87,7 +84,7 @@ class LectureModulesController < ApplicationController
   def update
     respond_to do |format|
       if @lecture_module.update(lecture_module_params)
-        format.html { redirect_to @lecture_module, notice: 'Lecture module was successfully updated.' }
+        format.html { redirect_to @lecture_module, notice: 'Lecture Module was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -99,7 +96,7 @@ class LectureModulesController < ApplicationController
   def destroy
     @lecture_module.destroy
     respond_to do |format|
-      format.html { redirect_to lecture_modules_url, notice: 'Lecture module was successfully destroyed.' }
+      format.html { redirect_to lecture_modules_url, notice: 'Lecture Module was successfully deleted.' }
     end
   end
 

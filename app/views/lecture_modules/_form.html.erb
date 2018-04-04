@@ -1,7 +1,7 @@
 <%= form_with(model: lecture_module, local: true) do |form| %>
   <% if lecture_module.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(lecture_module.errors.count, "error") %> prohibited this lecture_module from being saved:</h2>
+      <h2><%= pluralize(lecture_module.errors.count, "error") %> prohibited this lecture module from being saved:</h2>
 
       <ul>
       <% lecture_module.errors.full_messages.each do |message| %>

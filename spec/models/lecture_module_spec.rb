@@ -188,7 +188,7 @@ RSpec.describe LectureModule, :type => :model do
   describe "#get_module_full_title" do
     it "returns the full title string of a module" do
       text = @lecture_module.get_module_full_title
-      expect(text).to eq "TEST123 - Test 1 Module - SPRING 2017/2018"
+      expect(text).to eq "TEST123 - Test Module - SPRING 2017/2018"
     end
   end
 
@@ -230,9 +230,9 @@ RSpec.describe LectureModule, :type => :model do
     before do
       @user1 = User.find_by(username: 'test')
       @user2 = create(:user, email: 'test2@example.com', username: 'test2')
-      @lecture_module2 = create(:lecture_module, user: @user1, code: 'TEST222', academic_year_end: 2017, name: "Test 2 Module")
-      @lecture_module3 = create(:lecture_module, user: @user2, code: 'TEST333', academic_year_end: 2018, name: "Test 3 Module")
-      @lecture_module4 = create(:lecture_module, user: @user2, code: 'TEST444', academic_year_end: 2017, name: "Test 4 Module")
+      @lecture_module2 = create(:lecture_module, user: @user1, code: 'TEST222', academic_year_end: 2017, name: "Test Module 2")
+      @lecture_module3 = create(:lecture_module, user: @user2, code: 'TEST333', academic_year_end: 2018, name: "Test Module 3")
+      @lecture_module4 = create(:lecture_module, user: @user2, code: 'TEST444', academic_year_end: 2017, name: "Test Module 4")
     end
 
     describe ".get_my_current_modules(user)" do
@@ -241,7 +241,7 @@ RSpec.describe LectureModule, :type => :model do
         Timecop.freeze(date) do
           my_current_modules = LectureModule.get_my_current_modules(@user1)
           expect(my_current_modules.count).to eq 1
-          expect(my_current_modules[0].name).to eq "Test 1 Module"
+          expect(my_current_modules[0].name).to eq "Test Module"
         end
       end
     end
@@ -252,7 +252,7 @@ RSpec.describe LectureModule, :type => :model do
         Timecop.freeze(date) do
           my_completed_modules = LectureModule.get_my_completed_modules(@user1)
           expect(my_completed_modules.count).to eq 1
-          expect(my_completed_modules[0].name).to eq "Test 2 Module"
+          expect(my_completed_modules[0].name).to eq "Test Module 2"
         end
         Timecop.return
 
@@ -260,8 +260,8 @@ RSpec.describe LectureModule, :type => :model do
         Timecop.freeze(date) do
           my_completed_modules = LectureModule.get_my_completed_modules(@user1)
           expect(my_completed_modules.count).to eq 2
-          expect(my_completed_modules[0].name).to eq "Test 1 Module"
-          expect(my_completed_modules[1].name).to eq "Test 2 Module"
+          expect(my_completed_modules[0].name).to eq "Test Module"
+          expect(my_completed_modules[1].name).to eq "Test Module 2"
         end
       end
     end
@@ -272,7 +272,7 @@ RSpec.describe LectureModule, :type => :model do
         Timecop.freeze(date) do
           other_current_modules = LectureModule.get_other_current_modules(@user1)
           expect(other_current_modules.count).to eq 1
-          expect(other_current_modules[0].name).to eq "Test 3 Module"
+          expect(other_current_modules[0].name).to eq "Test Module 3"
         end
       end
     end
@@ -283,15 +283,15 @@ RSpec.describe LectureModule, :type => :model do
         Timecop.freeze(date) do
           other_completed_modules = LectureModule.get_other_completed_modules(@user1)
           expect(other_completed_modules.count).to eq 1
-          expect(other_completed_modules[0].name).to eq "Test 4 Module"
+          expect(other_completed_modules[0].name).to eq "Test Module 4"
         end
 
         date = "1 September 2018".to_datetime
         Timecop.freeze(date) do
           other_completed_modules = LectureModule.get_other_completed_modules(@user1)
           expect(other_completed_modules.count).to eq 2
-          expect(other_completed_modules[0].name).to eq "Test 3 Module"
-          expect(other_completed_modules[1].name).to eq "Test 4 Module"
+          expect(other_completed_modules[0].name).to eq "Test Module 3"
+          expect(other_completed_modules[1].name).to eq "Test Module 4"
         end
       end
     end

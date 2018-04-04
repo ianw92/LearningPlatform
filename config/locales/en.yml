@@ -36,3 +36,12 @@ en:
     attributes:
       user:
         login: "Username or email"
+
+  helpers:
+    submit:
+      todo_list:
+        create: "Create To Do List"
+        update: "Update To Do List"
+      lecture_module:
+        create: "Create Lecture Module"
+        update: "Update Lecture Module"

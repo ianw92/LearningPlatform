@@ -8,24 +8,13 @@
         <%= link_to lecture_module.get_module_full_title, lecture_module %>
       </div>
       <div class='col-3 col-md-2 col-lg-2 col-xl-1'>
-        <% if can? :edit, lecture_module %>
-          <%= link_to edit_lecture_module_path(lecture_module), data: { toggle: 'edit-lecture-module-tooltip'}, title: 'Edit Module' do %>
-            <i class="fas fa-pencil-alt"></i>
-          <% end %>
-          |
-        <% end %>
-        <% if can? :destroy, lecture_module %>
-          <%= link_to lecture_module, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-tooltip'}, title: 'Delete Module' do %>
-            <i class="fas fa-trash-alt"></i>
-          <% end %>
-        <% end %>
+        <!-- Module Edit/Delete buttons -->
+        <%= render partial: 'lecture_modules/lecture_module_edit_delete_links', locals: { lecture_module: lecture_module } %>
       </div>
 
       <div class='col-9 col-md-3 col-lg-2 col-xl-2'>
         <% if local_assigns.fetch :my_module %>
           <%= button_to 'Remove From My Modules', remove_from_my_modules_lecture_module_path(lecture_module), class: 'btn btn-sm btn-secondary float-right', method: :post, remote: true %>
-        <% elsif (@my_current_modules.ids.include? lecture_module.id) or (@my_completed_modules.ids.include? lecture_module.id)  %>
-          <span>------------------------------</span>
         <% else %>
           <%= button_to 'Add To My Modules', add_to_my_modules_lecture_module_path(lecture_module), class: 'btn btn-sm btn-secondary float-right', method: :post, remote: true %>
         <% end %>
