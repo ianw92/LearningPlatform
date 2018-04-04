@@ -35,7 +35,7 @@ RSpec.describe Task, :type => :model do
         todo_lists = TodoList.all
         tasks = Task.get_tasks_for_lists(todo_lists)
         expect(tasks.count).to eq 1
-        expect(tasks[0].title).to eq 'Task test'
+        expect(tasks[0].title).to eq 'Test Task'
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.describe Task, :type => :model do
   describe ".get_tasks_for_list" do
     it "returns a list of all tasks that belong to the supplied todo_list" do
       todo_list = TodoList.find_by(title: "Todo List Test")
-      task2 = Task.create(todo_list: todo_list, title: "Task test 2", due_date: Date.new, completed:false)
+      task2 = Task.create(todo_list: todo_list, title: "Test Task 2", due_date: Date.new, completed:false)
       tasks = Task.get_tasks_for_list(todo_list)
       expect(tasks.size).to eq 2
     end
@@ -81,11 +81,11 @@ RSpec.describe Task, :type => :model do
     context "when sort_style is 'due_date'" do
       it "returns the list of tasks sorted by due_date" do
         todo_list = TodoList.find_by(title: 'Todo List Test')
-        task2 = create(:task, todo_list: todo_list, due_date: Date.today - 1.days, title: "test 2")
+        task2 = create(:task, todo_list: todo_list, due_date: Date.today - 1.days, title: "Test Task 2")
         tasks = Task.sort_tasks(Task.all, 'due_date')
         expect(tasks.count).to eq 2
-        expect(tasks[0].title).to eq 'test 2'
-        expect(tasks[1].title).to eq 'Task test'
+        expect(tasks[0].title).to eq 'Test Task 2'
+        expect(tasks[1].title).to eq 'Test Task'
       end
     end
 
@@ -96,7 +96,7 @@ RSpec.describe Task, :type => :model do
         tasks = Task.sort_tasks(Task.all, 'title')
         expect(tasks.count).to eq 2
         expect(tasks[0].title).to eq 'aaa'
-        expect(tasks[1].title).to eq 'Task test'
+        expect(tasks[1].title).to eq 'Test Task'
       end
     end
 
@@ -104,11 +104,11 @@ RSpec.describe Task, :type => :model do
       it "returns the list of tasks sorted according to the position field" do
         @task.update_attribute(:position, 2)
         todo_list = TodoList.find_by(title: 'Todo List Test')
-        task2 = create(:task, todo_list: todo_list, position: 1, title: "test 2")
+        task2 = create(:task, todo_list: todo_list, position: 1, title: "Test Task 2")
         tasks = Task.sort_tasks(Task.all, 'position')
         expect(tasks.count).to eq 2
-        expect(tasks[0].title).to eq 'test 2'
-        expect(tasks[1].title).to eq 'Task test'
+        expect(tasks[0].title).to eq 'Test Task 2'
+        expect(tasks[1].title).to eq 'Test Task'
       end
     end
   end

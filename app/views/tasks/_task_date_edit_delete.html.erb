@@ -2,11 +2,11 @@
 <div class='col-5 col-sm-4 col-md-3 col-lg-2'>
   <%= task.due_date %>
   |
-  <%= link_to edit_task_path(task), data: { toggle: 'edit-task-tooltip'}, title: 'Edit Task' do %>
+  <%= link_to edit_task_path(task), data: { toggle: 'edit-task-tooltip'}, title: "Edit Task #{task.id}" do %>
     <i class='fas fa-pencil-alt'></i>
   <% end %>
   |
-  <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, remote: true, title: 'Delete Task' do %>
+  <%= link_to task, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, remote: true, title: "Delete Task #{task.id}" do %>
     <i class='fas fa-trash-alt'></i>
   <% end %>
 </div>

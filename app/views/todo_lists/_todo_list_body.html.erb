@@ -4,9 +4,9 @@
     Sort By: <%= @my_sort_style == 'position' ? 'Custom' : @my_sort_style.humanize %>
   </button>
   <div class='dropdown-menu'>
-    <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_due_date'>Due Date</a>
-    <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_title'>Title</a>
-    <a class='dropdown-item' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_custom'>Custom</a>
+    <a class='dropdown-item sort_by_due_date_btn' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_due_date'>Due Date</a>
+    <a class='dropdown-item sort_by_title_btn' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_title'>Title</a>
+    <a class='dropdown-item sort_by_position_btn' rel='nofollow' data-method='post' data-remote='true' href='/tasks/sort_by_custom'>Custom</a>
   </div>
 
   <br>

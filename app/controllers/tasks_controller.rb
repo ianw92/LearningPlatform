@@ -32,8 +32,6 @@ class TasksController < ApplicationController
         set_todo_lists
         format.html { redirect_back fallback_location: root_path, notice: 'Profile was successfully updated.' }
         format.js
-      else
-        format.html { redirect_back fallback_location: root_path, notice: 'Profile could not be updated.' }
       end
     end
   end
@@ -45,8 +43,6 @@ class TasksController < ApplicationController
       if task.save
         format.html { redirect_back fallback_location: root_path, notice: 'Task was successfully updated.' }
         format.js { @completed_task = task_to_toggle_completion }
-      else
-        format.html { render action: "edit" }
       end
     end
   end
@@ -128,8 +124,6 @@ class TasksController < ApplicationController
           set_todo_lists
           format.html { redirect_back fallback_location: root_path, notice: 'Profile was successfully updated.' }
           format.js
-        else
-          format.html { redirect_back fallback_location: root_path, notice: 'Profile could not be updated.' }
         end
       end
     end

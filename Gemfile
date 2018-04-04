@@ -64,6 +64,8 @@ group :test do
   gem 'shoulda-callback-matchers', '~> 1.1.1'
   gem 'simplecov', require: false
   gem 'timecop'
+  gem 'poltergeist'
+  gem 'launchy'
 end
 
 group :development do

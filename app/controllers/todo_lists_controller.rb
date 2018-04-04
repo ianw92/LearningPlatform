@@ -25,7 +25,7 @@ class TodoListsController < ApplicationController
 
     respond_to do |format|
       if @todo_list.save
-        format.html { redirect_to todo_lists_path, notice: 'Todo list was successfully created.' }
+        format.html { redirect_to todo_lists_path, notice: 'To Do List was successfully created.' }
       else
         format.html { render :new }
       end
@@ -37,7 +37,7 @@ class TodoListsController < ApplicationController
   def update
     respond_to do |format|
       if @todo_list.update(todo_list_params)
-        format.html { redirect_to todo_lists_path, notice: 'Todo list was successfully updated.' }
+        format.html { redirect_to todo_lists_path, notice: 'To Do List was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -49,7 +49,7 @@ class TodoListsController < ApplicationController
   def destroy
     @todo_list.destroy
     respond_to do |format|
-      format.html { redirect_to todo_lists_url, notice: 'Todo list was successfully destroyed.' }
+      format.html { redirect_to todo_lists_url, notice: 'To Do List was successfully deleted.' }
     end
   end
 

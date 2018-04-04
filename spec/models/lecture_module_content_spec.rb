@@ -131,11 +131,9 @@ RSpec.describe LectureModuleContent, :type => :model do
   describe "#s3_url" do
     context "when content exists" do
       it "returns the modified content url to include the AWS region" do
-        # TODO figure out how to do this or test it maually
-        # puts @lecture_module_content.content
-        # puts @lecture_module_content.content.url
-        # url = @lecture_module_content.s3_url
-        # expect(url).to eq "//s3.eu-west-2.amazonaws.com/learning-platform-bucket...test.pdf"
+        @lecture_module_content.content.stub(:url) { "//s3.amazonaws.com/learning-platform-bucket...test.pdf" }
+        url = @lecture_module_content.s3_url
+        expect(url).to eq "//s3.eu-west-2.amazonaws.com/learning-platform-bucket...test.pdf"
       end
     end
 

@@ -1,12 +1,12 @@
 <div class='edit-destroy-links'>
   <td>
-    <%= link_to edit_todo_list_path(todo_list), data: { toggle: 'edit-todo-list-tooltip'}, title: 'Edit Todo List' do %>
+    <%= link_to edit_todo_list_path(todo_list), data: { toggle: 'edit-todo-list-tooltip'}, title: "Edit Todo List #{todo_list.id}" do %>
       <i class='fas fa-pencil-alt'></i>
     <% end %>
   </td>
   |
   <td>
-    <%= link_to todo_list, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-todo-list-tooltip'}, title: 'Delete Todo List' do %>
+    <%= link_to todo_list, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-todo-list-tooltip'}, title: "Delete Todo List #{todo_list.id}" do %>
       <i class='fas fa-trash-alt'></i>
     <% end %>
   </td>

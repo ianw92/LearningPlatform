@@ -2,7 +2,7 @@ FactoryBot.define do
 
   factory :task do
     todo_list
-    title "Task test"
+    title "Test Task"
     due_date Date.today
     completed false
   end

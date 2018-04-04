@@ -14,7 +14,7 @@
         <!-- Checkbox -->
         <div class='col-1'>
           <div class='form-check'>
-            <input type='checkbox' name='checkbox' id='checkbox'
+            <input type='checkbox' name='checkbox' id='task_<%= task.id %>_checkbox'
                    value='<%= task.id %>' data-remote='true'
                    data-url='/tasks/<%= task.id %>/complete'
                    data-method='post' class='form-check-input toggle-task-checkbox'

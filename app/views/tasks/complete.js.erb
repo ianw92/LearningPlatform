@@ -4,7 +4,6 @@ $('#collapse_popover_<%= @completed_task.todo_list.id %>').html("<%=j render par
 if ($('.completed_task').hasClass('task_overdue')) {
   $('.completed_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FF0000'}, 3000);
 } else if ($('.completed_task').hasClass('task_due_today')) {
-  console.log("HELLO");
   $('.completed_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FFA500'}, 3000);
 } else if ($('.completed_task').hasClass('task_due_tomorrow')) {
   $('.completed_task').css({'background-color':'#88ff88'}).animate({'background-color':'#FFFF00'}, 3000);
