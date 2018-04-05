@@ -1,7 +1,7 @@
 <%= form_with(model: lecture_module_content, local: true, html: { multipart: true }) do |form| %>
   <% if lecture_module_content.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(lecture_module_content.errors.count, "error") %> prohibited this lecture_module_content from being saved:</h2>
+      <h2><%= pluralize(lecture_module_content.errors.count, "error") %> prohibited this content from being saved:</h2>
 
       <ul>
       <% lecture_module_content.errors.full_messages.each do |message| %>

@@ -106,7 +106,7 @@ feature 'Editing tasks' do
   # Scenario 3
 
   def when_they_click_the_edit_link_for_the_task
-    click_link "Edit Task #{@task.id}"
+    click_link "edit_task_#{@task.id}"
   end
 
   def then_they_should_be_redirected_to_the_edit_page_for_that_task

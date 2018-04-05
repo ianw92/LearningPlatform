@@ -32,7 +32,7 @@ feature 'Deleting tasks' do
 
   def when_they_click_the_delete_link_for_the_task_and_confirm_the_popup
     page.accept_confirm do
-      click_link "Delete Task #{@task.id}"
+      click_link "delete_task_#{@task.id}"
     end
   end
 
@@ -49,7 +49,7 @@ feature 'Deleting tasks' do
 
   def when_they_click_the_delete_link_for_the_task_and_reject_the_popup
     page.dismiss_confirm do
-      click_link "Delete Task #{@task.id}"
+      click_link "delete_task_#{@task.id}"
     end
   end
 

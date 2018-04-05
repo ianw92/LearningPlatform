@@ -41,7 +41,7 @@ feature 'Deleting lecture modules' do
 
   def when_they_click_the_delete_link_for_that_module_and_confirm_the_popup
     page.accept_confirm do
-      click_link "Delete Module #{@lecture_module.id}"
+      click_link "delete_module_#{@lecture_module.id}"
     end
   end
 
@@ -72,7 +72,7 @@ feature 'Deleting lecture modules' do
 
   def when_they_click_the_delete_link_for_that_module_and_reject_the_popup
     page.dismiss_confirm do
-      click_link "Delete Module #{@lecture_module.id}"
+      click_link "delete_module_#{@lecture_module.id}"
     end
   end
 

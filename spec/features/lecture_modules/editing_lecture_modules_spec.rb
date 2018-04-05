@@ -48,7 +48,7 @@ feature 'Editing lecture modules' do
   end
 
   def when_they_click_the_edit_link_for_that_module
-    click_link "Edit Module #{@lecture_module.id}"
+    click_link "edit_module_#{@lecture_module.id}"
   end
 
   def then_they_should_be_redirected_to_the_edit_page_for_that_module

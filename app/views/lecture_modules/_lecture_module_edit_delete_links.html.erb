@@ -1,11 +1,11 @@
 <% if can? :edit, lecture_module %>
-  <%= link_to edit_lecture_module_path(lecture_module), data: { toggle: 'edit-lecture-module-tooltip'}, title: "Edit Module #{lecture_module.id}" do %>
+  <%= link_to edit_lecture_module_path(lecture_module), data: { toggle: 'edit-lecture-module-tooltip'}, id: "edit_module_#{lecture_module.id}", title: "Edit Module" do %>
     <i class="fas fa-pencil-alt"></i>
   <% end %>
   |
 <% end %>
 <% if can? :destroy, lecture_module %>
-  <%= link_to lecture_module, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-tooltip'}, title: "Delete Module #{lecture_module.id}" do %>
+  <%= link_to lecture_module, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-tooltip'}, id: "delete_module_#{lecture_module.id}", title: "Delete Module" do %>
     <i class="fas fa-trash-alt"></i>
   <% end %>
 <% end %>

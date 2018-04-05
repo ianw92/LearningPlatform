@@ -45,7 +45,7 @@ feature 'Editing todo lists' do
   end
 
   def when_they_click_the_edit_link_for_that_list
-    click_link "Edit Todo List #{@todo_list.id}"
+    click_link "edit_to_do_list_#{@todo_list.id}"
   end
 
   def then_they_should_be_redirected_to_the_edit_page_for_that_list

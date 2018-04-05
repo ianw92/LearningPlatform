@@ -37,7 +37,7 @@ feature 'Deleting todo lists' do
 
   def when_they_click_the_delete_link_for_that_list_and_confirm_the_popup
     page.accept_confirm do
-      click_link "Delete Todo List #{@todo_list.id}"
+      click_link "delete_to_do_list_#{@todo_list.id}"
     end
   end
 
@@ -58,7 +58,7 @@ feature 'Deleting todo lists' do
 
   def when_they_click_the_delete_link_for_that_list_and_reject_the_popup
     page.dismiss_confirm do
-      click_link "Delete Todo List #{@todo_list.id}"
+      click_link "delete_to_do_list_#{@todo_list.id}"
     end
   end
 

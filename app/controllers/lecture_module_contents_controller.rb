@@ -25,7 +25,7 @@ class LectureModuleContentsController < ApplicationController
 
     respond_to do |format|
       if @lecture_module_content.save
-        format.html { redirect_to lecture_module_path(@lecture_module_content.lecture_module_id), notice: 'Lecture module content was successfully created.' }
+        format.html { redirect_to lecture_module_path(@lecture_module_content.lecture_module_id), notice: 'Lecture Module Content was successfully created.' }
       else
         format.html { render :new }
       end
@@ -37,7 +37,7 @@ class LectureModuleContentsController < ApplicationController
   def update
     respond_to do |format|
       if @lecture_module_content.update(lecture_module_content_params)
-        format.html { redirect_to lecture_module_path(@lecture_module_content.lecture_module_id), notice: 'Lecture module content was successfully updated.' }
+        format.html { redirect_to lecture_module_path(@lecture_module_content.lecture_module_id), notice: 'Lecture Module Content was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -49,7 +49,7 @@ class LectureModuleContentsController < ApplicationController
   def destroy
     @lecture_module_content.destroy
     respond_to do |format|
-      format.html { redirect_back fallback_location: root_path, notice: 'Lecture module content was successfully destroyed.' }
+      format.html { redirect_back fallback_location: root_path, notice: 'Lecture Module Content was successfully deleted.' }
     end
   end
 

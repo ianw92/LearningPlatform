@@ -6,13 +6,13 @@
       </div>
       <div class='col-3 col-sm-2 col-lg-1'>
         <% if can? :edit, lecture_module_content %>
-          <%= link_to edit_lecture_module_content_path(lecture_module_content), data: { toggle: 'edit-lecture-module-content-tooltip'}, title: 'Edit Content' do %>
+          <%= link_to edit_lecture_module_content_path(lecture_module_content), data: { toggle: 'edit-lecture-module-content-tooltip'}, id: "edit_content_#{lecture_module_content.id}", title: "Edit Content" do %>
             <i class="fas fa-pencil-alt"></i>
           <% end %>
           |
         <% end %>
         <% if can? :destroy, lecture_module_content %>
-          <%= link_to lecture_module_content, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-content-tooltip'}, title: 'Delete Content' do %>
+          <%= link_to lecture_module_content, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-lecture-module-content-tooltip'}, id: "delete_content_#{lecture_module_content.id}", title: "Delete Content" do %>
             <i class="fas fa-trash-alt"></i>
           <% end %>
         <% end %>
