@@ -228,7 +228,7 @@ RSpec.describe LectureModule, :type => :model do
 
   describe "getting current/completed modules methods" do
     before do
-      @user1 = User.find_by(username: 'test')
+      @user1 = User.find_by(username: 'Test User')
       @user2 = create(:user, email: 'test2@example.com', username: 'test2')
       @lecture_module2 = create(:lecture_module, user: @user1, code: 'TEST222', academic_year_end: 2017, name: "Test Module 2")
       @lecture_module3 = create(:lecture_module, user: @user2, code: 'TEST333', academic_year_end: 2018, name: "Test Module 3")

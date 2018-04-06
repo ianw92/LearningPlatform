@@ -2,11 +2,6 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy]
   authorize_resource
 
-  # GET /comments/new
-  def new
-    @comment = Comment.new
-  end
-
   def show_comments_toggle
     @week_id = params[:week_id]
     lecture_module = Week.find(@week_id).lecture_module

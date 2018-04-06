@@ -89,12 +89,10 @@ $(document).on 'turbolinks:load', ->
     localStorage.setItem("timer_running", false)
     localStorage.setItem("time_left", study_timer_time)
     clearInterval(window.timer)
-    alert("Timer settings successfully saved")
     )
 
   $('#logout-btn').click( ->
     localStorage.clear())
-
 
 $(document).on 'turbolinks:click', ->
   clearInterval(window.timer)

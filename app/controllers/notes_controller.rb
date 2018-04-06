@@ -2,11 +2,6 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:update, :destroy]
   authorize_resource
 
-  # GET /notes/new
-  def new
-    @note = Note.new
-  end
-
   def show_notes_toggle
     @week_id = params[:week_id]
     lecture_module = Week.find(@week_id).lecture_module

@@ -8,8 +8,6 @@ class TimersController < ApplicationController
     respond_to do |format|
       if @timer.update(timer_params)
         format.html { redirect_back fallback_location: root_path, notice: 'Timer was successfully updated.' }
-      else
-        # format.html { redirect_to :edit }
       end
     end
   end

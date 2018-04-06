@@ -17,17 +17,17 @@
 
   <div class="form-group">
     <%= form.label :study_length %>
-    <%= form.number_field :study_length, id: :study_timer_input, class: 'form-control', min: 1 %>
+    <%= form.number_field :study_length, id: :study_timer_input, class: 'form-control', min: 1, required: true %>
   </div>
 
   <div class="form-group">
     <%= form.label :short_break_length %>
-    <%= form.number_field :short_break_length, id: :short_break_input, class: 'form-control', min: 1 %>
+    <%= form.number_field :short_break_length, id: :short_break_input, class: 'form-control', min: 1, required: true %>
   </div>
 
   <div class="form-group">
     <%= form.label :long_break_length %>
-    <%= form.number_field :long_break_length, id: :long_break_input, class: 'form-control', min: 1 %>
+    <%= form.number_field :long_break_length, id: :long_break_input, class: 'form-control', min: 1, required: true %>
   </div>
 
   <div class="form-group actions">

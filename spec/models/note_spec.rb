@@ -3,7 +3,7 @@ RSpec.describe Note, :type => :model do
 
   before do
     @note = build(:note, user: nil)
-    user = User.find_by(username: 'test')
+    user = User.find_by(username: 'Test User')
     @note.user = user
     @note.save
   end
@@ -29,14 +29,14 @@ RSpec.describe Note, :type => :model do
 
   it "has a unique user/week pair" do
     week = Week.find(@note.week_id)
-    user = User.find_by(username: 'test')
+    user = User.find_by(username: 'Test User')
     note2 = build(:note, user: user, week: week)
     expect(note2).to_not be_valid
   end
 
   describe ".get_notes_for_module_and_user(lecture_module, user)" do
     let(:lecture_module) { LectureModule.find(@note.week.lecture_module.id) }
-    let(:user1) { User.find_by(username: 'test') }
+    let(:user1) { User.find_by(username: 'Test User') }
     context "when no notes exist for the given lecture_module and user" do
       it "returns nil" do
         Note.destroy_all
@@ -49,7 +49,7 @@ RSpec.describe Note, :type => :model do
       it "returns the notes" do
         notes = Note.get_notes_for_module_and_user(lecture_module, user1)
         expect(notes.count).to eq 1
-        expect(notes[0].body).to eq "test note"
+        expect(notes[0].body).to eq "Test Note"
       end
     end
   end

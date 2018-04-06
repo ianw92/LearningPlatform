@@ -1,8 +1,8 @@
 FactoryBot.define do
 
   factory :user do
-    email "test@example.com"
-    username "test"
+    email "testuser@example.com"
+    username "Test User"
     password "password"
     password_confirmation "password"
     confirmed_at Time.now

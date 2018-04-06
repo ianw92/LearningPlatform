@@ -3,7 +3,7 @@ RSpec.describe Comment, :type => :model do
 
   before do
     @comment = build(:comment, user: nil)
-    user = User.find_by(username: 'test')
+    user = User.find_by(username: 'Test User')
     @comment.user = user
     @comment.save
   end

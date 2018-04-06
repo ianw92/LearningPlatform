@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  resources :comments, except: [:show, :index] do
+  resources :comments, except: [:show, :index, :new] do
     collection do
       post 'show_comments_toggle'
     end
   end
   resources :timers, only: [:update]
-  resources :notes, except: [:show, :index, :edit] do
+  resources :notes, except: [:show, :index, :edit, :new] do
     collection do
       post 'show_notes_toggle'
     end

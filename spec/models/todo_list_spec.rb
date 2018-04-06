@@ -22,7 +22,7 @@ RSpec.describe TodoList, :type => :model do
   describe ".get_todo_lists_for_user(user)" do
     context "when the given user has todo_lists" do
       it "returns all todo_lists belonging to the given user" do
-        user = User.find_by(username: 'test')
+        user = User.find_by(username: 'Test User')
         todo_lists = TodoList.get_todo_lists_for_user(user)
         expect(todo_lists.count).to eq 1
         expect(todo_lists[0].title).to eq 'Todo List Test'
@@ -32,7 +32,7 @@ RSpec.describe TodoList, :type => :model do
     context "when the given user has no todo_lists" do
       it "returns an empty list" do
         TodoList.destroy_all
-        user = User.find_by(username: 'test')
+        user = User.find_by(username: 'Test User')
         todo_lists = TodoList.get_todo_lists_for_user(user)
         expect(todo_lists.count).to eq 0
       end

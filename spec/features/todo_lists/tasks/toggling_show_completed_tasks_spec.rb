@@ -58,8 +58,8 @@ feature 'Toggling show completed tasks' do
   def given_a_signed_in_user_with_a_todo_list_and_a_completed_task
     @user = create(:user)
     login_as(@user)
-    todo_list = create(:todo_list, user: @user)
-    @task = create(:task, todo_list: todo_list, completed: true)
+    @todo_list = create(:todo_list, user: @user)
+    @task = create(:task, todo_list: @todo_list, completed: true)
   end
 
   def given_user_is_on_the_todo_lists_index_page
@@ -75,7 +75,7 @@ feature 'Toggling show completed tasks' do
   end
 
   def when_they_click_the_show_completed_tasks_button
-    find("#show_hide_completed_tasks_btn_#{@task.id}").click
+    find("#show_hide_completed_tasks_btn_#{@todo_list.id}").click
   end
 
   def then_their_profile_is_updated_in_the_database

@@ -3,7 +3,7 @@ FactoryBot.define do
   factory :note do
     week
     user
-    body "test note"
+    body "Test Note"
   end
 
 end

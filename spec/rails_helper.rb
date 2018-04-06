@@ -1,5 +1,6 @@
 require 'simplecov'
 SimpleCov.start
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -13,6 +14,9 @@ require 'support/warden'
 require 'database_cleaner'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+
+# Load all files before testing to get accurate coverage statistics
+Rails.application.eager_load!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

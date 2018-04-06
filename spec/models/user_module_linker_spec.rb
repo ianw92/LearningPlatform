@@ -5,7 +5,7 @@ RSpec.describe UserModuleLinker, :type => :model do
     @user_module_linker = build(:user_module_linker, user: nil)
     # Delete the linker that was autocreated when the lecture_module was created
     UserModuleLinker.destroy_all
-    user = User.find_by(username: 'test')
+    user = User.find_by(username: 'Test User')
     @user_module_linker.user = user
     @user_module_linker.save
   end
@@ -33,7 +33,7 @@ RSpec.describe UserModuleLinker, :type => :model do
 
   describe "add/remove methods" do
     let(:lecture_module) { LectureModule.find_by(name: 'Test Module') }
-    let(:user) { User.find_by(username: 'test') }
+    let(:user) { User.find_by(username: 'Test User') }
     describe ".add_new_linker(lecture_module, user)" do
       it "adds a new user_module_linker record for the given lecture_module and user" do
         UserModuleLinker.destroy_all

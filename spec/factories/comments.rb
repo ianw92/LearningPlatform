@@ -3,7 +3,7 @@ FactoryBot.define do
   factory :comment do
     week
     user
-    body "test comment"
+    body "Test Comment"
   end
 
 end
