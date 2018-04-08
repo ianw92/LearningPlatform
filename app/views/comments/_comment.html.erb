@@ -1,9 +1,30 @@
-<% week.comments.each do |comment| %>
   <div id="comment_<%= comment.id %>" class="card card-body" style="padding:5px 10px;">
     <div>
       <span class="font-weight-bold"><%= comment.user.username %> </span>
-      <span class="text-muted"><%= comment.time_since_updated %></span>
+      <span class="text-muted"><%= comment.time_since_created %></span>
+      <span id="comment_<%= comment.id %>_edited" class="text-muted">
+        <% if comment.edited %>
+          | edited <%= comment.time_since_updated %>
+        <% end %>
+      </span>
+
+      <% if can? :destroy, comment %>
+        <span> | <%= link_to comment, method: :delete, data: { confirm: 'Are you sure?', toggle: 'delete-task-tooltip'}, remote: true, id: "delete_comment_#{comment.id}", title: "Delete Comment" do %>
+                   <i class='fas fa-trash-alt'></i>
+                 <% end %>
+        </span>
+      <% end %>
     </div>
-    <span><%= comment.body %></span>
+
+    <% if can? :edit, comment %>
+      <span id="comment_<%= comment.id %>_body"
+            contenteditable='true'
+            data-url='/comments/<%= comment.id %>'
+            data-task='<%= comment %>'><%= comment.body %>
+        <span class='edit_icon'><i class='fas fa-pencil-alt'></i></span>
+      </span>
+    <% else %>
+      <span id="comment_<%= comment.id %>_body"><%= comment.body %></span>
+    <% end %>
+
   </div>
-<% end %>

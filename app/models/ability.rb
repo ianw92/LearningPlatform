@@ -28,6 +28,7 @@ class Ability
     can [:read, :new, :create], Comment do |comment|
       !UserModuleLinker.find_by(user_id: user.id, lecture_module_id: comment.week.lecture_module_id).nil?
     end
+    can [:update, :destroy], Comment, user_id: user.id
     can [:show_comments_toggle], Comment
 
   end

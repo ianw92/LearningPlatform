@@ -11,5 +11,21 @@
 }
 
 .comments_padding {
-  margin: 5px 2px;
+  margin: 12px 2px;
+}
+
+span[contenteditable] {
+  .edit_icon {
+    display: none;
+  }
+  &:hover {
+    .edit_icon {
+      display: inline-block;
+    }
+  }
+  &:focus {
+    .edit_icon {
+      display: none;
+    }
+  }
 }

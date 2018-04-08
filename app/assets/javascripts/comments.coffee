@@ -26,3 +26,17 @@ $(document).on 'turbolinks:load', ->
         )
       )
     )
+
+  $(document).on('click', ->
+    $('span[id^=comment_][id$=_body]').on('input', ->
+      # Use bound class as a tag to stop blur event firing multiple times if the same comment is edited multiple times
+      if !$(this).hasClass('bound')
+        $(this).on('blur', ->
+
+          Rails.ajax
+            url: ($(this).data('url') + '?body=' + $(this)[0].textContent.trim())
+            type: 'PATCH'
+          )
+      $(this).addClass('bound')
+      )
+    )

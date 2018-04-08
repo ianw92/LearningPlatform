@@ -19,7 +19,9 @@
   <% if can? :read, Comment.new(week_id: week.id) %>
     <div class="card-body comments_padding <%= current_user.profile.get_show_comments_status %>" style="padding: 5px;overflow-y: scroll; overflow-x: hidden;">
       <% if !week.comments.empty? %>
-        <%= render partial: "comments/comment", locals: { week: week } %>
+        <%= render partial: "comments/comment",
+                   collection: week.comments,
+                   locals: { week: week } %>
       <% else %>
         <p>No comments in this discussion yet.</p>
       <% end %>

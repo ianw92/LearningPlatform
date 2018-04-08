@@ -40,11 +40,14 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-      else
-        format.html { render :edit }
+    @comment = Comment.find(params[:id])
+    if params[:body] != @comment.body
+      respond_to do |format|
+        if @comment.update(body: params[:body])
+          format.js { @comments = [@comment] }
+        else
+          format.html { redirect_back fallback_location: root_path, alert: 'Comment could not be updated.' }
+        end
       end
     end
   end
@@ -54,7 +57,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_back fallback_location: root_path, notice: 'Comment was successfully destroyed.' }
+      format.js
     end
   end
 

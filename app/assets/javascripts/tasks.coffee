@@ -11,9 +11,14 @@ document.addEventListener 'turbolinks:load', ->
         type: 'PATCH'
         data: $(this).sortable('serialize')
 
-    $('.todo_lists div[id^=task_][id$=_title], div[id^=task_][id$=_title_popover]').on('blur', ->
-      Rails.ajax
-        url: ($(this).data('url') + '?title=' + $(this)[0].textContent.trim())
-        type: 'PATCH'
+    $('.todo_lists div[id^=task_][id$=_title], div[id^=task_][id$=_title_popover]').on('input', ->
+      # Use bound class as a tag to stop blur event firing multiple times if the same comment is edited multiple times
+      if !$(this).hasClass('bound')
+        $(this).on('blur', ->
+          Rails.ajax
+            url: ($(this).data('url') + '?title=' + $(this)[0].textContent.trim())
+            type: 'PATCH'
+          )
+      $(this).addClass('bound')
       )
     )
