@@ -41,12 +41,13 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1.json
   def update
     @comment = Comment.find(params[:id])
+    @original_body = @comment.body
     if params[:body] != @comment.body
       respond_to do |format|
         if @comment.update(body: params[:body])
-          format.js { @comments = [@comment] }
+          format.js
         else
-          format.html { redirect_back fallback_location: root_path, alert: 'Comment could not be updated.' }
+          format.js { render :template => 'comments/update_empty.js.erb' }
         end
       end
     end

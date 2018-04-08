@@ -78,8 +78,9 @@ feature 'Editing tasks' do
   end
 
   def when_they_click_the_task_title_and_edit_the_content_with_a_valid_title
-    find("#task_#{@task.id}_title").click
-    page.execute_script("$('#task_#{@task.id}_title').html('Updated Test Task');")
+    task_title_div = find("#task_#{@task.id}_title")
+    task_title_div.click
+    task_title_div.set("Updated Test Task")
   end
 
   def when_they_unfocus_the_tasks_title

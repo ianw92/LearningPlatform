@@ -39,7 +39,7 @@ feature 'Creating todo lists' do
   end
 
   def when_they_click_the_new_list_link
-    click_link "+ New Todo List"
+    click_link "+ New To Do List"
   end
 
   def then_they_should_be_redirected_to_the_new_todo_list_page
