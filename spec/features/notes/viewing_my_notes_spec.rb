@@ -151,8 +151,4 @@ feature 'Viewing notes' do
     end
   end
 
-  def then_the_show_hide_notes_button_says_hide_notes
-    expect(page).to have_content "Hide Notes"
-  end
-
 end

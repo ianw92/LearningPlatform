@@ -36,12 +36,16 @@ class NotesController < ApplicationController
   # PATCH/PUT /notes/1
   # PATCH/PUT /notes/1.json
   def update
-    respond_to do |format|
-      if @note.update(note_params)
-        format.html { redirect_back fallback_location: root_path, notice: 'Note was successfully updated.' }
-        format.js
-      else
-        format.html { render :edit }
+    if params[:note][:body].empty?
+      return destroy
+    else
+      respond_to do |format|
+        if @note.update(note_params)
+          format.html { redirect_back fallback_location: root_path, notice: 'Note was successfully updated.' }
+          format.js
+        else
+          format.html { redirect_back fallback_location: root_path, alert: 'Note could not be updated.' }
+        end
       end
     end
   end
@@ -49,9 +53,11 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   # DELETE /notes/1.json
   def destroy
+    @week = @note.week
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
+      format.html { redirect_back fallback_location: root_path, notice: 'Note was successfully destroyed.' }
+      format.js { render :template => 'notes/destroy.js.erb' }
     end
   end
 

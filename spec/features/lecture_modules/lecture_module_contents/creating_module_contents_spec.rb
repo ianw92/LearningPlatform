@@ -130,10 +130,6 @@ feature 'Creating module contents' do
     expect(LectureModuleContent.count).to eq 1
   end
 
-  def then_the_content_should_exist_in_s3
-    bucket = s3.bucket('learning-platform-bucket')
-  end
-
   def then_they_should_be_able_to_see_the_content
     expect(page).to have_content LectureModuleContent.first.title
   end
