@@ -10,53 +10,71 @@
 
 
 <ul class="nav nav-tabs">
-  <li class="nav-item active"><a data-toggle="tab" href="#week1" class="nav-link small active"><h6>Week 1</h6></a></li>
-  <% for i in 2..12 do %>
-    <li class="nav-item"><a data-toggle="tab" href="#week<%= i %>" class="nav-link small"><h6>Week <%= i %></h6></a></li>
+  <% if @open_week_number.nil? %>
+    <li class="nav-item active"><a data-toggle="tab" href="#week1" class="nav-link small active"><h6>Week 1</h6></a></li>
+    <% for i in 2..12 do %>
+      <li class="nav-item"><a data-toggle="tab" href="#week<%= i %>" class="nav-link small"><h6>Week <%= i %></h6></a></li>
+    <% end %>
+  <% else %>
+    <% for i in 1..12 do %>
+      <% if i == @open_week_number %>
+        <li class="nav-item"><a data-toggle="tab" href="#week<%= i %>" class="nav-link small active"><h6>Week <%= i %></h6></a></li>
+      <% else %>
+        <li class="nav-item"><a data-toggle="tab" href="#week<%= i %>" class="nav-link small"><h6>Week <%= i %></h6></a></li>
+      <% end %>
+    <% end %>
   <% end %>
 </ul>
 
 <div class="tab-content">
   <% for i in 1..12 do %>
-    <% if i == 1 %>
-    <div id="week1" class="tab-pane fade in active show">
-    <% else %>
-    <div id="week<%= i %>" class="tab-pane fade">
-    <% end %>
-      <br>
-      <% if can? :new, LectureModuleContent.new(week: @weeks[i-1]) %>
-        <%= link_to new_lecture_module_content_path(week: @weeks[i-1]), class: 'float-right' do %>
-          Add Content to Week <%= i %>
-        <% end %>
-      <% end %>
-      <h3>Week <%= i %></h3>
-
-
-      <% if @weekly_content[i-1].empty? %>
-        <p>No content exists for Week <%= i %> of this module yet.</p>
+    <% if @open_week_number.nil? %>
+      <% if i == 1 %>
+      <div id="week1" class="tab-pane fade in active show">
       <% else %>
-        <div id="content_section">
-          <ul class="list-unstyled">
-              <%= render partial: "lecture_module_contents/lecture_module_content",
-                         collection: @weekly_content[i-1],
-                         locals: { show_pdf: true,
-                                   show_youTube: true } %>
-          </ul>
-        </div>
-
-
-        <div id="notes_section_<%= @weeks[i-1].id %>" class="notes_section">
-          <%= render partial: 'notes/notes_section',
-                     locals: { week: @weeks[i-1] } %>
-        </div>
-
-        <div id="comments_section_<%= @weeks[i-1].id %>" class="comments_section">
-          <%= render partial: 'comments/comments_section',
-                     locals: { week: @weeks[i-1] } %>
-        </div>
+      <div id="week<%= i %>" class="tab-pane fade">
       <% end %>
+    <% else %>
+      <% if i == @open_week_number %>
+      <div id="week<%= i %>" class="tab-pane fade in active show">
+      <% else %>
+      <div id="week<%= i %>" class="tab-pane fade">
+      <% end %>
+    <% end %>
+        <br>
+        <% if can? :new, LectureModuleContent.new(week: @weeks[i-1]) %>
+          <%= link_to new_lecture_module_content_path(week: @weeks[i-1]), class: 'float-right' do %>
+            Add Content to Week <%= i %>
+          <% end %>
+        <% end %>
+        <h3>Week <%= i %></h3>
 
-    </div>
+
+        <% if @weekly_content[i-1].empty? %>
+          <p>No content exists for Week <%= i %> of this module yet.</p>
+        <% else %>
+          <div id="content_section">
+            <ul class="list-unstyled">
+                <%= render partial: "lecture_module_contents/lecture_module_content",
+                           collection: @weekly_content[i-1],
+                           locals: { show_pdf: true,
+                                     show_youTube: true } %>
+            </ul>
+          </div>
+
+
+          <div id="notes_section_<%= @weeks[i-1].id %>" class="notes_section">
+            <%= render partial: 'notes/notes_section',
+                       locals: { week: @weeks[i-1] } %>
+          </div>
+
+          <div id="comments_section_<%= @weeks[i-1].id %>" class="comments_section">
+            <%= render partial: 'comments/comments_section',
+                       locals: { week: @weeks[i-1] } %>
+          </div>
+        <% end %>
+
+      </div>
 
   <% end %>
 </div>

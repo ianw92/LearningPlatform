@@ -16,6 +16,7 @@ class LectureModuleContentsController < ApplicationController
 
   # GET /lecture_module_contents/1/edit
   def edit
+    session[:open_week_number] = @lecture_module_content.week.week_number
   end
 
   # POST /lecture_module_contents
@@ -25,6 +26,7 @@ class LectureModuleContentsController < ApplicationController
 
     respond_to do |format|
       if @lecture_module_content.save
+        session[:open_week_number] = @lecture_module_content.week.week_number
         format.html { redirect_to lecture_module_path(@lecture_module_content.lecture_module_id), notice: 'Lecture Module Content was successfully created.' }
       else
         format.html { render :new }
@@ -37,6 +39,7 @@ class LectureModuleContentsController < ApplicationController
   def update
     respond_to do |format|
       if @lecture_module_content.update(lecture_module_content_params)
+        session[:open_week_number] = @lecture_module_content.week.week_number
         format.html { redirect_to lecture_module_path(@lecture_module_content.lecture_module_id), notice: 'Lecture Module Content was successfully updated.' }
       else
         format.html { render :edit }
@@ -47,6 +50,7 @@ class LectureModuleContentsController < ApplicationController
   # DELETE /lecture_module_contents/1
   # DELETE /lecture_module_contents/1.json
   def destroy
+    session[:open_week_number] = @lecture_module_content.week.week_number
     @lecture_module_content.destroy
     respond_to do |format|
       format.html { redirect_back fallback_location: root_path, notice: 'Lecture Module Content was successfully deleted.' }

@@ -36,6 +36,11 @@ class LectureModulesController < ApplicationController
   # GET /lecture_modules/1
   # GET /lecture_modules/1.json
   def show
+    if !session[:open_week_number].nil?
+      @open_week_number = session[:open_week_number]
+      session[:open_week_number] = nil
+    end
+
     @weeks = @lecture_module.weeks
     @weekly_content = Array.new(12)
     for i in 0..@weeks.length-1 do
