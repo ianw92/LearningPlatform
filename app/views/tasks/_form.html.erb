@@ -23,8 +23,9 @@
   <div class="form-group">
     <%= form.label :due_date %>
     <%= form.text_field :due_date, id: :task_due_date, class: 'form-control',
+            value: task.due_date.strftime('%d-%m-%Y'),
             "data-provide" => "datepicker",
-            "data-date-format" => "yyyy-mm-dd",
+            "data-date-format" => "dd-mm-yyyy",
             "data-date-orientation" => "auto" %>
   </div>
 

@@ -39,9 +39,9 @@
             <div class="col-lg-8">
               <%= form.text_field :due_date, id: :task_due_date,
                       class: 'form-control',
-                      value: Time.now.strftime('%Y-%m-%d'),
+                      value: Time.now.strftime('%d-%m-%Y'),
                       "data-provide" => "datepicker",
-                      "data-date-format" => "yyyy-mm-dd",
+                      "data-date-format" => "dd-mm-yyyy",
                       "data-date-orientation" => "auto" %>
             </div>
           </div>
