@@ -16,9 +16,9 @@
 
   &.collapsed-timer {
     padding: 5px 0;
-  }
 
-  #timer_buttons.collapsed-timer-buttons {
-    padding-top: 5px;
+    li {
+      padding: 5px 0;
+    }
   }
 }

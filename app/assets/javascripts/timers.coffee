@@ -23,18 +23,20 @@ $(document).on 'turbolinks:load', ->
   if localStorage.getItem("timer_running") is null
     localStorage.setItem("timer_running", false)
 
-  # $('#timer').html("#{localStorage.getItem("time_left")/60}:00")
+  # Set Timer dropdown title
+  switch localStorage.getItem("timer_type")
+    when "study" then $('#timer-select-btn').text('Study')
+    when "short_break" then $('#timer-select-btn').text('Short break')
+    when "long_break" then $('#timer-select-btn').text('Long break')
+    else $('#timer-select-btn').text('Study')
 
   window.timer = setInterval( ->
-    # console.log("timer running : #{localStorage.getItem("timer_running")}")
     time_left = localStorage.getItem("time_left")
     if localStorage.getItem("timer_running") is "true"
 
       time_left -= 1
       localStorage.setItem("time_left", time_left)
       localStorage.setItem("last_interval_stopped", false)
-
-      # console.log("time left #{time_left}")
 
     minutes = ("0" + Math.floor((time_left / 60))).slice(-2);
     seconds = ("0" + Math.floor((time_left % 60))).slice(-2);
@@ -44,8 +46,10 @@ $(document).on 'turbolinks:load', ->
 
     if time_left is 0
       localStorage.setItem("timer_running", false)
-      localStorage.setItem("time_left", study_timer_time)
-      alert("Time up! Do you need a break? Have a drink of water and go for a brief walk!")
+      switch localStorage.getItem("timer_type")
+        when "study" then alert("Time up! Have something to drink and take a walk, you'll work better after a short break"); localStorage.setItem("time_left", study_timer_time)
+        when "short_break" then alert("Break over! It's time to get back to work!"); localStorage.setItem("time_left", short_break_time)
+        when "long_break" then alert("Break over! It's time to get back to work!"); localStorage.setItem("time_left", long_break_time)
 
   , 1000)
 
@@ -57,6 +61,7 @@ $(document).on 'turbolinks:load', ->
     localStorage.setItem("timer_running", false))
 
   $('#reset-btn').click( ->
+    localStorage.setItem("timer_running", false)
     switch localStorage.getItem("timer_type")
       when "study" then localStorage.setItem("time_left", study_timer_time)
       when "short_break" then localStorage.setItem("time_left", short_break_time)
@@ -67,16 +72,19 @@ $(document).on 'turbolinks:load', ->
 
   # Timer Settings
   $('#study-timer-btn').click( ->
+    localStorage.setItem("timer_running", false)
     localStorage.setItem("time_left", study_timer_time)
     localStorage.setItem("timer_type", "study")
     $('#timer-select-btn').text('Study'))
 
   $('#short-break-btn').click( ->
+    localStorage.setItem("timer_running", false)
     localStorage.setItem("time_left", short_break_time)
     localStorage.setItem("timer_type", "short_break")
     $('#timer-select-btn').text('Short break'))
 
   $('#long-break-btn').click( ->
+    localStorage.setItem("timer_running", false)
     localStorage.setItem("time_left", long_break_time)
     localStorage.setItem("timer_type", "long_break")
     $('#timer-select-btn').text('Long break'))
@@ -87,7 +95,6 @@ $(document).on 'turbolinks:load', ->
     short_break_time = $('#short_break_input').val()*60
     long_break_time = $('#long_break_input').val()*60
     localStorage.setItem("timer_running", false)
-    localStorage.setItem("time_left", study_timer_time)
     clearInterval(window.timer)
     )
 

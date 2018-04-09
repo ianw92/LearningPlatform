@@ -40,7 +40,7 @@
     <%= form.text_field :youTube_link, id: :lecture_module_content_youTube_link, class: 'form-control', placeholder: 'https://www.youtube.com/embed/..........' %>
   </div>
 
-  <div class="form-group actions <%= hidden-to-start if !lecture_module_content.content? && !lecture_module_content.youTube_link? %>" id="submit-content-btn">
+  <div class="form-group actions <%= 'hidden-to-start' if !lecture_module_content.content? && !lecture_module_content.youTube_link? %>" id="submit-content-btn">
     <%= form.submit :class => "btn btn-primary" %>
   </div>
 <% end %>
