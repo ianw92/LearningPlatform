@@ -72,6 +72,7 @@ class TasksController < ApplicationController
     if params[:title].nil?
       respond_to do |format|
         if @task.update(task_params)
+          session[:open_list_id] = @task.todo_list.id
           format.html { redirect_to todo_lists_path, notice: 'Task was successfully updated.' }
         else
           format.html { render :edit }

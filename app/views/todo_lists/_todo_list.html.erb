@@ -11,12 +11,20 @@
     </a>
   </div>
 
-  <% if todo_list.id==@todo_lists_global[0].id %>
-  <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse show'>
-  <% elsif !@completed_task.nil? && todo_list.id==(@completed_task.todo_list_id) %>
-  <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse show'>
+  <% if !@open_list_id.nil? %>
+    <% if todo_list.id==@open_list_id %>
+      <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse show'>
+    <% else %>
+      <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse'>
+    <% end %>
   <% else %>
-  <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse'>
+    <% if todo_list.id==@todo_lists_global[0].id %>
+      <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse show'>
+    <% elsif !@completed_task.nil? && todo_list.id==(@completed_task.todo_list_id) %>
+      <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse show'>
+    <% else %>
+      <div id='collapse_<%= type %>_<%= todo_list.id %>' class='collapse'>
+    <% end %>
   <% end %>
 
     <%= render partial: 'todo_lists/todo_list_body',

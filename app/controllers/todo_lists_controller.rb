@@ -5,6 +5,11 @@ class TodoListsController < ApplicationController
   # GET /todo_lists
   # GET /todo_lists.json
   def index
+    if !session[:open_list_id].nil?
+      @open_list_id = session[:open_list_id]
+      session[:open_list_id] = nil
+    end
+
     @task = Task.new
   end
 
@@ -25,6 +30,7 @@ class TodoListsController < ApplicationController
 
     respond_to do |format|
       if @todo_list.save
+        session[:open_list_id] = @todo_list.id
         format.html { redirect_to todo_lists_path, notice: 'To Do List was successfully created.' }
       else
         format.html { render :new }
@@ -37,6 +43,7 @@ class TodoListsController < ApplicationController
   def update
     respond_to do |format|
       if @todo_list.update(todo_list_params)
+        session[:open_list_id] = @todo_list.id
         format.html { redirect_to todo_lists_path, notice: 'To Do List was successfully updated.' }
       else
         format.html { render :edit }
