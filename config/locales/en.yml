@@ -46,5 +46,5 @@ en:
         create: "Create Lecture Module"
         update: "Update Lecture Module"
       lecture_module_content:
-        create: "Create Lecture Module Content"
-        update: "Update Lecture Module Content"
+        create: "Create Week Content"
+        update: "Update Week Content"
